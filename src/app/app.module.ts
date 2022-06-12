@@ -6,13 +6,15 @@ import { CryptosComponentComponent } from './cryptos-component/cryptos-component
 import { NftsComponentComponent } from './nfts-component/nfts-component.component';
 import { DaosComponentComponent } from './daos-component/daos-component.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HomeComponentComponent } from './home-component/home-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CryptosComponentComponent,
     NftsComponentComponent,
-    DaosComponentComponent
+    DaosComponentComponent,
+    HomeComponentComponent
   ],
   imports: [
     BrowserModule,
