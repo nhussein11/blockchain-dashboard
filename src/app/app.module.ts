@@ -8,6 +8,7 @@ import { DaosComponentComponent } from './daos-component/daos-component.componen
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { NotFoundPageComponentComponent } from './not-found-page-component/not-found-page-component.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,11 +17,14 @@ import { NotFoundPageComponentComponent } from './not-found-page-component/not-f
     NftsComponentComponent,
     DaosComponentComponent,
     HomeComponentComponent,
-    NotFoundPageComponentComponent
+    NotFoundPageComponentComponent,
+    
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
