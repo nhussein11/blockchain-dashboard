@@ -7,6 +7,7 @@ import { NftsComponentComponent } from './nfts-component/nfts-component.componen
 import { DaosComponentComponent } from './daos-component/daos-component.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponentComponent } from './home-component/home-component.component';
+import { NotFoundPageComponentComponent } from './not-found-page-component/not-found-page-component.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HomeComponentComponent } from './home-component/home-component.componen
     CryptosComponentComponent,
     NftsComponentComponent,
     DaosComponentComponent,
-    HomeComponentComponent
+    HomeComponentComponent,
+    NotFoundPageComponentComponent
   ],
   imports: [
     BrowserModule,
