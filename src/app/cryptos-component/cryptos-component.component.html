@@ -1,0 +1,24 @@
+<h2>Cryptocurrencies Ranking</h2>
+<h2>Coins:</h2>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Price (USD)</th>
+        <th>Max Supply</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr *ngFor="let crypto of cryptosData">
+        <td>{{crypto.name}}</td>
+        <td>{{crypto.symbol}}</td>
+        <td>{{crypto.price}}</td>
+        <td>{{crypto.maxSuply}}</td> 
+      </tr>
+    </tbody>
+  </table>
+</div>
