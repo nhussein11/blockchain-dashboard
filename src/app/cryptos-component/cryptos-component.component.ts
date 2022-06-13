@@ -22,10 +22,13 @@ export class CryptosComponentComponent implements OnInit {
     this._cryptosService.getCryptos().subscribe(response=>{
       const values = Object.values(response.data)
       Object.values(values).forEach(
+        
         (value) => {
+          console.log(value)
           let data=JSON.parse(JSON.stringify(value))
           
           let crypto:Cryptocurrency = {
+            id: data.id,
             name: data.name,
             symbol: data.symbol,
             price: data.quote.USD.price,

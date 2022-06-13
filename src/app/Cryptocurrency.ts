@@ -1,7 +1,10 @@
 export interface Cryptocurrency{
-    name:string;
-    symbol:string;
-    price:number;
-    maxSuply: number;
-
+    id?:number;
+    name?:string;
+    symbol?:string;
+    price?:number;
+    maxSuply?: number;
+    description?:string;
+    category?:string;
+    logo?:string;
 }

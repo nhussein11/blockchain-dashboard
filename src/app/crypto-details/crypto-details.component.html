@@ -1,1 +1,23 @@
 <p>crypto-details works!</p>
+<h2>Details:</h2>
+
+<h3>
+    {{crypto.name}}
+</h3>
+
+<h3 *ngIf="crypto.category">
+   Category
+    <p>{{crypto.category}}</p>
+</h3>
+
+<h3 *ngIf="crypto.description">
+    Description
+    <p>{{crypto.description}}</p>
+</h3>
+
+<h3 *ngIf="crypto.logo">
+    Logo
+    <img src={{crypto.logo}}
+    >
+</h3>
+

@@ -12,7 +12,7 @@ import { CryptoDetailsComponent } from './crypto-details/crypto-details.componen
 const routes : Routes=[
   {path:'', component: HomeComponentComponent},
   {path:'cryptocurrencies', component: CryptosComponentComponent},
-  {path:'crypto_details', component: CryptoDetailsComponent},
+  {path:'crypto_details/:id', component: CryptoDetailsComponent},
   {path:'nfts', component: NftsComponentComponent},
   {path:'daos', component: DaosComponentComponent},
   {path:'**', component: NotFoundPageComponentComponent},

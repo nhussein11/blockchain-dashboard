@@ -14,14 +14,14 @@
     <tbody>
 
       <tr *ngFor="let crypto of cryptosData">
-        <td> <a routerLink="/crypto_details">
+        <td> 
+          <a routerLink="/crypto_details/{{crypto.id}}">
             {{crypto.name}}
           </a>
-
         </td>
         <td>{{crypto.symbol}}</td>
-        <td>{{crypto.price}}</td>
-        <td>{{crypto.maxSuply}}</td>
+        <td>{{crypto.price | currency }}</td>
+        <td>{{crypto.maxSuply }}</td>
       </tr>
     </tbody>
   </table>
