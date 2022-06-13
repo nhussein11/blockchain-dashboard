@@ -10,7 +10,7 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 import { NotFoundPageComponentComponent } from './not-found-page-component/not-found-page-component.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CryptoDetailsComponent } from './crypto-details/crypto-details.component';
-
+// import { AlertModule } from 'ngx-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,13 +20,14 @@ import { CryptoDetailsComponent } from './crypto-details/crypto-details.componen
     HomeComponentComponent,
     NotFoundPageComponentComponent,
     CryptoDetailsComponent,
-    
+
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    // AlertModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
