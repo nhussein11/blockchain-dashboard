@@ -6,11 +6,13 @@ import { DaosComponentComponent } from './daos-component/daos-component.componen
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { NotFoundPageComponentComponent } from './not-found-page-component/not-found-page-component.component';
+import { CryptoDetailsComponent } from './crypto-details/crypto-details.component';
 
 
 const routes : Routes=[
   {path:'', component: HomeComponentComponent},
   {path:'cryptocurrencies', component: CryptosComponentComponent},
+  {path:'crypto_details', component: CryptoDetailsComponent},
   {path:'nfts', component: NftsComponentComponent},
   {path:'daos', component: DaosComponentComponent},
   {path:'**', component: NotFoundPageComponentComponent},

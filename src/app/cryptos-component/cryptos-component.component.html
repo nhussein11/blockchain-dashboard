@@ -12,12 +12,16 @@
       </tr>
     </thead>
     <tbody>
-      
+
       <tr *ngFor="let crypto of cryptosData">
-        <td>{{crypto.name}}</td>
+        <td> <a routerLink="/crypto_details">
+            {{crypto.name}}
+          </a>
+
+        </td>
         <td>{{crypto.symbol}}</td>
         <td>{{crypto.price}}</td>
-        <td>{{crypto.maxSuply}}</td> 
+        <td>{{crypto.maxSuply}}</td>
       </tr>
     </tbody>
   </table>

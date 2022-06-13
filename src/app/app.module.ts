@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { NotFoundPageComponentComponent } from './not-found-page-component/not-found-page-component.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CryptoDetailsComponent } from './crypto-details/crypto-details.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     DaosComponentComponent,
     HomeComponentComponent,
     NotFoundPageComponentComponent,
+    CryptoDetailsComponent,
     
 
   ],
