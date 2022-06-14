@@ -11,10 +11,7 @@ import { Cryptocurrency } from '../Cryptocurrency';
 
 export class CryptosComponentComponent implements OnInit {
   
-
-
   cryptosData:Cryptocurrency[]=[];
-  
   
   constructor(private _cryptosService:CryptosService) { }
 
@@ -24,7 +21,7 @@ export class CryptosComponentComponent implements OnInit {
       Object.values(values).forEach(
         
         (value) => {
-          console.log(value)
+          //console.log(value)
           let data=JSON.parse(JSON.stringify(value))
           
           let crypto:Cryptocurrency = {
@@ -34,7 +31,9 @@ export class CryptosComponentComponent implements OnInit {
             price: data.quote.USD.price,
             maxSuply: data.max_supply
           };
+
           this.cryptosData.push(crypto)
+  
         }
       );   
       }

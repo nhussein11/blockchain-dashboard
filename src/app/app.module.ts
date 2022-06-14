@@ -11,6 +11,9 @@ import { NotFoundPageComponentComponent } from './not-found-page-component/not-f
 import { HttpClientModule } from '@angular/common/http';
 import { CryptoDetailsComponent } from './crypto-details/crypto-details.component';
 // import { AlertModule } from 'ngx-bootstrap';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +31,7 @@ import { CryptoDetailsComponent } from './crypto-details/crypto-details.componen
     AppRoutingModule,
     HttpClientModule,
     // AlertModule.forRoot(),
+    InfiniteScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
