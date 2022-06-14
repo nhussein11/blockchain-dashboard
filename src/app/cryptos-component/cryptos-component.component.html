@@ -1,27 +1,27 @@
 <h2 class="display-4 text-center">Cryptocurrencies Ranking</h2>
-
-<div>
-  <table class="table" >
-    <thead class="table-dark">
-      <tr>
-        <th>Name</th>
-        <th>Symbol</th>
-        <th>Price (USD)</th>
-        <th>Max Supply</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <tr *ngFor="let crypto of cryptosData">
-        <td> 
-          <a routerLink="/crypto_details/{{crypto.id}}">
-            {{crypto.name}}
-          </a>
-        </td>
-        <td>{{crypto.symbol}}</td>
-        <td>{{crypto.price | currency }}</td>
-        <td>{{crypto.maxSuply }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <table class="table table-responsive table-hover" >
+      <thead class="table-dark">
+        <tr class="text-center">
+          <th >Name</th>
+          <th>Symbol</th>
+          <th>Price (USD)</th>
+          <th>Max Supply</th>
+        </tr>
+      </thead>
+      <tbody class="text-center ">
+        <tr *ngFor="let crypto of cryptosData">
+          <td >  
+            <a class="link-secondary" style="text-decoration: none;"routerLink="/crypto_details/{{crypto.id}}">
+              {{crypto.name}}
+            </a>
+          </td>
+          <td>{{crypto.symbol}}</td>
+          <td>{{crypto.price | currency }}</td>
+          <td>{{(crypto.maxSuply)?crypto.maxSuply :'-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
