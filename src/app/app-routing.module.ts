@@ -5,7 +5,7 @@ import { CryptosComponentComponent } from './pages/cryptocurrencies/cryptos-comp
 import { NftsComponentComponent } from './pages/nfts/nfts-component/nfts-component.component';
 import { DaosComponentComponent } from './pages/daos/daos-component/daos-component.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponentComponent } from './home-component/home-component.component';
+import { HomeComponentComponent } from './pages/home-component/home-component.component';
 import { NotFoundPageComponentComponent } from './pages/not-found-page-component/not-found-page-component.component';
 import { CryptoDetailsComponent } from './pages/cryptocurrencies/crypto-details/crypto-details.component';
 

@@ -3,7 +3,7 @@ import { CryptosComponentComponent } from './pages/cryptocurrencies/cryptos-comp
 import { CryptoDetailsComponent } from './pages/cryptocurrencies/crypto-details/crypto-details.component';
 import { DaosComponentComponent } from './pages/daos/daos-component/daos-component.component';
 import { DaoDetailsComponent } from './pages/daos/dao-details/dao-details.component';
-import { HomeComponentComponent } from './home-component/home-component.component';
+import { HomeComponentComponent } from './pages/home-component/home-component.component';
 import { NftsComponentComponent } from './pages/nfts/nfts-component/nfts-component.component';
 import { NftDetailsComponent } from './pages/nfts/nft-details/nft-details.component';
 import { NotFoundPageComponentComponent } from './pages/not-found-page-component/not-found-page-component.component';
