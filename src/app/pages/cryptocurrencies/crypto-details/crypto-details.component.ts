@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CryptosService } from '../cryptos.service';
+import { CryptosService } from 'src/app/services/cryptos.service';
 import { ActivatedRoute } from '@angular/router';
-import { Cryptocurrency } from '../Cryptocurrency';
+import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
+
 @Component({
   selector: 'app-crypto-details',
   templateUrl: './crypto-details.component.html',

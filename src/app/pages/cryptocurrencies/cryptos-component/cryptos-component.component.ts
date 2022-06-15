@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CryptosService } from '../cryptos.service';
-import { Cryptocurrency } from '../Cryptocurrency';
+import { CryptosService } from 'src/app/services/cryptos.service';
+import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
 
 @Component({
   selector: 'app-cryptos-component',
