@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Cryptocurrency } from '../models/Cryptocurrency';
+import { map, Observable } from 'rxjs';
+import { Cryptocurrency, CryptoReqRepResponse } from '../models/Cryptocurrency';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { Cryptocurrency } from '../models/Cryptocurrency';
 
 export class CryptosService {
   
-  HEADERS = {
+  private HEADERS = {
     //My own key; 
     'X-CMC_PRO_API_KEY': 'b61a8fc1-81dc-4ab2-8fa5-475d5ddf4e08',
     'Accept': 'application/json',
@@ -18,15 +18,22 @@ export class CryptosService {
 
   constructor(private http: HttpClient) { }
 
-  getCryptos():Observable<any>{
+  getCryptos():Observable<CryptoReqRepResponse>{
     let url = '/v1/cryptocurrency/listings/latest';
     
-    return this.http.get<any>(url,
+    return this.http.get<CryptoReqRepResponse>(url,
         { headers: this.HEADERS }
-      );
+      ).pipe(
+        map( resp =>{
+          return resp
+        }
+        )
+      )
+      
+      ;
   }
   
-  getCryptoDetails(id:string):Observable<any>{
+  getCryptoDetails(id:string):Observable<Cryptocurrency[]>{
     let url = '/v1/cryptocurrency/info?id='+id.toString();
     
     return this.http.get<any>(url,
