@@ -13,6 +13,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ExchangesComponentComponent } from './pages/exchanges/exchanges-component/exchanges-component.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     NftDetailsComponent,
 
     NotFoundPageComponentComponent,
+     ExchangesComponentComponent,
   ],
   imports: [
     BrowserModule,
