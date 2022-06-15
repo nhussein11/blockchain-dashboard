@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Cryptocurrency } from '../models/Cryptocurrency';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,8 @@ export class CryptosService {
     return this.http.get<any>(url,
         { headers: this.HEADERS }
       );
-
-
-
   }
+  
   getCryptoDetails(id:string):Observable<any>{
     let url = '/v1/cryptocurrency/info?id='+id.toString();
     
