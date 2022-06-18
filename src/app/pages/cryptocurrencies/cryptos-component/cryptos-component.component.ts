@@ -16,11 +16,9 @@ export class CryptosComponentComponent implements OnInit {
   constructor(private _cryptosService:CryptosService) { }
 
   ngOnInit(): void {
-    this._cryptosService.getCryptos().subscribe(response=>{
-          console.log(response)
-
-          //this.cryptosData.push(crypto)
-  
+    this._cryptosService.getCryptos().subscribe(
+        (response:Cryptocurrency[]) => {
+          this.cryptosData=response;
         }
     ) 
   }

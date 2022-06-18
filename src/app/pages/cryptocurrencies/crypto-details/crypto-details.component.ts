@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CryptosService } from 'src/app/services/cryptos.service';
 import { ActivatedRoute } from '@angular/router';
 import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
+import { CryptocurrencyDetails } from 'src/app/models/Cryptocurrency-Details';
 
 @Component({
   selector: 'app-crypto-details',
@@ -11,7 +12,7 @@ import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
 export class CryptoDetailsComponent implements OnInit {
   
 
-  id:Number=0;
+  id:string='';
   // crypto:Cryptocurrency = {};
   
   constructor(private route:ActivatedRoute,private _cryptosService:CryptosService) { }
@@ -38,6 +39,12 @@ export class CryptoDetailsComponent implements OnInit {
     //     )
     //   }
     // )
+
+    this.id=this.route.snapshot.paramMap.get('id')!;
+    this._cryptosService.getCryptoDetails(this.id).subscribe(
+      (respose) => 
+      console.log(respose.logo)
+    )
   }
 
 }
