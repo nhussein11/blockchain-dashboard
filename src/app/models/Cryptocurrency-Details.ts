@@ -9,4 +9,5 @@ export interface CryptocurrencyDetails extends Omit<Cryptocurrency,'max_supply'|
 }
 export interface URLs{
     source_code:string;
+    technical_doc:string;
 }
