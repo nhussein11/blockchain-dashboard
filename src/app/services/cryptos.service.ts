@@ -37,7 +37,7 @@ export class CryptosService {
     return this.http.get<any>(url,
         { headers: this.HEADERS, observe:'response' })
         .pipe(
-          map( (resp ) => resp.body.data)
+          map( (resp ) => resp.body.data[id])
         );
     }
 

@@ -18,7 +18,7 @@ export class CryptosComponentComponent implements OnInit {
   ngOnInit(): void {
     this._cryptosService.getCryptos().subscribe(
         (response:Cryptocurrency[]) => {
-          console.log(response[0].quote)
+
           this.cryptosData=response;
         }
     ) 
