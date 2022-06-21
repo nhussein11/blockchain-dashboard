@@ -12,15 +12,14 @@ import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
 export class CryptosComponentComponent implements OnInit {
   
   cryptosData:Cryptocurrency[]=[];
+  p: number = 1;
+  count: number = 15;
   
   constructor(private _cryptosService:CryptosService) { }
 
   ngOnInit(): void {
     this._cryptosService.getCryptos().subscribe(
-        (response:Cryptocurrency[]) => {
-
-          this.cryptosData=response;
-        }
+        (response:Cryptocurrency[]) => this.cryptosData=response
     ) 
   }
 }

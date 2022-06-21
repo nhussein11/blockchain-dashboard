@@ -3,13 +3,12 @@
 
   <div class="card" style="width: 24rem;">
     <h5 class="card-header text-center">{{crypto.name}}</h5>
-    <img src={{crypto.logo}} class="card-img-top" style="width:100%;height: 100%;object-fit: cover;">
+    <img src={{crypto.logo}} class="card-img mx-auto" style="width:50%;height: 50%;object-fit: cover;">
     <div class="card-body">
       <p class="card-text text-center">{{crypto.description}}</p>
       <h5 class="card-footer text-center" *ngIf="crypto.category">Category: {{crypto.category | uppercase}}</h5>
       
     </div>
   </div> 
-
 
 </div>

@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody class="text-center ">
-        <tr *ngFor="let crypto of cryptosData">
+        <tr *ngFor="let crypto of cryptosData | paginate: { itemsPerPage: count, currentPage: p }">
           <td >  
             <a class="link-secondary" style="text-decoration: none;"routerLink="/crypto_details/{{crypto.id}}">
               {{crypto.name}}
@@ -23,5 +23,8 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="row justify-content-center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>
