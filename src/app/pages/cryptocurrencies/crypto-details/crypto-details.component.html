@@ -7,7 +7,9 @@
     <div class="card-body">
       <p class="card-text text-center">{{crypto.description}}</p>
       <h5 class="card-footer text-center" *ngIf="crypto.category">Category: {{crypto.category | uppercase}}</h5>
-      
+      <h5 class="card-footer text-center" *ngIf="crypto.category">Source Code: 
+        <a href={{crypto.urls.source_code[0]}} target="_blank">{{crypto.urls.source_code[0]}}</a>
+      </h5>
     </div>
   </div> 
 

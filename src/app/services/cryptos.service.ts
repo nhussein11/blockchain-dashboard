@@ -16,7 +16,7 @@ export class CryptosService {
     //My own key; 
     'X-CMC_PRO_API_KEY': 'b61a8fc1-81dc-4ab2-8fa5-475d5ddf4e08',
     'Accept': 'application/json',
-    'Accept-Encoding': 'deflate, gzip',
+    // 'Accept-Encoding': 'deflate, gzip',
     'Access-Control-Allow-Origin':'*'
   }
 
