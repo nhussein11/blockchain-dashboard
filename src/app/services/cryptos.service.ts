@@ -5,6 +5,7 @@ import { Cryptocurrency } from '../models/Cryptocurrency';
 import { CryptocurrencyDetails } from '../models/Cryptocurrency-Details';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
