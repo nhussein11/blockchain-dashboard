@@ -1,11 +1,3 @@
-// export interface Welcome {
-//     status: Status;
-//     data:   Data;
-// }
-
-// export interface Data {
-//     "2010": The2010;
-// }
 
 export interface CryptocurrencyDetails {
     id:                               number;

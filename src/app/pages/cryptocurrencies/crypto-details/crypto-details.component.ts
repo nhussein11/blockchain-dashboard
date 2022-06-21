@@ -43,7 +43,7 @@ export class CryptoDetailsComponent implements OnInit {
     this.id=this.route.snapshot.paramMap.get('id')!;
     this._cryptosService.getCryptoDetails(this.id).subscribe(
       (respose) => 
-      console.log(respose.logo)
+      console.log(respose)
     )
   }
 
