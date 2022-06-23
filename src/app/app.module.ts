@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     HttpClientModule,
     InfiniteScrollModule,
     NgxPaginationModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

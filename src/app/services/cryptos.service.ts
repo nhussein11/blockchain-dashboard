@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Cryptocurrency } from '../models/Cryptocurrency';
+import { Cryptocurrency,CryptocurrencyDetailsGraphic } from '../models/Cryptocurrency';
 import { CryptocurrencyDetails } from '../models/Cryptocurrency-Details';
 
 
@@ -41,6 +41,29 @@ export class CryptosService {
           map( (resp ) => resp.body.data[id])
         );
     }
+
+    getCryptoDetailsGraphic(id:string):Observable<number[]>{
+      let url = '/v1/cryptocurrency/quotes/latest?id='+id;
+      let auxObj={}
+      let cryptoPercetages:number[]=[];
+      return this.http.get<any>(url,
+          { headers: this.HEADERS, observe:'response' })
+          .pipe(
+            map( (resp ) => {
+              console.log(resp)
+              cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_1h); 
+              cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_24h);
+              cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_7d); 
+              cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_30d);
+              cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_60d);
+              cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_90d);
+             console.log(cryptoPercetages)
+              return cryptoPercetages
+            }
+            // resp.body.data[id]
+            )
+          );
+      }
 
     
   }

@@ -24,3 +24,4 @@ export interface Usd {
     last_updated:             Date;
 }
 
+export interface CryptocurrencyDetailsGraphic extends Omit<Cryptocurrency,'id'|'name' | 'symbol'>{}
