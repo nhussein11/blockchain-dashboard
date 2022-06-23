@@ -1,19 +1,24 @@
 <h2 class="display-5 text-left">Details:</h2>
-<div class="d-flex justify-content-center ">
-
-  <div class="card" style="width: 24rem;">
-    <h5 class="card-header text-center">{{crypto.name}}</h5>
-    <img src={{crypto.logo}} class="card-img mx-auto" style="width:50%;height: 50%;object-fit: cover;">
-    <div class="card-body">
-      <p class="card-text text-center">{{crypto.description}}</p>
-      <h5 class="card-footer text-center" *ngIf="crypto.category">Category: {{crypto.category | uppercase}}</h5>
-      <h5 class="card-footer text-center" *ngIf="crypto.urls.source_code[0]">Source Code: 
-        <a href={{crypto.urls.source_code[0]}} target="_blank">{{crypto.urls.source_code[0]}}</a>
-      </h5>
-      <h5 class="card-footer text-center" *ngIf="crypto.urls.technical_doc[0] && crypto.urls.source_code[0]!=crypto.urls.technical_doc[0]">Technical Doc: 
-        <a href={{crypto.urls.technical_doc[0]}} target="_blank">{{crypto.urls.technical_doc[0]}}</a>
-      </h5>
-    </div>
-  </div> 
-
+<div *ngIf="!cryptoDetailLoaded; else divCard">
+  <p-progressSpinner
+    class="d-flex justify-content-center"
+  ></p-progressSpinner>
 </div>
+<ng-template #divCard>
+  <div class="d-flex justify-content-center ">
+    <div class="card" style="width: 24rem;">
+      <h5 class="card-header text-center">{{crypto.name}}</h5>
+      <img src={{crypto.logo}} class="card-img mx-auto" style="width:50%;height: 50%;object-fit: cover;">
+      <div class="card-body">
+        <p class="card-text text-center">{{crypto.description}}</p>
+        <h5 class="card-footer text-center" *ngIf="crypto.category">Category: {{crypto.category | uppercase}}</h5>
+        <h5 class="card-footer text-center" *ngIf="crypto.urls.source_code[0]">Source Code: 
+          <a href={{crypto.urls.source_code[0]}} target="_blank">{{crypto.urls.source_code[0]}}</a>
+        </h5>
+        <h5 class="card-footer text-center" *ngIf="crypto.urls.technical_doc[0] && crypto.urls.source_code[0]!=crypto.urls.technical_doc[0]">Technical Doc: 
+          <a href={{crypto.urls.technical_doc[0]}} target="_blank">{{crypto.urls.technical_doc[0]}}</a>
+        </h5>
+      </div>
+    </div> 
+  </div>
+</ng-template>

@@ -11,18 +11,8 @@ import { CryptocurrencyDetails } from 'src/app/models/Cryptocurrency-Details';
 })
 export class CryptoDetailsComponent implements OnInit {
 
-
+  cryptoDetailLoaded:boolean=false;
   id: string = '';
-  
-  // crypto: CryptocurrencyDetails = {
-  //   category: '',
-  //   description: '',
-  //   logo: '',
-  //   id: 0,
-  //   name: '',
-  //   symbol: '',
-  // };
-
   crypto: CryptocurrencyDetails = {} as CryptocurrencyDetails;
 
   constructor(private route: ActivatedRoute, private _cryptosService: CryptosService) { }
@@ -32,8 +22,8 @@ export class CryptoDetailsComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id')!;
     this._cryptosService.getCryptoDetails(this.id).subscribe(
       (respose:CryptocurrencyDetails) => {
-        console.log(respose.urls.source_code)
-        this.crypto = respose
+        this.crypto = respose;
+        this.cryptoDetailLoaded = true;
       } 
     )
   }
