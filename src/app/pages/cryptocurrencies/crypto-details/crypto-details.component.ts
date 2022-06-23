@@ -20,26 +20,32 @@ export class CryptoDetailsComponent implements OnInit {
     datasets: [
       {
         label: 'Percent change 1h',
+        backgroundColor: "green",
         data: [0]
       },
       {
         label: 'Percent change 24h',
+        backgroundColor: "blue",
         data: [0]
       },
       {
         label: 'Percent change 7d',
+        backgroundColor: "pink",
         data: [0]
       },
       {
         label: 'Percent change 30d',
+        backgroundColor: "orange",
         data: [0]
       },
       {
         label: 'Percent change 60d',
+        backgroundColor: "red",
         data: [0]
       },
       {
         label: 'Percent change 90d',
+        backgroundColor: "grey",
         data: [0]
       },
     ]
