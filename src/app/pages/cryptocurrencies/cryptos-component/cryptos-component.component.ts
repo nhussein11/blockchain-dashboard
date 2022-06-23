@@ -10,7 +10,7 @@ import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
 })
 
 export class CryptosComponentComponent implements OnInit {
-  
+  cryptosDataLoaded:boolean=false;
   cryptosData:Cryptocurrency[]=[];
   p: number = 1;
   count: number = 15;
@@ -19,7 +19,10 @@ export class CryptosComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this._cryptosService.getCryptos().subscribe(
-        (response:Cryptocurrency[]) => this.cryptosData=response
+        (response:Cryptocurrency[]) => {
+          this.cryptosData=response;
+          this.cryptosDataLoaded=true;
+        }
     ) 
   }
 }

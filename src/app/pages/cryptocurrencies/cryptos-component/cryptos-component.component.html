@@ -1,30 +1,41 @@
 <h2 class="display-4 text-center">Cryptocurrencies Ranking</h2>
-<div class="row justify-content-center">
-  <div class="col-auto" infinite-scroll >
-    <table class="table table-responsive table-hover" >
-      <thead class="table-dark">
-        <tr class="text-center">
-          <th >Name</th>
-          <th>Symbol</th>
-          <th>Price (USD)</th>
-          <th>Max Supply</th>
-        </tr>
-      </thead>
-      <tbody class="text-center ">
-        <tr *ngFor="let crypto of cryptosData | paginate: { itemsPerPage: count, currentPage: p } ">
-          <td >  
-            <a class="link-secondary" style="text-decoration: none;"routerLink="/crypto_details/{{crypto.id}}">
-              {{crypto.name}}
-            </a>
-          </td>
-          <td>{{crypto.symbol}}</td>
-          <td>{{crypto.quote.USD.price| currency }}</td>
-          <td>{{(crypto.max_supply)?crypto.max_supply :'-' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="d-flex justify-content-center">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
+
+
+
+<div *ngIf="!cryptosDataLoaded; else divTable">
+  <p-progressSpinner
+    class="d-flex justify-content-center"
+  ></p-progressSpinner>
 </div>
+<ng-template #divTable>
+  <div  class="row justify-content-center">
+    <div class="col-auto" >
+      <table class="table table-responsive table-hover" >
+        <thead class="table-dark">
+          <tr class="text-center">
+            <th >Name</th>
+            <th>Symbol</th>
+            <th>Price (USD)</th>
+            <th>Max Supply</th>
+          </tr>
+        </thead>
+        <tbody class="text-center ">
+          <tr *ngFor="let crypto of cryptosData | paginate: { itemsPerPage: count, currentPage: p } ">
+            <td >  
+              <a class="link-secondary" style="text-decoration: none;"routerLink="/crypto_details/{{crypto.id}}">
+                {{crypto.name}}
+              </a>
+            </td>
+            <td>{{crypto.symbol}}</td>
+            <td>{{crypto.quote.USD.price| currency }}</td>
+            <td>{{(crypto.max_supply)?crypto.max_supply :'-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div  class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+  
+</ng-template>

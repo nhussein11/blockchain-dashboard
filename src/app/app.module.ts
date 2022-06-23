@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     HttpClientModule,
     InfiniteScrollModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
