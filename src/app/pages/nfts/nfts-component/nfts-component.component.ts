@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Nft } from 'src/app/models/Nfts';
+import { NftsService } from 'src/app/services/nfts.service';
 
 @Component({
   selector: 'app-nfts-component',
@@ -6,10 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nfts-component.component.css']
 })
 export class NftsComponentComponent implements OnInit {
+  
 
-  constructor() { }
+  nfts:Nft[]=[];
+
+  constructor(private _nftService:NftsService) { }
 
   ngOnInit(): void {
+    
+
+      this._nftService.getNfts().subscribe(
+        (res:Nft[]) => 
+        
+        res.forEach((r)=>
+          
+          this.nfts.push(r)
+          
+        )
+      );
+
+      
+    
   }
 
 }
