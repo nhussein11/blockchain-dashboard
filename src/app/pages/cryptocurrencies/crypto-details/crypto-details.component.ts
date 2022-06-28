@@ -22,35 +22,34 @@ export class CryptoDetailsComponent implements OnInit {
         label: 'Percent change 1h',
         backgroundColor: "green",
         data: [0]
-      },
-      {
+      }
+      ,{
         label: 'Percent change 24h',
         backgroundColor: "blue",
         data: [0]
-      },
-      {
+      }
+      ,{
         label: 'Percent change 7d',
         backgroundColor: "pink",
         data: [0]
-      },
-      {
+      }
+      ,{
         label: 'Percent change 30d',
         backgroundColor: "orange",
         data: [0]
-      },
-      {
+      }
+      ,{
         label: 'Percent change 60d',
         backgroundColor: "red",
         data: [0]
-      },
-      {
+      }
+      ,{
         label: 'Percent change 90d',
         backgroundColor: "grey",
         data: [0]
-      },
+      }
     ]
   }
-
 
   constructor(private route: ActivatedRoute, private _cryptosService: CryptosService) { }
 
@@ -65,15 +64,13 @@ export class CryptoDetailsComponent implements OnInit {
     )
     this._cryptosService.getCryptoDetailsGraphic(this.id).subscribe(
       (respose) => {
-
+        console.log(respose);
         this.dataChart.datasets.forEach(
           (dataset,index)=>{
-            dataset.data[0]=respose[index]*100
+            dataset.data[0]=respose[index]*100; //Revisar!
           }
         )
       }
-
     )
   }
-
 }

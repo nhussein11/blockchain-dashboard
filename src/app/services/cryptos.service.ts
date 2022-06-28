@@ -44,20 +44,20 @@ export class CryptosService {
 
     getCryptoDetailsGraphic(id:string):Observable<number[]>{
       let url = '/v1/cryptocurrency/quotes/latest?id='+id;
-      let auxObj={}
+      // let auxObj={}
       let cryptoPercetages:number[]=[];
       return this.http.get<any>(url,
           { headers: this.HEADERS, observe:'response' })
           .pipe(
             map( (resp ) => {
-              console.log(resp)
+              
               cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_1h); 
               cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_24h);
               cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_7d); 
               cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_30d);
               cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_60d);
               cryptoPercetages.push(resp.body.data[id].quote.USD.percent_change_90d);
-             console.log(cryptoPercetages)
+              // console.log(cryptoPercetages)
               return cryptoPercetages
             }
             // resp.body.data[id]
