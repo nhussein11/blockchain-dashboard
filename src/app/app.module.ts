@@ -13,7 +13,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { ExchangesComponentComponent } from './pages/exchanges/exchanges-component/exchanges-component.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -29,13 +31,16 @@ import { ExchangesComponentComponent } from './pages/exchanges/exchanges-compone
     NftDetailsComponent,
 
     NotFoundPageComponentComponent,
-     ExchangesComponentComponent,
+     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     InfiniteScrollModule,
+    NgxPaginationModule,
+    ProgressSpinnerModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,33 +10,19 @@ import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
 })
 
 export class CryptosComponentComponent implements OnInit {
-  
+  cryptosDataLoaded:boolean=false;
   cryptosData:Cryptocurrency[]=[];
+  p: number = 1;
+  count: number = 15;
   
   constructor(private _cryptosService:CryptosService) { }
 
   ngOnInit(): void {
-    this._cryptosService.getCryptos().subscribe(response=>{
-      const values = Object.values(response.data)
-      Object.values(values).forEach(
-        
-        (value) => {
-          //console.log(value)
-          let data=JSON.parse(JSON.stringify(value))
-          
-          let crypto:Cryptocurrency = {
-            id: data.id,
-            name: data.name,
-            symbol: data.symbol,
-            price: data.quote.USD.price,
-            maxSuply: data.max_supply
-          };
-
-          this.cryptosData.push(crypto)
-  
+    this._cryptosService.getCryptos().subscribe(
+        (response:Cryptocurrency[]) => {
+          this.cryptosData=response;
+          this.cryptosDataLoaded=true;
         }
-      );   
-      }
-    );
+    ) 
   }
 }

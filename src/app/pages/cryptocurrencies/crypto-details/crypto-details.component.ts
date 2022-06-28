@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CryptosService } from 'src/app/services/cryptos.service';
 import { ActivatedRoute } from '@angular/router';
-import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
+import { Cryptocurrency, CryptocurrencyDetailsGraphic } from 'src/app/models/Cryptocurrency';
+import { CryptocurrencyDetails } from 'src/app/models/Cryptocurrency-Details';
 
 @Component({
   selector: 'app-crypto-details',
@@ -9,35 +10,67 @@ import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
   styleUrls: ['./crypto-details.component.css']
 })
 export class CryptoDetailsComponent implements OnInit {
-  
 
-  id:Number=0;
-  crypto:Cryptocurrency = {};
-  
-  constructor(private route:ActivatedRoute,private _cryptosService:CryptosService) { }
+  cryptoDetailLoaded: boolean = false;
+  id: string = '';
+  crypto: CryptocurrencyDetails = {} as CryptocurrencyDetails;
+
+  dataChart = {
+    labels: ['2022'],
+    datasets: [
+      {
+        label: 'Percent change 1h',
+        backgroundColor: "green",
+        data: [0]
+      }
+      ,{
+        label: 'Percent change 24h',
+        backgroundColor: "blue",
+        data: [0]
+      }
+      ,{
+        label: 'Percent change 7d',
+        backgroundColor: "pink",
+        data: [0]
+      }
+      ,{
+        label: 'Percent change 30d',
+        backgroundColor: "orange",
+        data: [0]
+      }
+      ,{
+        label: 'Percent change 60d',
+        backgroundColor: "red",
+        data: [0]
+      }
+      ,{
+        label: 'Percent change 90d',
+        backgroundColor: "grey",
+        data: [0]
+      }
+    ]
+  }
+
+  constructor(private route: ActivatedRoute, private _cryptosService: CryptosService) { }
 
   ngOnInit(): void {
-    //Cargar los detalles 
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this._cryptosService.getCryptoDetails(this.id.toString()).subscribe(
-      (response)=> {
-        const values = Object.values(response.data)
-        Object.values(values).forEach(
-          (value) => {
-            let data=JSON.parse(JSON.stringify(value))
-            console.log(data)
-            this.crypto = {
-              id: data.id,
-              name: data.name,
-              symbol: data.symbol,
-              category:data.category,
-              description:data.description,
-              logo:data.logo,
-            };
+
+    this.id = this.route.snapshot.paramMap.get('id')!;
+    this._cryptosService.getCryptoDetails(this.id).subscribe(
+      (respose: CryptocurrencyDetails) => {
+        this.crypto = respose;
+        this.cryptoDetailLoaded = true;
+      }
+    )
+    this._cryptosService.getCryptoDetailsGraphic(this.id).subscribe(
+      (respose) => {
+        console.log(respose);
+        this.dataChart.datasets.forEach(
+          (dataset,index)=>{
+            dataset.data[0]=respose[index]*100; //Revisar!
           }
         )
       }
     )
   }
-
 }
