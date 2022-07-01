@@ -11,7 +11,8 @@ export class NftsComponentComponent implements OnInit {
   
 
   nfts:Nft[]=[];
-
+  // p: number = 1;
+  // count: number = 3;
   constructor(private _nftService:NftsService) { }
 
   ngOnInit(): void {
