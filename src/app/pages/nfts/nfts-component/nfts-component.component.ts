@@ -11,7 +11,7 @@ export class NftsComponentComponent implements OnInit {
 
 
   nfts: Nft[] = [];
-  
+  owner:string = '0xfae46f94ee7b2acb497cecaff6cff17f621c693d';
   // p: number = 1;
   // count: number = 3;
 
@@ -20,7 +20,7 @@ export class NftsComponentComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this._nftService.getNfts().subscribe(
+    this._nftService.getNfts(this.owner).subscribe(
       (response:Nft[]) => {
         // console.log(response)
         

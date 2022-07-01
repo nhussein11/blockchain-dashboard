@@ -12,11 +12,11 @@ export class NftsService {
   constructor(private http: HttpClient) { }
 
 
-  getNfts(): Observable<Nft[]> {
+  getNfts(owner:string): Observable<Nft[]> {
     
     
 
-    let url = 'https://eth-mainnet.alchemyapi.io/nft/v2/demo/getNFTs/?owner=0xfae46f94ee7b2acb497cecaff6cff17f621c693d';
+    let url = `https://eth-mainnet.alchemyapi.io/nft/v2/demo/getNFTs/?owner=${owner}`;
 
     return this.http.get<any>(url)
       .pipe(
