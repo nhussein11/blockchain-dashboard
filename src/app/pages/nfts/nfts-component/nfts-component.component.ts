@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Nft } from 'src/app/models/Nfts';
+import { Nft, OwnedNft } from 'src/app/models/Nfts';
 import { NftsService } from 'src/app/services/nfts.service';
 
 @Component({
@@ -8,28 +8,28 @@ import { NftsService } from 'src/app/services/nfts.service';
   styleUrls: ['./nfts-component.component.css']
 })
 export class NftsComponentComponent implements OnInit {
-  
 
-  nfts:Nft[]=[];
+
+  nfts: Nft[] = [];
+  
   // p: number = 1;
   // count: number = 3;
-  constructor(private _nftService:NftsService) { }
+
+  constructor(private _nftService: NftsService) { }
 
   ngOnInit(): void {
-    
 
-      this._nftService.getNfts().subscribe(
-        (res:Nft[]) => 
+
+    this._nftService.getNfts().subscribe(
+      (response:Nft[]) => {
+        // console.log(response)
         
-        res.forEach((r)=>
-          
-          this.nfts.push(r)
-          
-        )
-      );
+        this.nfts = response
+      }
+        
 
-      
-    
+    );
+    console.log(this.nfts)
+
   }
-
 }
