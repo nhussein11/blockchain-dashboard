@@ -1,57 +1,22 @@
 <ng-template ngIf="{{!nfts}}">
     <div class="conteiner">
-        
         <div class="row">
-            <!-- <div *ngFor="let nft of nfts "> -->
             <div class="col-sm-3" *ngFor="let nft of nfts ">
-                
-                    <div class="card-columns" style="width: 18rem;">
 
-                        <img class="card-img-top" src="{{nft.image}}" alt="">
+                <div class="card-columns" style="width: 18rem;">
 
-                        <div class="card-body">
-                            <h5 class="card-title">{{nft.name}}</h5>
-                            <p class="card-text">{{nft.description}}</p>
-                        </div>
+                    <img class="card-img-top" src="{{nft.image}}" alt="">
 
-                        <!-- <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{nft.slug}}</li>
-                        </ul> -->
-<!-- 
-                        <div class="card-body">
-                            <a href="#" class="card-link">{{nft.twitter_username}}</a>
-                            <a href="#" class="card-link">{{nft.telegram_url}}</a>
-                        </div> -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{nft.name}}</h5>
+                        <p class="card-text">{{nft.description}}</p>
                     </div>
+                    <div class="card-footer">
+                        <h5 class="card-title">{{nft.date | date}}</h5>
+                    </div>
+
                 </div>
-
-
-            </div>
-
-        </div>
-
-    
-
-</ng-template>
-
-
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-4">
-            <div class="card">
-                hola mundo
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card">
-                hola mundo
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card">
-                hola mundo
             </div>
         </div>
     </div>
-
-</div> -->
+</ng-template>

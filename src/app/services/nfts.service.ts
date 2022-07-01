@@ -21,18 +21,10 @@ export class NftsService {
     return this.http.get<any>(url)
       .pipe(
         map((res) => {
-         return  (res.ownedNfts).map((nft:OwnedNft)=>{
-        
-            return (nft.metadata)
-            
-          })
-          
-        }
-        )
+         return  (res.ownedNfts).map(
+           (nft:OwnedNft)=> nft.metadata
+          )
+        })
       );
   }
-
-
-  
-
 }
