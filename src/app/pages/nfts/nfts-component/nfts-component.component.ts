@@ -12,6 +12,7 @@ export class NftsComponentComponent implements OnInit {
 
   nfts: Nft[] = [];
   owner:string = '0xfae46f94ee7b2acb497cecaff6cff17f621c693d';
+  defaultImage:string = 'src/assets/no_image_available_icon.jpg';
   // p: number = 1;
   // count: number = 3;
 
@@ -22,14 +23,18 @@ export class NftsComponentComponent implements OnInit {
 
     this._nftService.getNfts(this.owner).subscribe(
       (response:Nft[]) => {
-        // console.log(response)
+        console.log(response)
+        response.map(
+          (nft:Nft) => {
+            nft.image?.startsWith('ipfs://')
+            ? nft.image='https://ipfs.io/ipfs'+ nft.image.substring(6)
+            : nft.image
+            
+          }
+        )
         
         this.nfts = response
       }
-        
-
     );
-    console.log(this.nfts)
-
   }
 }

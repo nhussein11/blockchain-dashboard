@@ -1,11 +1,12 @@
 
 <ng-template ngIf="{{!nfts}}">
     <div class="container">
+        
         <div class="input-group">
-            <h5 class="display-6 " >Owner:</h5>
-            <input class="form-control form-control-lg mt-5 text-center" type="text" 
+            <label class="display-6 " >Owner:</label>
+            <input class="form-control form-control-lg mt-5 me-5 text-center" type="text" 
             placeholder="{{owner}}">
-            <button type="submit" class="btn btn-primary mt-5 ">Submit</button>
+            <button type="submit" class="btn btn-primary mt-5">Search</button>
         </div>
         
     </div>
@@ -13,13 +14,15 @@
         <div class="row">
             <div class="col-sm-3" *ngFor="let nft of nfts ">
 
-                <div class="card-columns" style="width: 18rem;">
+                <div class="card-columns" style="width: 14rem;">
 
-                    <img class="card-img-top" src="{{nft.image}}" alt="">
+                    <img class="card-img-top" src="{{nft.image?nft.image:defaultImage}}" 
+                    
+                    alt="">
 
                     <div class="card-body">
                         <h5 class="card-title">{{nft.name}}</h5>
-                        <p class="card-text">{{nft.description}}</p>
+                        <p class="card-text">{{nft.image}}</p> 
                     </div>
                     <div class="card-footer">
                         <h5 class="card-title">{{nft.date | date}}</h5>
