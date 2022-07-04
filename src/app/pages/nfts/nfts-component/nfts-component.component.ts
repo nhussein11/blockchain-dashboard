@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Nft, OwnedNft } from 'src/app/models/Nfts';
 import { NftsService } from 'src/app/services/nfts.service';
+// import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-nfts-component',
@@ -8,33 +9,66 @@ import { NftsService } from 'src/app/services/nfts.service';
   styleUrls: ['./nfts-component.component.css']
 })
 export class NftsComponentComponent implements OnInit {
-
+  
 
   nfts: Nft[] = [];
-  owner:string = '0xfae46f94ee7b2acb497cecaff6cff17f621c693d';
-  defaultImage:string = 'src/assets/no_image_available_icon.jpg';
+  owner: string = '0xfae46f94ee7b2acb497cecaff6cff17f621c693d';
+  defaultImage: string = 'src/assets/no_image_available_icon.jpg';
+  // decodedImage = new Image();
+
   // p: number = 1;
   // count: number = 3;
 
-  constructor(private _nftService: NftsService) { }
+  constructor(private _nftService: NftsService,
+    // private sanitizer:DomSanitizer
+    ) { }
 
   ngOnInit(): void {
 
 
     this._nftService.getNfts(this.owner).subscribe(
-      (response:Nft[]) => {
-        console.log(response)
+      (response: Nft[]) => {
+
         response.map(
-          (nft:Nft) => {
+          (nft: Nft) => {
             nft.image?.startsWith('ipfs://')
-            ? nft.image='https://ipfs.io/ipfs'+ nft.image.substring(6)
-            : nft.image
-            
+              ? nft.image = 'https://ipfs.io/ipfs' + nft.image.substring(6)
+              : nft.image
+
+            // if (nft.image?.startsWith('data:')) {
+            // }
           }
         )
-        
         this.nfts = response
       }
     );
   }
+
+
+  isEmptyNft(nft: Nft) {
+    return (nft && (Object.keys(nft).length === 0));
+  }
+
+  // convertDataUrlToBlob(image: string): Blob {
+  //   const arr = image.split(',');
+  //   // const mime = arr[0].match(/:(.*?);/)[1];
+  //   const mime = 'svg';
+  //   const bstr = atob(arr[1]);
+  //   let n = bstr.length;
+  //   const u8arr = new Uint8Array(n);
+
+  //   while (n--) {
+  //     u8arr[n] = bstr.charCodeAt(n);
+  //   }
+
+
+  //   return new Blob([u8arr], { type: mime });
+  // }
+
+
+  // decode64(img: string){
+  //   let decode = atob(img.substring(26))
+  //   return (decode)
+  // }
+
 }
