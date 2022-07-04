@@ -21,9 +21,9 @@
 <ng-template #cardsContent>
     <div class="container mt-5 ">
         <div class="row">
-            <div class="col-sm-3" *ngFor="let nft of nfts ">
+            <div class="col-sm-3  mt-5" *ngFor="let nft of nfts" >
 
-                <div class="card-columns" style="width: 14rem;" *ngIf="!isEmptyNft(nft)">
+                <div class="card-columns border " style="width: 14rem; " *ngIf="!isEmptyNft(nft)">
 
                     <img class="card-img-top" src="{{nft.image}}" alt="">
 
@@ -39,10 +39,10 @@
                             </a>
                             
                         </h5>
-                        <p class="card-text">{{nft.description?.slice(0,200)}}</p>
+                        <p class="card-text">{{nft.description?.slice(0,80)+' ...'}}</p>
                     </div>
                     <div class="card-footer">
-                        <h5 class="card-title">{{nft.date ? (nft.date | date) : 'No Date Registered'}}</h5>
+                        <h5 class="card-title">{{nft.compiler ? (nft.compiler) : 'No Compiler Registered'}}</h5>
                     </div>
 
                 </div>
