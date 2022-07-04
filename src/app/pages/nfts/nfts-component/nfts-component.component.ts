@@ -9,24 +9,27 @@ import { NftsService } from 'src/app/services/nfts.service';
   styleUrls: ['./nfts-component.component.css']
 })
 export class NftsComponentComponent implements OnInit {
-  
+
 
   nfts: Nft[] = [];
   owner: string = '0xfae46f94ee7b2acb497cecaff6cff17f621c693d';
+  emptyOwner:boolean=false;
+  // owner: string ='0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d';
   defaultImage: string = 'src/assets/no_image_available_icon.jpg';
-  // decodedImage = new Image();
 
-  // p: number = 1;
-  // count: number = 3;
+  // decodedImage = new Image();
 
   constructor(private _nftService: NftsService,
     // private sanitizer:DomSanitizer
-    ) { }
+  ) { }
 
   ngOnInit(): void {
+    this.loadNfts(this.owner);
+  }
 
 
-    this._nftService.getNfts(this.owner).subscribe(
+  loadNfts(owner: string) {
+    this._nftService.getNfts(owner).subscribe(
       (response: Nft[]) => {
 
         response.map(
@@ -44,6 +47,17 @@ export class NftsComponentComponent implements OnInit {
     );
   }
 
+  searchNftsByContract(newOwner: string) {
+    
+    ! newOwner 
+    ? 
+      (this.emptyOwner=true, 
+      this.owner='')
+    : 
+      this.nfts = [],
+      console.log(newOwner),
+      this.loadNfts(newOwner);
+  }
 
   isEmptyNft(nft: Nft) {
     return (nft && (Object.keys(nft).length === 0));
