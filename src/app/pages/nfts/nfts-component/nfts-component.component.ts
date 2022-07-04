@@ -56,7 +56,6 @@ export class NftsComponentComponent implements OnInit {
     : 
       this.emptyOwner=false
       this.nfts = [],
-      console.log(newOwner),
       this.loadNfts(newOwner);
   }
 
