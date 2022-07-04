@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Nft, OwnedNft } from 'src/app/models/Nfts';
 import { NftsService } from 'src/app/services/nfts.service';
 // import {DomSanitizer} from '@angular/platform-browser';
@@ -12,6 +13,7 @@ export class NftsComponentComponent implements OnInit {
 
 
   nfts: Nft[] = [];
+  selectedNft: Nft ={} as Nft;
   owner: string = '0xfae46f94ee7b2acb497cecaff6cff17f621c693d';
   emptyOwner:boolean=false;
   // owner: string ='0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d';
@@ -21,6 +23,7 @@ export class NftsComponentComponent implements OnInit {
 
   constructor(private _nftService: NftsService,
     // private sanitizer:DomSanitizer
+    private route:Router
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +65,16 @@ export class NftsComponentComponent implements OnInit {
   isEmptyNft(nft: Nft) {
     return (nft && (Object.keys(nft).length === 0));
   }
+  encapsulateNft(nft:Nft){
+    return (JSON.stringify(nft)).toString();
+  }
+  navigateToNftDetails(nft:Nft){
+    this.route.navigate(['nft_details', JSON.stringify(nft)]
+    
+    )
+  }
+  
+
 
   // convertDataUrlToBlob(image: string): Blob {
   //   const arr = image.split(',');
