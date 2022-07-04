@@ -20,10 +20,10 @@
 
                     <div class="card-body">
                         <h5 class="card-title">{{nft.name}}</h5>
-                        <p class="card-text">{{nft.description}}</p> 
+                        <p  class="card-text">{{nft.description?.slice(0,200)}}</p> 
                     </div>
                     <div class="card-footer">
-                        <h5 class="card-title">{{nft.date | date}}</h5>
+                        <h5 class="card-title">{{nft.date ? (nft.date | date) : 'No Date Registered'}}</h5>
                     </div>
 
                 </div>
