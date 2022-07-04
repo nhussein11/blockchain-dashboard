@@ -13,7 +13,7 @@ export class NftDetailsComponent implements OnInit {
   data: string = '';
 
   constructor(private _route: ActivatedRoute,
-            private modal: NgbModal
+              private modal: NgbModal
     ) { }
 
   ngOnInit(): void {
@@ -22,6 +22,10 @@ export class NftDetailsComponent implements OnInit {
     this.nft = JSON.parse(this.data);
     // console.log(this.nft.name)
     
+  }
+
+  openModal(contenido:any){
+    this.modal.open(contenido,{size:'xl',centered:true, scrollable:true})
   }
 
 }

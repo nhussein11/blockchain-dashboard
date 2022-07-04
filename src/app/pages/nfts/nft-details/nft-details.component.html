@@ -1,1 +1,28 @@
-<h1>{{nft.name}}</h1>
+<h1></h1>
+<ng-template  #contenido let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Details</h4>
+        <button class="btn-close" aria-label="Close" type="button" (click)="modal.dismiss()"> </button>
+    </div>
+    <div class="modal-body">
+        <div class="container ">
+            <div class="card row flex-row">
+                <img class="col-lg-4 card-img-end img-fluid p-0" src="{{nft.image}}" />
+                <div class="col-lg-8 card-body">
+                    <h1 class="card-title">{{nft.name}}</h1>
+                    <p class="card-text">{{nft.description}}</p>
+                    <p><strong>Version: </strong>{{nft.version?nft.version:' - '}}</p>
+                    <p><strong>DNA: </strong>{{nft.dna}}</p>
+                    <p><strong>Edition: </strong>{{nft.edition}}</p>
+                    <p class="card-text"><strong>{{nft.compiler}}</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <h5>{{nft.date | date}}</h5>
+    </div>
+</ng-template>
+
+
+<button type="button" class="btn btn-outline-primary" (click)="openModal(contenido) ">  Lanzar modal</button>
