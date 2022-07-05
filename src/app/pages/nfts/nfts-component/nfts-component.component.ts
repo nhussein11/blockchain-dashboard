@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Nft, OwnedNft } from 'src/app/models/Nfts';
+import {NftDetailsComponent} from 'src/app/pages/nfts/nft-details/nft-details.component'
 import { NftsService } from 'src/app/services/nfts.service';
 // import {DomSanitizer} from '@angular/platform-browser';
 
@@ -16,13 +18,14 @@ export class NftsComponentComponent implements OnInit {
   selectedNft: Nft ={} as Nft;
   owner: string = '0xfae46f94ee7b2acb497cecaff6cff17f621c693d';
   emptyOwner:boolean=false;
+  nftIsSelected:boolean=false;
   // owner: string ='0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d';
+
   defaultImage: string = 'src/assets/no_image_available_icon.jpg';
 
-  // decodedImage = new Image();
 
   constructor(private _nftService: NftsService,
-    // private sanitizer:DomSanitizer
+    private modal: NgbModal,
     private route:Router
   ) { }
 
@@ -40,9 +43,6 @@ export class NftsComponentComponent implements OnInit {
             nft.image?.startsWith('ipfs://')
               ? nft.image = 'https://ipfs.io/ipfs' + nft.image.substring(6)
               : nft.image
-
-            // if (nft.image?.startsWith('data:')) {
-            // }
           }
         )
         this.nfts = response
@@ -68,34 +68,18 @@ export class NftsComponentComponent implements OnInit {
   encapsulateNft(nft:Nft){
     return (JSON.stringify(nft)).toString();
   }
-  navigateToNftDetails(nft:Nft){
-    this.route.navigate(['nft_details', JSON.stringify(nft)]
+
+  openToNftDetails(nft:Nft){
+    this.modal.open(NftDetailsComponent,{size:'xl',centered:true, scrollable:true})
+
+    // this.route.navigate(['nft_details', JSON.stringify(nft)]
     
-    )
+    // )
+    // this.nftIsSelected=true  
+    // this.modal.open(contenido:any){
+    //   this.modal.open(contenido,{size:'xl',centered:true, scrollable:true})
+    // }  
   }
   
-
-
-  // convertDataUrlToBlob(image: string): Blob {
-  //   const arr = image.split(',');
-  //   // const mime = arr[0].match(/:(.*?);/)[1];
-  //   const mime = 'svg';
-  //   const bstr = atob(arr[1]);
-  //   let n = bstr.length;
-  //   const u8arr = new Uint8Array(n);
-
-  //   while (n--) {
-  //     u8arr[n] = bstr.charCodeAt(n);
-  //   }
-
-
-  //   return new Blob([u8arr], { type: mime });
-  // }
-
-
-  // decode64(img: string){
-  //   let decode = atob(img.substring(26))
-  //   return (decode)
-  // }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Nft } from 'src/app/models/Nfts';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap'
 @Component({
   selector: 'app-nft-details',
   templateUrl: './nft-details.component.html',
@@ -13,19 +13,23 @@ export class NftDetailsComponent implements OnInit {
   data: string = '';
 
   constructor(private _route: ActivatedRoute,
-              private modal: NgbModal
+              private activeModal: NgbActiveModal
     ) { }
 
   ngOnInit(): void {
-
-    this.data = this._route.snapshot.paramMap.get('data')!;
-    this.nft = JSON.parse(this.data);
+    // this.modal.open(contenido,{size:'xl',centered:true, scrollable:true})
+    // this.data = this._route.snapshot.paramMap.get('data')!;
+    // this.nft = JSON.parse(this.data);
     // console.log(this.nft.name)
     
   }
 
   openModal(contenido:any){
-    this.modal.open(contenido,{size:'xl',centered:true, scrollable:true})
+    
+  }
+
+  closeModal(){
+    this.activeModal.close("Modal closed!");
   }
 
 }

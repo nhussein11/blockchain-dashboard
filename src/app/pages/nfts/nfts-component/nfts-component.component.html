@@ -1,5 +1,4 @@
 <div class="container">
-
     <div class="input-group">
         <label class="display-6 ">Owner:</label>
         <input class="form-control form-control-lg mt-5 me-5 text-center" type="text" #ownerInput
@@ -7,7 +6,6 @@
         <button type="submit" class="btn btn-primary mt-5"
             (click)="searchNftsByContract(ownerInput.value)">Search</button>
     </div>
-
 </div>
 
 <div *ngIf="emptyOwner; else cardsContent">
@@ -16,31 +14,23 @@
             <strong>Warning!</strong> You must indicate an owner...
         </div>
     </div>
-
 </div>
-<ng-template #cardsContent>
-    <div class="container mt-5 ">
-        <div class="row">
-            <div class="col-sm-3  mt-5" *ngFor="let nft of nfts" >
 
-                <div class="card-columns border " style="width: 14rem; " *ngIf="!isEmptyNft(nft)">
+<ng-template #cardsContent>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 mt-5" *ngFor="let nft of nfts">
+
+                <div class="card-columns border " (click)="openToNftDetails(nft)"
+                    style="width: 14rem; cursor: pointer;" *ngIf="!isEmptyNft(nft)">
 
                     <img class="card-img-top" src="{{nft.image}}" alt="">
 
                     <div class="card-body">
-                        <h5 class="card-title" >
-                            <a 
-                            style="cursor: pointer;" 
-                            
-                            (click)="navigateToNftDetails(nft)"
-                                
-                            >
-                                {{nft.name}}
-                            </a>
-                            
-                        </h5>
+                        <h5 class="card-title">{{nft.name}}</h5>
                         <p class="card-text">{{nft.description?.slice(0,80)+' ...'}}</p>
                     </div>
+
                     <div class="card-footer">
                         <h5 class="card-title">{{nft.compiler ? (nft.compiler) : 'No Compiler Registered'}}</h5>
                     </div>
@@ -49,4 +39,8 @@
             </div>
         </div>
     </div>
+</ng-template>
+
+<ng-template *ngIf="nftIsSelected">
+    <app-nft-details></app-nft-details>
 </ng-template>
