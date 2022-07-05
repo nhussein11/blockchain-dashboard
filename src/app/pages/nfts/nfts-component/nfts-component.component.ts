@@ -25,8 +25,8 @@ export class NftsComponentComponent implements OnInit {
 
 
   constructor(private _nftService: NftsService,
-    private modal: NgbModal,
-    private route:Router
+              private modal: NgbModal,
+              private route:Router
   ) { }
 
   ngOnInit(): void {
@@ -40,12 +40,18 @@ export class NftsComponentComponent implements OnInit {
 
         response.map(
           (nft: Nft) => {
-            nft.image?.startsWith('ipfs://')
+
+          
+            if (!this.isEmptyNft(nft)){
+              nft.image?.startsWith('ipfs://')
               ? nft.image = 'https://ipfs.io/ipfs' + nft.image.substring(6)
               : nft.image
-          }
+              this.nfts.push(nft)
+            }
+            }
+          
         )
-        this.nfts = response
+        // this.nfts = response
       }
     );
   }
@@ -65,21 +71,13 @@ export class NftsComponentComponent implements OnInit {
   isEmptyNft(nft: Nft) {
     return (nft && (Object.keys(nft).length === 0));
   }
-  encapsulateNft(nft:Nft){
-    return (JSON.stringify(nft)).toString();
-  }
+
 
   openToNftDetails(nft:Nft){
+  
+    this.selectedNft=nft;
     this.modal.open(NftDetailsComponent,{size:'xl',centered:true, scrollable:true})
 
-    // this.route.navigate(['nft_details', JSON.stringify(nft)]
-    
-    // )
-    // this.nftIsSelected=true  
-    // this.modal.open(contenido:any){
-    //   this.modal.open(contenido,{size:'xl',centered:true, scrollable:true})
-    // }  
-  }
-  
+  }  
 
 }

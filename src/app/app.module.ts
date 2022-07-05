@@ -16,6 +16,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {ChartModule} from 'primeng/chart';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -40,9 +41,10 @@ import {ChartModule} from 'primeng/chart';
     InfiniteScrollModule,
     NgxPaginationModule,
     ProgressSpinnerModule,
-    ChartModule
+    ChartModule,
+    
   ],
-  providers: [],
+  providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
