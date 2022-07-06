@@ -9,10 +9,10 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap'
 })
 export class NftDetailsComponent implements OnInit,OnChanges {
   data: string = '';
-  nft: Nft ={} as Nft;
+  // nft: Nft ={} as Nft;
 
 
-  @Input() _nft: Nft ={} as Nft;
+  @Input() nft: Nft ={} as Nft;
   
 
   constructor(private _route: ActivatedRoute,
@@ -20,13 +20,11 @@ export class NftDetailsComponent implements OnInit,OnChanges {
   ) { }
 
   ngOnInit(): void {
-    console.log(this._nft)
-    this.nft = this._nft  
 
   }
 
   ngOnChanges():void {
-    // console.log(this.nft)    
+
   }
 
   closeModal() {

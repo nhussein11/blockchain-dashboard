@@ -73,7 +73,7 @@ export class NftsComponentComponent implements OnInit {
     
     const modalRef = this.modal.open(NftDetailsComponent,{size:'xl',centered:true, scrollable:true });
   
-    (<NftDetailsComponent>modalRef.componentInstance)._nft = this.selectedNft;
+    (<NftDetailsComponent>modalRef.componentInstance).nft = this.selectedNft;
   
 
     modalRef.result.then((result) => {
