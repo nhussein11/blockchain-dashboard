@@ -21,8 +21,8 @@
         <div class="row">
             <div class="col-sm-3 mt-5" *ngFor="let nft of nfts ">
 
-                <div class="card-columns border " (click)="openToNftDetails(nft)"
-                    style="width: 14rem; cursor: pointer;" *ngIf="!isEmptyNft(nft)">
+                <div class="card-columns border " (click)="openNftDetails(nft)" style="width: 14rem; cursor: pointer;"
+                    *ngIf="!isEmptyNft(nft)">
 
                     <img class="card-img-top" src="{{nft.image}}" alt="">
 
@@ -34,16 +34,10 @@
                     <div class="card-footer">
                         <h5 class="card-title">{{nft.compiler ? (nft.compiler) : 'No Compiler Registered'}}</h5>
                     </div>
-                    
-                    
-                
                 </div>
             </div>
         </div>
     </div>
 </ng-template>
-<div *ngIf="!isEmptyNft(selectedNft)">
-    <app-nft-details  [nft]="selectedNft"></app-nft-details>
-</div>
 
-
+<app-nft-details *ngIf="!isEmptyNft(selectedNft)" [_nft]=" selectedNft"></app-nft-details>

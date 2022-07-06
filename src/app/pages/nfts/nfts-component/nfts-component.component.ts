@@ -37,21 +37,16 @@ export class NftsComponentComponent implements OnInit {
   loadNfts(owner: string) {
     this._nftService.getNfts(owner).subscribe(
       (response: Nft[]) => {
-
         response.map(
           (nft: Nft) => {
-
-          
-            if (!this.isEmptyNft(nft)){
-              nft.image?.startsWith('ipfs://')
-              ? nft.image = 'https://ipfs.io/ipfs' + nft.image.substring(6)
-              : nft.image
-              this.nfts.push(nft)
+              if (!this.isEmptyNft(nft)){
+                nft.image?.startsWith('ipfs://')
+                ? nft.image = 'https://ipfs.io/ipfs' + nft.image.substring(6)
+                : nft.image
+                this.nfts.push(nft)
+              }
             }
-            }
-          
-        )
-        // this.nfts = response
+          )
       }
     );
   }
@@ -73,11 +68,22 @@ export class NftsComponentComponent implements OnInit {
   }
 
 
-  openToNftDetails(nft:Nft){
-  
+  openNftDetails(nft:Nft){
     this.selectedNft=nft;
-    this.modal.open(NftDetailsComponent,{size:'xl',centered:true, scrollable:true})
+    
+    const modalRef = this.modal.open(NftDetailsComponent,{size:'xl',centered:true, scrollable:true });
+  
+    (<NftDetailsComponent>modalRef.componentInstance)._nft = this.selectedNft;
+  
 
-  }  
+    modalRef.result.then((result) => {
+      console.log(result);
+    }).catch( (result) => {
+      console.log(result);
+    });
+
+  }
+  
+  
 
 }
