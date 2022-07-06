@@ -5,7 +5,15 @@
 <div class="modal-body">
     <div class="container ">
         <div class="card row flex-row">
-            <img class="col-lg-4 card-img-end img-fluid mt-4 mb-4" src="{{nft.image}}" />
+            <div *ngIf="nft.video else imgNft">
+                <video *ngIf="nft.video" class="col-md-4 card-img-end img-fluid " src="{{nft.video}}" alt=""></video>
+            </div>
+            <ng-template #imgNft>
+                <img class="col-lg-4 card-img-end img-fluid mt-4 mb-4" src="{{nft.image}}" alt="">
+            </ng-template>
+
+
+            <!-- <img class="col-lg-4 card-img-end img-fluid mt-4 mb-4" src="{{nft.image}}" /> -->
             <div class="col-lg-8 card-body">
                 <h1 class="card-title">{{nft.name}}</h1>
                 <p class="card-text">{{nft.description}}</p>

@@ -26,7 +26,7 @@ export class NftsComponentComponent implements OnInit {
 
   constructor(private _nftService: NftsService,
               private modal: NgbModal,
-              private route:Router
+              
   ) { }
 
   ngOnInit(): void {
@@ -40,15 +40,22 @@ export class NftsComponentComponent implements OnInit {
         response.map(
           (nft: Nft) => {
               if (!this.isEmptyNft(nft)){
+                if (nft.image?.split('/').includes("v")){
+                  nft.video = nft.image
+                }
+                    
                 nft.image?.startsWith('ipfs://')
                 ? nft.image = 'https://ipfs.io/ipfs' + nft.image.substring(6)
                 : nft.image
                 this.nfts.push(nft)
+                
               }
             }
           )
       }
     );
+    console.log(this.nfts)
+    
   }
 
   searchNftsByContract(newOwner: string) {
@@ -69,6 +76,8 @@ export class NftsComponentComponent implements OnInit {
 
 
   openNftDetails(nft:Nft){
+    console.log(nft.image)
+    
     this.selectedNft=nft;
     
     const modalRef = this.modal.open(NftDetailsComponent,{size:'lg',centered:true, scrollable:true,backdropClass: "modal-backdrop" });

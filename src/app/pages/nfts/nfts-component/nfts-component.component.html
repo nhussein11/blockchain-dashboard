@@ -20,11 +20,19 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3 mt-5" *ngFor="let nft of nfts ">
+                
+                <div class="card-columns border " (click)="openNftDetails(nft)"  style="width: 14rem; cursor: pointer;"
+                    *ngIf="!isEmptyNft(nft) ">
+                    <div *ngIf="nft.video else imgNft">
+                        <video *ngIf="nft.video" class="card-img-top" src="{{nft.video}}" alt=""></video>
+                    </div>
+                    <ng-template #imgNft>
+                        <img class="card-img-top" src="{{nft.image}}" alt="">
+                    </ng-template>
+                    
 
-                <div class="card-columns border " (click)="openNftDetails(nft)" style="width: 14rem; cursor: pointer;"
-                    *ngIf="!isEmptyNft(nft)">
-
-                    <img class="card-img-top" src="{{nft.image}}" alt="">
+                    <!-- <video class="card-img-top" src="{{nft.image}}" alt=""></video> -->
+                    <!-- <img class="card-img-top" src="{{nft.image}}" alt=""> -->
 
                     <div class="card-body">
                         <h5 class="card-title">{{nft.name}}</h5>

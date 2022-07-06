@@ -13,6 +13,7 @@ export interface Nft{
     name?:             string;
     description?:      string;
     image?:            string;
+    // video?:            string;
     external_url?:     string;
     // attributes?:       Attribute[] | AttributesClass;
     date?:             number;
@@ -29,4 +30,5 @@ export interface Nft{
     background_color?: string;
     liveModel?:        string;
     poster?:           string;
+    video?:string;
 }
