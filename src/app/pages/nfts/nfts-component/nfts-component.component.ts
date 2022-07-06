@@ -71,7 +71,7 @@ export class NftsComponentComponent implements OnInit {
   openNftDetails(nft:Nft){
     this.selectedNft=nft;
     
-    const modalRef = this.modal.open(NftDetailsComponent,{size:'xl',centered:true, scrollable:true });
+    const modalRef = this.modal.open(NftDetailsComponent,{size:'lg',centered:true, scrollable:true,backdropClass: "modal-backdrop" });
   
     (<NftDetailsComponent>modalRef.componentInstance).nft = this.selectedNft;
   
@@ -81,6 +81,8 @@ export class NftsComponentComponent implements OnInit {
     }).catch( (result) => {
       console.log(result);
     });
+
+    this.selectedNft = {};
 
   }
   

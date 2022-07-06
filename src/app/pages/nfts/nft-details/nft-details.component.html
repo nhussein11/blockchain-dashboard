@@ -5,7 +5,7 @@
 <div class="modal-body">
     <div class="container ">
         <div class="card row flex-row">
-            <img class="col-lg-4 card-img-end img-fluid p-0" src="{{nft.image}}" />
+            <img class="col-lg-4 card-img-end img-fluid mt-4 mb-4" src="{{nft.image}}" />
             <div class="col-lg-8 card-body">
                 <h1 class="card-title">{{nft.name}}</h1>
                 <p class="card-text">{{nft.description}}</p>
@@ -20,11 +20,3 @@
 <div class="modal-footer">
     <h5>{{ nft.date? (nft.date | date ) : 'Not Date Registered'}}</h5>
 </div>
-
-
-<!-- <ng-template #contenido let-modal>
-</ng-template> -->
-
-
-
-<!-- <button type="button" class="btn btn-outline-primary" (click)="openModal(contenido) ">  Lanzar modal</button> -->
