@@ -15,7 +15,6 @@ const routes : Routes=[
   {path:'cryptocurrencies', component: CryptosComponentComponent},
   {path:'crypto_details/:id', component: CryptoDetailsComponent},
   {path:'nfts', component: NftsComponentComponent},
-  // {path:'nft_details/:data', component: NftDetailsComponent},
   {path:'daos', component: DaosComponentComponent},
   {path:'**', component: NotFoundPageComponentComponent},
 

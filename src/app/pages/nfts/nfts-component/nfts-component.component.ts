@@ -42,6 +42,9 @@ export class NftsComponentComponent implements OnInit {
               if (!this.isEmptyNft(nft)){
                 if (nft.image?.split('/').includes("v")){
                   nft.video = nft.image
+                  nft.image=undefined
+                  console.log(nft)
+                  
                 }
                     
                 nft.image?.startsWith('ipfs://')
@@ -53,9 +56,7 @@ export class NftsComponentComponent implements OnInit {
             }
           )
       }
-    );
-    console.log(this.nfts)
-    
+    );    
   }
 
   searchNftsByContract(newOwner: string) {
@@ -80,7 +81,7 @@ export class NftsComponentComponent implements OnInit {
     
     this.selectedNft=nft;
     
-    const modalRef = this.modal.open(NftDetailsComponent,{size:'lg',centered:true, scrollable:true,backdropClass: "modal-backdrop" });
+    const modalRef = this.modal.open(NftDetailsComponent,{size:'xl',centered:true, scrollable:true,backdropClass: "modal-backdrop" });
   
     (<NftDetailsComponent>modalRef.componentInstance).nft = this.selectedNft;
   

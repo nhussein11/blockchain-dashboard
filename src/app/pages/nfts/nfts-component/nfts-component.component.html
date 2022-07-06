@@ -1,10 +1,10 @@
 <div class="container">
     <div class="input-group">
-        <label class="display-6 ">Owner:</label>
+        <label class="display-6 "><strong>Owner:</strong></label>
         <input class="form-control form-control-lg mt-5 me-5 text-center" type="text" #ownerInput
             (keyup.enter)="searchNftsByContract(ownerInput.value)" [placeholder]="owner">
         <button type="submit" class="btn btn-primary mt-5"
-            (click)="searchNftsByContract(ownerInput.value)">Search</button>
+            (click)="searchNftsByContract(ownerInput.value)"><strong>Search</strong></button>
     </div>
 </div>
 
@@ -23,17 +23,14 @@
                 
                 <div class="card-columns border " (click)="openNftDetails(nft)"  style="width: 14rem; cursor: pointer;"
                     *ngIf="!isEmptyNft(nft) ">
+                    
                     <div *ngIf="nft.video else imgNft">
                         <video *ngIf="nft.video" class="card-img-top" src="{{nft.video}}" alt=""></video>
                     </div>
                     <ng-template #imgNft>
                         <img class="card-img-top" src="{{nft.image}}" alt="">
                     </ng-template>
-                    
-
-                    <!-- <video class="card-img-top" src="{{nft.image}}" alt=""></video> -->
-                    <!-- <img class="card-img-top" src="{{nft.image}}" alt=""> -->
-
+            
                     <div class="card-body">
                         <h5 class="card-title">{{nft.name}}</h5>
                         <p class="card-text">{{nft.description?.slice(0,80)+' ...'}}</p>
