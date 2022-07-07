@@ -37,28 +37,49 @@ export class NftsComponentComponent implements OnInit {
   loadNfts(owner: string) {
     this.nfts=[]
     this._nftService.getNfts(owner).subscribe(
-   
       (response: Nft[]) => {
-        
-        this.nfts = response.filter (nft => nft !== undefined)
-        
-        this.nftsDataLoaded = true;
+        this.nfts = response.filter (nft => nft !== undefined);
 
-        
+
+        this.nfts.forEach((nft)=>{
+          if(nft.image?.startsWith('data')){
+            // console.log(nft.image)
+            console.log(nft.image.split(',')[1])
+            // nft.image = this.unicodeBase64Decode(nft.image.split(',')[1])
+            console.log(
+
+              this.unicodeBase64Decode(nft.image.split(',')[1])
+            )
+             
+            
+            // console.log(this.unicodeBase64Decode(nft.image))
+            
+          }
+          
+          
+        })
+
+
+
+        this.nftsDataLoaded = true;
       }
     );
-    
   }
+ unicodeBase64Decode(text : string ){
+    text = text.replace(/\s+/g, '').replace(/\-/g, '+').replace(/\_/g, '/');
+    // console.log(text)
+    
+    return decodeURIComponent(Array.prototype.map.call(window.atob(text),function(c){return'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join(''));
+}
 
   searchNftsByContract(newOwner: string) {
-    
-
     !newOwner
       ?
       (
         this.emptyOwner = true,
         this.nftsDataLoaded = true,
-        this.owner = '')
+        this.owner = ''
+      )
       :
         this.emptyOwner = false
         this.nfts = [],
@@ -79,7 +100,6 @@ export class NftsComponentComponent implements OnInit {
 
     (<NftDetailsComponent>modalRef.componentInstance).nft = this.selectedNft;
 
-
     modalRef.result.then((result) => {
       console.log(result);
     }).catch((result) => {
@@ -89,7 +109,4 @@ export class NftsComponentComponent implements OnInit {
     this.selectedNft = {};
 
   }
-
-
-
 }
