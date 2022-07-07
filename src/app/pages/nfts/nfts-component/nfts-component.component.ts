@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Nft, OwnedNft } from 'src/app/models/Nfts';
 import { NftDetailsComponent } from 'src/app/pages/nfts/nft-details/nft-details.component'
 import { NftsService } from 'src/app/services/nfts.service';
-// import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+
+
 
 @Component({
   selector: 'app-nfts-component',
@@ -26,6 +28,7 @@ export class NftsComponentComponent implements OnInit {
 
   constructor(private _nftService: NftsService,
     private modal: NgbModal,
+    private _sanitizer: DomSanitizer
 
   ) { }
 
@@ -43,24 +46,22 @@ export class NftsComponentComponent implements OnInit {
 
         this.nfts.forEach((nft)=>{
           if(nft.image?.startsWith('data')){
-            // console.log(nft.image)
-            console.log(nft.image.split(',')[1])
-            // nft.image = this.unicodeBase64Decode(nft.image.split(',')[1])
-            console.log(
+            
+            let dataURI = nft.image;
+            let blob = this.dataURItoBlob(dataURI);
+            let objectURL = URL.createObjectURL(blob);
 
-              this.unicodeBase64Decode(nft.image.split(',')[1])
-            )
+            
+             let trustedImgSource = this._sanitizer.bypassSecurityTrustUrl(objectURL)
+             let trustedAndSanitizedImgSourceString =this._sanitizer.sanitize(SecurityContext.URL,trustedImgSource)
              
+             nft.image = trustedAndSanitizedImgSourceString?.toString();
+             
+            // console.log(nft.image)
+
             
-            // console.log(this.unicodeBase64Decode(nft.image))
-            
-          }
-          
-          
+          }          
         })
-
-
-
         this.nftsDataLoaded = true;
       }
     );
@@ -71,6 +72,31 @@ export class NftsComponentComponent implements OnInit {
     
     return decodeURIComponent(Array.prototype.map.call(window.atob(text),function(c){return'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join(''));
 }
+
+dataURItoBlob(dataURI : string )
+{
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+
+    if(dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for(var i = 0; i < byteString.length; i++)
+    {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type: mimeString});
+}
+
+// https://stackoverflow.com/questions/51416374/how-to-convert-base64-to-normal-image-url
 
   searchNftsByContract(newOwner: string) {
     !newOwner
