@@ -4,7 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Nft, OwnedNft } from 'src/app/models/Nfts';
 import { NftDetailsComponent } from 'src/app/pages/nfts/nft-details/nft-details.component'
 import { NftsService } from 'src/app/services/nfts.service';
-import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { read } from '@popperjs/core';
 
 
 
@@ -25,6 +26,9 @@ export class NftsComponentComponent implements OnInit {
 
   defaultImage: string = 'src/assets/no_image_available_icon.jpg';
 
+  imgSrcTest?: string = ''
+
+
 
   constructor(private _nftService: NftsService,
     private modal: NgbModal,
@@ -38,65 +42,70 @@ export class NftsComponentComponent implements OnInit {
 
 
   loadNfts(owner: string) {
-    this.nfts=[]
+    this.nfts = []
     this._nftService.getNfts(owner).subscribe(
       (response: Nft[]) => {
-        this.nfts = response.filter (nft => nft !== undefined);
+        this.nfts = response.filter(nft => nft !== undefined);
 
 
-        this.nfts.forEach((nft)=>{
-          if(nft.image?.startsWith('data')){
-            
+        this.nfts.forEach((nft) => {
+          if (nft.image?.startsWith('data')) {
+
             let dataURI = nft.image;
             let blob = this.dataURItoBlob(dataURI);
             let objectURL = URL.createObjectURL(blob);
 
-            
-             let trustedImgSource = this._sanitizer.bypassSecurityTrustUrl(objectURL)
-             let trustedAndSanitizedImgSourceString =this._sanitizer.sanitize(SecurityContext.URL,trustedImgSource)
-             
-             nft.image = trustedAndSanitizedImgSourceString?.toString();
-             
+
+            let trustedImgSource = this._sanitizer.bypassSecurityTrustUrl(objectURL)
+            // let trustedAndSanitizedImgSourceString = this._sanitizer.sanitize(SecurityContext.URL, trustedImgSource)
+
+            nft.image = trustedImgSource?.toString();
+            this.imgSrcTest = trustedImgSource?.toString();
             // console.log(nft.image)
 
-            
-          }          
+
+            // let reader = new FileReader();
+            // reader.readAsDataURL(blob)
+            // reader.onloadend = function() {
+            //   let base64data = reader.result;     
+            //   console.log(base64data)
+
+            // }
+
+
+
+          }
         })
         this.nftsDataLoaded = true;
       }
     );
   }
- unicodeBase64Decode(text : string ){
-    text = text.replace(/\s+/g, '').replace(/\-/g, '+').replace(/\_/g, '/');
-    // console.log(text)
-    
-    return decodeURIComponent(Array.prototype.map.call(window.atob(text),function(c){return'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join(''));
-}
+  getImgContent(image:string): SafeUrl {
+    return this._sanitizer.bypassSecurityTrustUrl(image);
+  }
 
-dataURItoBlob(dataURI : string )
-{
+  dataURItoBlob(dataURI: string) {
     // convert base64/URLEncoded data component to raw binary data held in a string
     var byteString;
 
-    if(dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(dataURI.split(',')[1]);
     else
-        byteString = unescape(dataURI.split(',')[1]);
+      byteString = unescape(dataURI.split(',')[1]);
 
     // separate out the mime component
     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
     // write the bytes of the string to a typed array
     var ia = new Uint8Array(byteString.length);
-    for(var i = 0; i < byteString.length; i++)
-    {
-        ia[i] = byteString.charCodeAt(i);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], {type: mimeString});
-}
+    return new Blob([ia], { type: mimeString });
+  }
 
-// https://stackoverflow.com/questions/51416374/how-to-convert-base64-to-normal-image-url
+  // https://stackoverflow.com/questions/51416374/how-to-convert-base64-to-normal-image-url
 
   searchNftsByContract(newOwner: string) {
     !newOwner
@@ -107,9 +116,9 @@ dataURItoBlob(dataURI : string )
         this.owner = ''
       )
       :
-        this.emptyOwner = false
-        this.nfts = [],
-        this.loadNfts(newOwner);
+      this.emptyOwner = false
+    this.nfts = [],
+      this.loadNfts(newOwner);
   }
 
   isEmptyNft(nft: Nft) {
