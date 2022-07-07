@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div *ngIf="emptyOwner; else cardsContent">
+<div *ngIf="emptyOwner">
     <div>
         <div class="container alert alert-warning mt-5 text-center">
             <strong>Warning!</strong> You must indicate an owner...
@@ -17,8 +17,7 @@
 </div>
 
 
-
-<div *ngIf="!nftsDataLoaded; else cardsContent">
+<div *ngIf="!nftsDataLoaded; else cardsContent"> 
     <p-progressSpinner class="d-flex justify-content-center"
     strokeWidth="2" 
     animationDuration="1s"

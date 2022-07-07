@@ -31,7 +31,10 @@ export class NftsService {
                 ? nft.image = 'https://ipfs.io/ipfs' + nft.image.substring(6)
                 : nft.image
 
-              if (!(nft && (Object.keys(nft).length === 0))) {
+              
+                if (!(nft && (Object.keys(nft).length === 0))) {
+                // console.log(nft)
+                
                 return nft
               } else return;
             }

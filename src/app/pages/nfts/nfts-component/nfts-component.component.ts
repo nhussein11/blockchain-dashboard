@@ -35,31 +35,34 @@ export class NftsComponentComponent implements OnInit {
 
 
   loadNfts(owner: string) {
+    this.nfts=[]
     this._nftService.getNfts(owner).subscribe(
+   
       (response: Nft[]) => {
-        response.map((nft:Nft)=>{
-          if (nft) {this.nfts.push(nft)}
-          }
-        )
         
-
+        this.nfts = response.filter (nft => nft !== undefined)
+        
         this.nftsDataLoaded = true;
-      }
 
+        
+      }
     );
+    
   }
 
   searchNftsByContract(newOwner: string) {
+    
 
     !newOwner
       ?
-      (this.emptyOwner = true,
+      (
+        this.emptyOwner = true,
         this.nftsDataLoaded = true,
         this.owner = '')
       :
-      this.emptyOwner = false
-    this.nfts = [],
-      this.loadNfts(newOwner);
+        this.emptyOwner = false
+        this.nfts = [],
+        this.loadNfts(newOwner);
   }
 
   isEmptyNft(nft: Nft) {
