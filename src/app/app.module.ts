@@ -12,39 +12,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import {ChartModule} from 'primeng/chart';
-import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-
-    CryptosComponentComponent,
-    NftsComponentComponent,
-    DaosComponentComponent,
-    HomeComponentComponent,
-
-    CryptoDetailsComponent,
-    DaoDetailsComponent,
-    NftDetailsComponent,
-
-    NotFoundPageComponentComponent,
-     
+    AppComponent,     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    InfiniteScrollModule,
-    NgxPaginationModule,
-    ProgressSpinnerModule,
-    ChartModule,
-    
+    HttpClientModule
   ],
-  providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
