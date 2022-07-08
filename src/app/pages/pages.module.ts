@@ -19,8 +19,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -44,6 +44,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     NgxPaginationModule,
     ProgressSpinnerModule,
     ChartModule,
+    Ng2SearchPipeModule,
+    FormsModule
   ],
   providers:[NgbActiveModal]
 })

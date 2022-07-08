@@ -3,6 +3,8 @@ export interface Cryptocurrency {
     name:                             string;
     symbol:                           string;
     max_supply:                       number;
+    circulating_supply:               number;
+    cmc_rank:                         number;
     quote:                            Quote;
 }
 export interface Quote {
