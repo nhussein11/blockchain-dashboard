@@ -127,7 +127,7 @@ export class NftsComponentComponent implements OnInit {
 
 
   openNftDetails(nft: Nft) {
-    console.log(nft.image)
+    
 
     this.selectedNft = nft;
 

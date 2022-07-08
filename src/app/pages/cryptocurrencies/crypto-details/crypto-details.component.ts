@@ -66,8 +66,8 @@ export class CryptoDetailsComponent implements OnInit {
       (respose) => {
         console.log(respose);
         this.dataChart.datasets.forEach(
-          (dataset,index)=>{
-            dataset.data[0]=respose[index]*100; //Revisar!
+          ({data},index)=>{
+            data[0]=respose[index]*100; //Revisar!
           }
         )
       }
