@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Exchange } from 'src/app/models/Exchange';
+import { ExchangesService } from 'src/app/services/exchanges.service';
 
 @Component({
   selector: 'app-exchanges-component',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExchangesComponentComponent implements OnInit {
 
-  constructor() { }
+  exchanges:Exchange[]=[]
+  
+  constructor( private _exchangesService : ExchangesService) { }
+
 
   ngOnInit(): void {
-  }
 
+    this._exchangesService.getExchanges().subscribe(
+      (response:Exchange[])=>{
+        this.exchanges = response
+        console.log(this.exchanges)
+      }
+    );
+  }
 }

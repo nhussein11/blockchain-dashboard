@@ -21,6 +21,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
+import { ExchangesComponentComponent } from './exchanges/exchanges-component/exchanges-component.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { FormsModule } from '@angular/forms';
     NftDetailsComponent,
     DaosComponentComponent,
     DaoDetailsComponent,
+    ExchangesComponentComponent,
     NotFoundPageComponentComponent,
     HomeComponentComponent
 

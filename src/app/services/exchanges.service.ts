@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { Exchange } from '../models/Exchange';
 
 @Injectable({
@@ -14,6 +15,8 @@ export class ExchangesService {
   }
 
   private url : string = 'https://coingecko.p.rapidapi.com/exchanges';
+  // private url : string = 'https://api.coingecko.com/api/v3/exchanges'; // endpoint without keys
+  
 
   constructor(private http:HttpClient) { }
 
@@ -21,6 +24,10 @@ export class ExchangesService {
     
     return this.http.get<Exchange[]>(this.url,
       {headers: this.HEADERS}
+    ).pipe(
+      map((exchanges:Exchange[])=>{
+        return exchanges
+      })
     );
   
   }
