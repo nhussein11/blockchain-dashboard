@@ -1,15 +1,22 @@
-<div class="container" *ngFor="let exchange of exchanges "> 
-    <div class="card mt-4">
-        <div class="card-header">
-            {{exchange.id}}
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">{{exchange.name}}</h5>
-            <p class="card-text">{{exchange.description}}</p>
-            <p class="card-text">{{exchange.year_established}}</p>
-            <img src="{{exchange.image}}">
-            <p class="card-text">{{exchange.country}}</p>
-            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+<h4 class="d-flex justify-content-center display-6 mx-3">Exchanges List</h4>
+<div class="container" >
+    <div class="row " >
+        <div class="col-sm-3 " *ngFor="let exchange of exchanges ">
+            <div class="card align-items-center mt-4">
+                <div class="card-header ">
+                    
+                    <img src="{{exchange.image}}">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{exchange.name}}</h5>
+                    <p class="card-text">{{exchange.description?.slice(0,50)+' ...'}}</p>
+                    <p class="card-text">{{exchange.year_established}}</p>
+        
+                    <p class="card-text">{{exchange.country}}</p>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
