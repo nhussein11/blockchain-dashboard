@@ -9,17 +9,16 @@ import { ExchangesService } from 'src/app/services/exchanges.service';
 })
 export class ExchangesComponentComponent implements OnInit {
 
-  exchanges:Exchange[]=[]
-  
-  constructor( private _exchangesService : ExchangesService) { }
+  exchanges: Exchange[] = [];
+
+  constructor(private _exchangesService: ExchangesService) { }
 
 
   ngOnInit(): void {
 
     this._exchangesService.getExchanges().subscribe(
-      (response:Exchange[])=>{
-        this.exchanges = response
-        console.log(this.exchanges)
+      (response: Exchange[]) => {
+        this.exchanges = response;
       }
     );
   }

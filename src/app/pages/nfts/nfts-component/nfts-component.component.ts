@@ -5,8 +5,6 @@ import { Nft, OwnedNft } from 'src/app/models/Nfts';
 import { NftDetailsComponent } from 'src/app/pages/nfts/nft-details/nft-details.component'
 import { NftsService } from 'src/app/services/nfts.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { read } from '@popperjs/core';
-
 
 
 @Component({

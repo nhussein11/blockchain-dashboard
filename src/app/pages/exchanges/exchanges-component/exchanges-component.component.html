@@ -2,17 +2,17 @@
 <div class="container" >
     <div class="row " >
         <div class="col-sm-3 " *ngFor="let exchange of exchanges ">
-            <div class="card align-items-center mt-4">
+            <div class="card text-center mt-4">
                 <div class="card-header ">
                     
                     <img src="{{exchange.image}}">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{exchange.name}}</h5>
-                    <p class="card-text">{{exchange.description?.slice(0,50)+' ...'}}</p>
-                    <p class="card-text">{{exchange.year_established}}</p>
+                    <p class="card-text">{{(exchange.description)?(exchange.description?.slice(0,80)+' ...'):' - '}}</p>
+                    <p class="card-text">Year Established: {{exchange.year_established}}</p>
         
-                    <p class="card-text">{{exchange.country}}</p>
+                    <p class="card-text">Country: {{exchange.country}}</p>
                     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
             </div>
