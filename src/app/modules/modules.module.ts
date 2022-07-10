@@ -11,7 +11,7 @@ import { NotFoundPageComponentComponent } from './not-found-page-component/not-f
 import { HomeComponentComponent } from './home-component/home-component.component';
 
 
-import { PagesRoutingModule } from './pages-routing.module';
+import { PagesRoutingModule } from './modules-routing.module';
 
 import { ChartModule } from 'primeng/chart';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,12 +22,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { ExchangesComponentComponent } from './exchanges/exchanges-component/exchanges-component.component';
+import { CryptocurrenciesModule } from './cryptocurrencies/cryptocurrencies.module';
 
 
 @NgModule({
   declarations: [
-    CryptosComponentComponent,
-    CryptoDetailsComponent,
+
     NftsComponentComponent,
     NftDetailsComponent,
     DaosComponentComponent,
@@ -40,6 +40,7 @@ import { ExchangesComponentComponent } from './exchanges/exchanges-component/exc
   imports: [
     CommonModule,
     PagesRoutingModule,
+    CryptocurrenciesModule,
 
     HttpClientModule,
     InfiniteScrollModule,

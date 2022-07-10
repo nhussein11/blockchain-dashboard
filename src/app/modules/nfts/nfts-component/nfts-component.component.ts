@@ -2,7 +2,7 @@ import { Component, OnInit, SecurityContext } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Nft, OwnedNft } from 'src/app/models/Nfts';
-import { NftDetailsComponent } from 'src/app/pages/nfts/nft-details/nft-details.component'
+import { NftDetailsComponent } from 'src/app/modules/nfts/nft-details/nft-details.component'
 import { NftsService } from 'src/app/services/nfts.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
