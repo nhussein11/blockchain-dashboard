@@ -23,16 +23,17 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { ExchangesComponentComponent } from './exchanges/exchanges-component/exchanges-component.component';
 import { CryptocurrenciesModule } from './cryptocurrencies/cryptocurrencies.module';
+import { NftsModule } from './nfts/nfts.module';
+import { ExchangesModule } from './exchanges/exchanges.module';
 
 
 @NgModule({
   declarations: [
 
-    NftsComponentComponent,
-    NftDetailsComponent,
+
     DaosComponentComponent,
     DaoDetailsComponent,
-    ExchangesComponentComponent,
+    
     NotFoundPageComponentComponent,
     HomeComponentComponent
 
@@ -41,14 +42,12 @@ import { CryptocurrenciesModule } from './cryptocurrencies/cryptocurrencies.modu
     CommonModule,
     PagesRoutingModule,
     CryptocurrenciesModule,
+    NftsModule,
+    ExchangesModule,
 
     HttpClientModule,
     InfiniteScrollModule,
-    NgxPaginationModule,
-    ProgressSpinnerModule,
-    ChartModule,
-    Ng2SearchPipeModule,
-    FormsModule
+    
   ],
   providers:[NgbActiveModal]
 })
