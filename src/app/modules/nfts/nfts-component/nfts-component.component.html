@@ -5,10 +5,10 @@
                 class="form-control form-control-lg mt-5 me-5 text-center" 
                 type="text" 
                 [placeholder]="owner"
-                (keyup.enter)="searchNftsByContract(ownerInput.value)">
+                (keyup.enter)="searchNftsByContract()">
         <button class="btn btn-primary mt-5"
                 type="submit"
-                (click)="searchNftsByContract(ownerInput.value)"><strong>Search</strong></button>
+                (click)="searchNftsByContract()"><strong>Search</strong></button>
     </div>
 </div>
 

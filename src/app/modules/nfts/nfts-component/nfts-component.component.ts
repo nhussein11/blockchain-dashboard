@@ -1,4 +1,4 @@
-import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Component, ElementRef, OnInit, SecurityContext, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Nft, OwnedNft } from 'src/app/models/Nfts';
@@ -13,6 +13,8 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
   styleUrls: ['./nfts-component.component.css']
 })
 export class NftsComponentComponent implements OnInit {
+
+  @ViewChild('ownerInput')  ownerInput!: ElementRef<HTMLInputElement>;
 
   nftsDataLoaded: boolean = false;
   nfts: Nft[] = [];
@@ -105,8 +107,9 @@ export class NftsComponentComponent implements OnInit {
 
   // https://stackoverflow.com/questions/51416374/how-to-convert-base64-to-normal-image-url
 
-  searchNftsByContract(newOwner: string) {
-    !newOwner
+  searchNftsByContract() {
+    
+    !this.ownerInput.nativeElement.value
       ?
       (
         this.emptyOwner = true,
@@ -116,7 +119,7 @@ export class NftsComponentComponent implements OnInit {
       :
       this.emptyOwner = false
     this.nfts = [],
-      this.loadNfts(newOwner);
+      this.loadNfts(this.ownerInput.nativeElement.value);
   }
 
   isEmptyNft(nft: Nft) {
