@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { Nft, OwnedNft } from '../models/Nfts';
 
 @Injectable({
@@ -8,18 +8,18 @@ import { Nft, OwnedNft } from '../models/Nfts';
 })
 export class NftsService {
 
-  private url = 'https://eth-mainnet.alchemyapi.io/nft/v2/demo/getNFTs' ;
+  private url = 'https://eth-mainnet.alchemyapi.io/nft/v2/demo/getNFTs';
 
   constructor(private http: HttpClient) { }
 
   getNfts(owner: string): Observable<Nft[]> {
-    
+
     let params = new HttpParams()
-                    .set('owner',owner);
-    
+      .set('owner', owner);
+
     let endpoint = `${this.url}`;
 
-    return this.http.get<any>(endpoint, {params})
+    return this.http.get<any>(endpoint, { params })
       .pipe(
         map((res) => {
           return (res.ownedNfts).map(
@@ -42,6 +42,8 @@ export class NftsService {
               } else return;
             }
           )
-        }));
+        })
+
+      );
   }
 }

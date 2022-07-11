@@ -20,7 +20,7 @@ export class NftsComponentComponent implements OnInit {
   nfts: Nft[] = [];
   selectedNft: Nft = {} as Nft;
   owner: string = '0xfae46f94ee7b2acb497cecaff6cff17f621c693d';
-  emptyOwner: boolean = false;
+  invalidOwner: boolean = false;
   nftIsSelected: boolean = false;
   // owner: string ='0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d';
 
@@ -74,8 +74,8 @@ export class NftsComponentComponent implements OnInit {
       }
     ), ((err:any)=>{
       console.log('Error')
-      console.log(err)
-      
+      // console.log(err)
+      this.invalidOwner=true
     })
   }
   getImgContent(image:string): SafeUrl {
@@ -110,13 +110,13 @@ export class NftsComponentComponent implements OnInit {
     !this.ownerInput.nativeElement.value
       ?
       (
-        this.emptyOwner = true,
+        this.invalidOwner = true,
         this.nftsDataLoaded = true,
         this.owner = ''
       )
       :
-      this.emptyOwner = false
-    this.nfts = [],
+      this.invalidOwner = false
+      this.nfts = [],
       this.loadNfts(this.ownerInput.nativeElement.value);
   }
 

@@ -12,13 +12,13 @@
     </div>
 </div>
 
-<!-- <div *ngIf="emptyOwner; else progressSpinner">
+<div *ngIf="invalidOwner">
     <div>
         <div class="container alert alert-warning mt-5 text-center">
-            <strong>Warning!</strong> You must indicate an owner...
+            <strong>Warning!</strong> You must indicate a valid owner...
         </div>
     </div>
-</div> -->
+</div>
 
 
 <div *ngIf="!nftsDataLoaded; else cardsContent" #progressSpinner>
