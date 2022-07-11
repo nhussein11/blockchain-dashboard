@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CryptosService } from 'src/app/services/cryptos.service';
 import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
+import { LocalService } from 'src/app/services/local.service';
 
 
 @Component({
@@ -19,13 +20,16 @@ export class CryptosComponentComponent implements OnInit {
 
   searchText: string = '';
 
-  constructor(private _cryptosService: CryptosService) { }
+  constructor(private _cryptosService: CryptosService,
+              private _localService:LocalService          
+    ) { }
 
   ngOnInit(): void {
     this._cryptosService.getCryptos().subscribe(
       (response: Cryptocurrency[]) => {
         this.cryptosData = response;
         this.cryptosDataLoaded = true;
+
       }
     )
   }
