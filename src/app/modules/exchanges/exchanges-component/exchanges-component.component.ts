@@ -19,7 +19,10 @@ export class ExchangesComponentComponent implements OnInit {
     this._exchangesService.getExchanges().subscribe(
       (response: Exchange[]) => {
         this.exchanges = response;
-      }
+      }, ((err)=>{
+        console.log('Error')
+        console.info(err)
+      })
     );
   }
 }

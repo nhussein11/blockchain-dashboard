@@ -52,16 +52,13 @@ export class NftsComponentComponent implements OnInit {
             let dataURI = nft.image;
             let blob = this.dataURItoBlob(dataURI);
             let objectURL = URL.createObjectURL(blob);
-
-
+            
             let trustedImgSource = this._sanitizer.bypassSecurityTrustUrl(objectURL)
             // let trustedAndSanitizedImgSourceString = this._sanitizer.sanitize(SecurityContext.URL, trustedImgSource)
 
             nft.image = trustedImgSource?.toString();
             this.imgSrcTest = trustedImgSource?.toString();
             // console.log(nft.image)
-
-
             // let reader = new FileReader();
             // reader.readAsDataURL(blob)
             // reader.onloadend = function() {
@@ -69,14 +66,15 @@ export class NftsComponentComponent implements OnInit {
             //   console.log(base64data)
 
             // }
-
-
-
           }
         })
         this.nftsDataLoaded = true;
       }
-    );
+    ), ((err:any)=>{
+      console.log('Error')
+      console.log(err)
+      
+    })
   }
   getImgContent(image:string): SafeUrl {
     return this._sanitizer.bypassSecurityTrustUrl(image);

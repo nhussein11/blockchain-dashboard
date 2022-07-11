@@ -56,12 +56,19 @@ export class CryptoDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.id = this.route.snapshot.paramMap.get('id')!;
+    
     this._cryptosService.getCryptoDetails(this.id).subscribe(
       (respose: CryptocurrencyDetails) => {
         this.crypto = respose;
         this.cryptoDetailLoaded = true;
-      }
+      },((err)=>{
+        console.log('Error');
+        console.info(err)
+      })
     )
+
+
+
     this._cryptosService.getCryptoDetailsGraphic(this.id).subscribe(
       (respose) => {
         console.log(respose);
@@ -70,7 +77,10 @@ export class CryptoDetailsComponent implements OnInit {
             data[0]=respose[index]*100; //Revisar!
           }
         )
-      }
+      },((err)=>{
+        console.log('Error');
+        console.info(err)
+      })
     )
   }
 }

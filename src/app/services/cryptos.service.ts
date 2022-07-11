@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { Cryptocurrency, CryptocurrencyDetailsGraphic } from '../models/Cryptocurrency';
 import { CryptocurrencyDetails } from '../models/Cryptocurrency-Details';
 
