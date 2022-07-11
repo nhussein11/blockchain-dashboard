@@ -1,10 +1,14 @@
 <div class="container">
     <div class="input-group">
         <label class="display-6 "><strong>Owner:</strong></label>
-        <input class="form-control form-control-lg mt-5 me-5 text-center" type="text" #ownerInput
-            (keyup.enter)="searchNftsByContract(ownerInput.value)" [placeholder]="owner">
-        <button type="submit" class="btn btn-primary mt-5"
-            (click)="searchNftsByContract(ownerInput.value)"><strong>Search</strong></button>
+        <input #ownerInput 
+                class="form-control form-control-lg mt-5 me-5 text-center" 
+                type="text" 
+                [placeholder]="owner"
+                (keyup.enter)="searchNftsByContract(ownerInput.value)">
+        <button class="btn btn-primary mt-5"
+                type="submit"
+                (click)="searchNftsByContract(ownerInput.value)"><strong>Search</strong></button>
     </div>
 </div>
 
@@ -17,12 +21,8 @@
 </div> -->
 
 
-<div *ngIf="!nftsDataLoaded; else cardsContent" #progressSpinner> 
-    <p-progressSpinner class="d-flex justify-content-center"
-    strokeWidth="2" 
-    animationDuration="1s"
-    
-    ></p-progressSpinner>
+<div *ngIf="!nftsDataLoaded; else cardsContent" #progressSpinner>
+    <p-progressSpinner class="d-flex justify-content-center" strokeWidth="2" animationDuration="1s"></p-progressSpinner>
 </div>
 
 <ng-template #cardsContent>
