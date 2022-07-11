@@ -21,8 +21,10 @@ export class ExchangesService {
   constructor(private http:HttpClient) { }
 
   getExchanges(){
+
+    let endpoint = `${this.url}`
     
-    return this.http.get<Exchange[]>(this.url,
+    return this.http.get<Exchange[]>(endpoint,
       {headers: this.headers}
     ).pipe(
       map((exchanges:Exchange[])=>{
