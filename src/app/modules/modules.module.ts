@@ -9,19 +9,19 @@ import { PagesRoutingModule } from './modules-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbNavbar } from '@ng-bootstrap/ng-bootstrap';
 
 import { CryptocurrenciesModule } from './cryptocurrencies/cryptocurrencies.module';
 import { NftsModule } from './nfts/nfts.module';
 import { ExchangesModule } from './exchanges/exchanges.module';
 
 
+
+
 @NgModule({
   declarations: [
-    
     NotFoundPageComponentComponent,
     HomeComponentComponent
-
   ],
   imports: [
     
@@ -30,6 +30,8 @@ import { ExchangesModule } from './exchanges/exchanges.module';
     CryptocurrenciesModule,
     NftsModule,
     ExchangesModule,
+    
+    
 
     HttpClientModule,
     InfiniteScrollModule,
@@ -37,4 +39,4 @@ import { ExchangesModule } from './exchanges/exchanges.module';
   ],
   providers:[NgbActiveModal]
 })
-export class PagesModule { }
+export class ModulesModule { }
