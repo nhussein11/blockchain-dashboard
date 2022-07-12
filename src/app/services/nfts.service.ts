@@ -33,11 +33,12 @@ export class NftsService {
               if (nft.image?.startsWith('ipfs://')) { this.ipfsImage(nft) }
 
               if (!(Object.keys(nft).length === 0)) { return nft }
-              else { return; }
+              else { return;}
             }
           )
         })
-      );
+      
+        );
   }
 
   isVideo(nft: Nft): void {

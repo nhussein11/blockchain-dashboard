@@ -28,7 +28,7 @@ export class NftsComponentComponent implements OnInit {
 
   imgSrcTest?: string = ''
 
-
+  errorMessage:string=''
 
   constructor(private _nftService: NftsService,
     private modal: NgbModal,
@@ -72,11 +72,12 @@ export class NftsComponentComponent implements OnInit {
         })
         this.nftsDataLoaded = true;
       }
-    ), ((err:any)=>{
-      console.log('Error')
-      // console.log(err)
-      this.invalidOwner=true
-    })
+      , ((err:Error)=>{
+        console.log(err)
+        this.errorMessage = err.message 
+        this.invalidOwner=true
+      })
+    )
   }
   getImgContent(image:string): SafeUrl {
     return this._sanitizer.bypassSecurityTrustUrl(image);
