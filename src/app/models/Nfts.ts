@@ -23,7 +23,7 @@ export interface Nft{
     background_image?: string;
     is_normalized?:    boolean;
     segment_length?:   number;
-    image_url?:        string;
+    image_url?:        string | any;
     name_length?:      number;
     version?:          number;
     url?:              string;

@@ -45,31 +45,7 @@ export class NftsComponentComponent implements OnInit {
     this.nfts = []
     this._nftService.getNfts(owner).subscribe(
       (response: Nft[]) => {
-
         this.nfts = response.filter(nft => nft !== undefined);
-
-        this.nfts.forEach((nft) => {
-          if (nft.image?.startsWith('data')) {
-
-            let dataURI = nft.image;
-            let blob = this.dataURItoBlob(dataURI);
-            let objectURL = URL.createObjectURL(blob);
-            
-            let trustedImgSource = this._sanitizer.bypassSecurityTrustUrl(objectURL)
-            // let trustedAndSanitizedImgSourceString = this._sanitizer.sanitize(SecurityContext.URL, trustedImgSource)
-
-            nft.image = trustedImgSource?.toString();
-            this.imgSrcTest = trustedImgSource?.toString();
-            // console.log(nft.image)
-            // let reader = new FileReader();
-            // reader.readAsDataURL(blob)
-            // reader.onloadend = function() {
-            //   let base64data = reader.result;     
-            //   console.log(base64data)
-
-            // }
-          }
-        })
         this.nftsDataLoaded = true;
       }
       , ((err:Error)=>{
@@ -79,32 +55,7 @@ export class NftsComponentComponent implements OnInit {
       })
     )
   }
-  getImgContent(image:string): SafeUrl {
-    return this._sanitizer.bypassSecurityTrustUrl(image);
-  }
 
-  dataURItoBlob(dataURI: string) {
-    // convert base64/URLEncoded data component to raw binary data held in a string
-    var byteString;
-
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-      byteString = atob(dataURI.split(',')[1]);
-    else
-      byteString = unescape(dataURI.split(',')[1]);
-
-    // separate out the mime component
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-    // write the bytes of the string to a typed array
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-
-    return new Blob([ia], { type: mimeString });
-  }
-
-  // https://stackoverflow.com/questions/51416374/how-to-convert-base64-to-normal-image-url
 
   searchNftsByContract() {
     
@@ -142,5 +93,12 @@ export class NftsComponentComponent implements OnInit {
 
     this.selectedNft = {} as Nft;
 
+  }
+
+  getSantizeUrl(url : string | undefined){
+    if(url){
+      return this._sanitizer.bypassSecurityTrustUrl(url);
+    }else{return;}
+    
   }
 }

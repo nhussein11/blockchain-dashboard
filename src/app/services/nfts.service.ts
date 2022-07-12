@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { catchError, map, Observable } from 'rxjs';
 import { Nft, OwnedNft } from '../models/Nfts';
 
@@ -10,7 +11,7 @@ export class NftsService {
 
   private url = 'https://eth-mainnet.alchemyapi.io/nft/v2/demo/getNFTs';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private _sanitizer: DomSanitizer    ) { }
 
   getNfts(owner: string): Observable<Nft[]> {
 
@@ -32,6 +33,8 @@ export class NftsService {
 
               if (nft.image?.startsWith('ipfs://')) { this.ipfsImage(nft) }
 
+              if (nft.image?.startsWith('data')) {this.base64Image(nft)}
+
               if (!(Object.keys(nft).length === 0)) { return nft }
               else { return;}
             }
@@ -49,4 +52,29 @@ export class NftsService {
   ipfsImage(nft: Nft): void {
     nft.image = 'https://ipfs.io/ipfs' + nft.image?.substring(6);
   }
+
+
+  base64Image(nft:Nft): void {
+    let dataURI = nft.image || '';
+    let blob = this.dataURItoBlob(dataURI);
+    let objectURL = URL.createObjectURL(blob);
+    nft.image = objectURL
+
+  }
+
+
+  dataURItoBlob(dataURI: string) {
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(dataURI.split(',')[1]);
+    else
+      byteString = unescape(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], { type: mimeString });
+  }
+
 }
