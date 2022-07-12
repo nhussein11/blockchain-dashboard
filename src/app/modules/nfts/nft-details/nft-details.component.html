@@ -10,11 +10,8 @@
                 <video *ngIf="nft.video" class="card-img-right img-fluid mt-4 mb-4" src="{{nft.video}}" alt=""></video>
             </div>
             <ng-template #imgNft >
-                <img class="col-lg-4 card-img-end img-fluid mt-4 mb-4" src="{{nft.image}}" alt="">
+                <img class="col-lg-4 card-img-end img-fluid mt-4 mb-4"  [src]=getSantizeUrl(nft.image) alt="">
             </ng-template>
-
-
-            <!-- <img class="col-lg-4 card-img-end img-fluid mt-4 mb-4" src="{{nft.image}}" /> -->
             <div class="col-lg-8 card-body">
                 <h1 class="card-title mt-1">{{nft.name}}</h1>
                 <p class="card-text fs-5">{{nft.description}}</p>
