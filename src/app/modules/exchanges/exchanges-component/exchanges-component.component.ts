@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { debounceTime, Subject } from 'rxjs';
 import { Exchange } from 'src/app/models/Exchange';
 import { ExchangesService } from 'src/app/services/exchanges.service';
 
@@ -10,6 +11,10 @@ import { ExchangesService } from 'src/app/services/exchanges.service';
 export class ExchangesComponentComponent implements OnInit {
 
   exchanges: Exchange[] = [];
+
+  searchText:string='';
+
+  
 
   constructor(private _exchangesService: ExchangesService) { }
 
@@ -25,4 +30,8 @@ export class ExchangesComponentComponent implements OnInit {
       })
     );
   }
+
+
+  
+
 }
