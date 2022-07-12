@@ -69,14 +69,14 @@ export class CryptoDetailsComponent implements OnInit {
 
     this._cryptosService.getCryptoDetailsGraphic(this.id).subscribe(
       (respose) => {
-        // console.log(respose);
         this.dataChart.datasets.forEach(
           ({data},index)=>{
             data[0]=respose[index]*100; 
           }
         )
-        this.cryptoDetailGraphicLoaded = true;
         
+        this.cryptoDetailGraphicLoaded = true;
+
       },((err)=>{
         console.log('Error');
         console.info(err)
