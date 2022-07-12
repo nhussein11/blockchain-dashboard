@@ -28,22 +28,24 @@ export class NftsService {
 
               let nft: Nft = ownedNfts.metadata
 
-              if (nft.image?.split('/').includes("v")) {
-                nft.video = nft.image
-                nft.image = undefined
-              }
+              if (nft.image?.split('/').includes("v")) { this.isVideo(nft) }
 
-              if (nft.image?.startsWith('ipfs://')) {
-                nft.image = 'https://ipfs.io/ipfs' + nft.image.substring(6)
-              }
+              if (nft.image?.startsWith('ipfs://')) { this.ipfsImage(nft) }
 
-              if (!(nft && (Object.keys(nft).length === 0))) {
-                return nft
-              } else return;
+              if (!(Object.keys(nft).length === 0)) { return nft }
+              else { return; }
             }
           )
         })
-
       );
+  }
+
+  isVideo(nft: Nft): void {
+    nft.video = nft.image;
+    nft.image = undefined;
+  }
+
+  ipfsImage(nft: Nft): void {
+    nft.image = 'https://ipfs.io/ipfs' + nft.image?.substring(6);
   }
 }

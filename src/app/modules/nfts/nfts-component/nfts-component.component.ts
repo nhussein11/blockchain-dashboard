@@ -45,8 +45,8 @@ export class NftsComponentComponent implements OnInit {
     this.nfts = []
     this._nftService.getNfts(owner).subscribe(
       (response: Nft[]) => {
-        this.nfts = response.filter(nft => nft !== undefined);
 
+        this.nfts = response.filter(nft => nft !== undefined);
 
         this.nfts.forEach((nft) => {
           if (nft.image?.startsWith('data')) {
@@ -127,7 +127,6 @@ export class NftsComponentComponent implements OnInit {
 
   openNftDetails(nft: Nft) {
     
-
     this.selectedNft = nft;
 
     const modalRef = this.modal.open(NftDetailsComponent, { size: 'xl', centered: true, scrollable: true, backdropClass: "modal-backdrop" });
@@ -140,7 +139,7 @@ export class NftsComponentComponent implements OnInit {
       console.log(result);
     });
 
-    this.selectedNft = {};
+    this.selectedNft = {} as Nft;
 
   }
 }
