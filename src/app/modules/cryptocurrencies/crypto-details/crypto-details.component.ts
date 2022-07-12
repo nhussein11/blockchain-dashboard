@@ -12,6 +12,7 @@ import { CryptocurrencyDetails } from 'src/app/models/Cryptocurrency-Details';
 export class CryptoDetailsComponent implements OnInit {
 
   cryptoDetailLoaded: boolean = false;
+  cryptoDetailGraphicLoaded:boolean=false;
   id: string = '';
   crypto: CryptocurrencyDetails = {} as CryptocurrencyDetails;
 
@@ -54,7 +55,6 @@ export class CryptoDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private _cryptosService: CryptosService) { }
 
   ngOnInit(): void {
-
     this.id = this.route.snapshot.paramMap.get('id')!;
     
     this._cryptosService.getCryptoDetails(this.id).subscribe(
@@ -67,20 +67,21 @@ export class CryptoDetailsComponent implements OnInit {
       })
     )
 
-
-
     this._cryptosService.getCryptoDetailsGraphic(this.id).subscribe(
       (respose) => {
-        console.log(respose);
+        // console.log(respose);
         this.dataChart.datasets.forEach(
           ({data},index)=>{
-            data[0]=respose[index]*100; //Revisar!
+            data[0]=respose[index]*100; 
           }
         )
+        this.cryptoDetailGraphicLoaded = true;
+        
       },((err)=>{
         console.log('Error');
         console.info(err)
       })
     )
+
   }
 }
