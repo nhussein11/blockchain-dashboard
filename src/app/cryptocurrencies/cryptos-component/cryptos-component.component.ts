@@ -7,7 +7,7 @@ import { LocalService } from 'src/app/services/local.service';
 @Component({
   selector: 'app-cryptos-component',
   templateUrl: './cryptos-component.component.html',
-  styleUrls: ['./cryptos-component.component.css'],
+
   providers: [CryptosService]
 })
 

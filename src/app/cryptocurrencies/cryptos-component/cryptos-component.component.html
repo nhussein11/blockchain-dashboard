@@ -32,7 +32,8 @@
           </tr>
         </thead>
         <tbody class="text-center ">
-          <tr  *ngFor="let crypto of cryptosData | filter:searchText   | paginate: { itemsPerPage: count, currentPage: p }">
+          <!-- <tr  *ngFor="let crypto of (cryptosData | filter:searchText   | paginate: { itemsPerPage: count, currentPage: p })"> -->
+          <tr  *ngFor="let crypto of (cryptosData | paginate: { itemsPerPage: count, currentPage: p }  )  ">
             <td>{{(crypto.cmc_rank)?crypto.cmc_rank :'-' }}</td>
             <td>
               <a class="link-secondary" style="text-decoration: none;" routerLink="/crypto_details/{{crypto.id}}">

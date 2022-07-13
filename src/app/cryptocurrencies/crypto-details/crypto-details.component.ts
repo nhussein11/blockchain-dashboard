@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CryptosService } from 'src/app/services/cryptos.service';
 import { ActivatedRoute } from '@angular/router';
-import { Cryptocurrency, CryptocurrencyDetailsGraphic } from 'src/app/models/Cryptocurrency';
+
 import { CryptocurrencyDetails } from 'src/app/models/Cryptocurrency-Details';
 
 @Component({
   selector: 'app-crypto-details',
-  templateUrl: './crypto-details.component.html',
-  styleUrls: ['./crypto-details.component.css']
+  templateUrl: './crypto-details.component.html'
 })
 export class CryptoDetailsComponent implements OnInit {
 
