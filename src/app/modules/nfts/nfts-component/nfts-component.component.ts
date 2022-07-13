@@ -56,6 +56,14 @@ export class NftsComponentComponent implements OnInit {
     )
   }
 
+  getSantizeUrl(url : string | undefined){
+    if(!(url === undefined)){
+      return this._sanitizer.bypassSecurityTrustUrl(url);
+    }else{
+      return 'https://github.com/nhussein11/blockchain-dashboard/blob/b13b498584fdf45121425edd6bae06cc4b752ecb/src/assets/no_image_available_icon.jpg'
+    }
+    
+  }
 
   searchNftsByContract() {
     
@@ -95,10 +103,4 @@ export class NftsComponentComponent implements OnInit {
 
   }
 
-  getSantizeUrl(url : string | undefined){
-    if(url){
-      return this._sanitizer.bypassSecurityTrustUrl(url);
-    }else{return;}
-    
-  }
 }

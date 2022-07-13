@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { catchError, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Nft, OwnedNft } from '../models/Nfts';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class NftsService {
 
   private url = 'https://eth-mainnet.alchemyapi.io/nft/v2/demo/getNFTs';
 
-  constructor(private http: HttpClient,private _sanitizer: DomSanitizer    ) { }
+  constructor(private http: HttpClient, private _sanitizer: DomSanitizer) { }
 
   getNfts(owner: string): Observable<Nft[]> {
 
@@ -33,15 +33,15 @@ export class NftsService {
 
               if (nft.image?.startsWith('ipfs://')) { this.ipfsImage(nft) }
 
-              if (nft.image?.startsWith('data')) {this.base64Image(nft)}
+              if (nft.image?.startsWith('data')) { this.base64Image(nft) }
 
               if (!(Object.keys(nft).length === 0)) { return nft }
-              else { return;}
+              else { return; }
             }
           )
         })
-      
-        );
+
+      );
   }
 
   isVideo(nft: Nft): void {
@@ -54,7 +54,7 @@ export class NftsService {
   }
 
 
-  base64Image(nft:Nft): void {
+  base64Image(nft: Nft): void {
     let dataURI = nft.image || '';
     let blob = this.dataURItoBlob(dataURI);
     let objectURL = URL.createObjectURL(blob);
