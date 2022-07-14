@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div *ngIf="!cryptosDataLoaded; else divTable">
+<div *ngIf="!cryptosDataLoaded; else divTable" class="h-100">
   <p-progressSpinner class="d-flex justify-content-center"></p-progressSpinner>
 </div>
 
@@ -32,7 +32,8 @@
           </tr>
         </thead>
         <tbody class="text-center ">
-          <tr  *ngFor="let crypto of cryptosData | filter:searchText   | paginate: { itemsPerPage: count, currentPage: p }">
+          <!-- <tr  *ngFor="let crypto of (cryptosData | filter:searchText   | paginate: { itemsPerPage: count, currentPage: p })"> -->
+          <tr  *ngFor="let crypto of (cryptosData | paginate: { itemsPerPage: count, currentPage: p }  )  ">
             <td>{{(crypto.cmc_rank)?crypto.cmc_rank :'-' }}</td>
             <td>
               <a class="link-secondary" style="text-decoration: none;" routerLink="/crypto_details/{{crypto.id}}">
@@ -47,7 +48,7 @@
         </tbody>
       </table>
     </div>
-    <div class="d-flex justify-content-center mt-2">
+    <div class="d-flex justify-content-center mt-2 ">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>

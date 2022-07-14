@@ -1,0 +1,10 @@
+#navbar ul li a , #navbar-header {
+    color: var(--text-color) !important;
+}
+#navbar ul li a {
+    border-bottom: 2px solid white;    
+}
+#navbar-header strong{
+    padding-left: 1e;
+    margin-left: 5%;
+}

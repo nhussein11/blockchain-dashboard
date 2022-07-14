@@ -1,10 +1,10 @@
-import { Component, ElementRef, OnInit, SecurityContext, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Nft, OwnedNft } from 'src/app/models/Nfts';
-import { NftDetailsComponent } from 'src/app/modules/nfts/nft-details/nft-details.component'
+import { Nft } from 'src/app/models/Nfts';
+import { NftDetailsComponent } from 'src/app/nfts/nft-details/nft-details.component'
 import { NftsService } from 'src/app/services/nfts.service';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({

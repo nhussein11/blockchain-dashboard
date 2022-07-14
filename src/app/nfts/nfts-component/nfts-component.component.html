@@ -10,6 +10,11 @@
                 type="submit"
                 (click)="searchNftsByContract()"><strong>Search</strong></button>
     </div>
+
+    <!-- <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="Search"  />
+    </span> -->
 </div>
 
 <div *ngIf="invalidOwner">
@@ -22,7 +27,7 @@
 </div>
 
 
-<div *ngIf="!nftsDataLoaded; else cardsContent" #progressSpinner>
+<div *ngIf="!nftsDataLoaded; else cardsContent" #progressSpinner class="h-100">
     <p-progressSpinner class="d-flex justify-content-center" strokeWidth="2" animationDuration="1s"></p-progressSpinner>
 </div>
 
