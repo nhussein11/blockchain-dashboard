@@ -14,7 +14,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 //primeNg
 import {TableModule} from 'primeng/table';
-
+import {InputTextModule} from 'primeng/inputtext';
 
 
 
@@ -25,13 +25,14 @@ import {TableModule} from 'primeng/table';
   ],
   imports: [
     CommonModule,
-    TableModule,
+    
     NgxPaginationModule,
     ProgressSpinnerModule,
     ChartModule,
     FormsModule,
     Ng2SearchPipeModule,
-    RouterModule
+    RouterModule,
+    InputTextModule
 
   ]
 })
