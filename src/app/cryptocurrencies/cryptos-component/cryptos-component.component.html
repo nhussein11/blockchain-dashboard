@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row mt-2">
     <div class="col">
-      <h2 class="display text-center">Cryptocurrencies Ranking</h2>
+      <h2 class="text-center">Cryptocurrencies Ranking</h2>
     </div>
     <div class="col">
       <div class="d-flex justify-content-center input-group px-md-6 ">
@@ -16,11 +16,11 @@
   <p-progressSpinner class="d-flex justify-content-center"></p-progressSpinner>
 </div>
 
-<ng-template #divTable>
+<ng-template #divTable class="container">
   <div class="row justify-content-center mt-4">
     <div class="col-auto">
-      <table class="table table-responsive table-hover">
-        <thead class="table-dark">
+      <table class="table table-responsive table-hover " style="font-family: var(--font--family); color:var(--text--color); font-size: large;">
+        <thead class="table" style="font-family: var(--font--family); color:var(--text--color)">
           <tr class="text-center">
             <th>Rank</th>
             <th>Name</th>
@@ -32,11 +32,11 @@
           </tr>
         </thead>
         <tbody class="text-center ">
-          <!-- <tr  *ngFor="let crypto of (cryptosData | filter:searchText   | paginate: { itemsPerPage: count, currentPage: p })"> -->
-          <tr  *ngFor="let crypto of (cryptosData | paginate: { itemsPerPage: count, currentPage: p }  )  ">
+
+          <tr *ngFor="let crypto of (cryptosData | paginate: { itemsPerPage: count, currentPage: p }  )  ">
             <td>{{(crypto.cmc_rank)?crypto.cmc_rank :'-' }}</td>
             <td>
-              <a class="link-secondary" style="text-decoration: none;" routerLink="/crypto_details/{{crypto.id}}">
+              <a class="link-light " style="text-decoration: none;" routerLink="/crypto_details/{{crypto.id}}">
                 {{crypto.name}}
               </a>
             </td>
@@ -53,4 +53,29 @@
     </div>
   </div>
 
+  <!-- <p-table [value]="cryptosData" class="d-flex justify-content-center " responsiveLayout="scroll">
+    <ng-template pTemplate="header" style="text-align: center;">
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Price</th>
+        <th>Max Supply</th>
+        <th>Circulating Supply</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-crypto>
+      <tr style="text-align: center;">
+        <td>{{(crypto.cmc_rank)?crypto.cmc_rank :'-' }}</td>
+        <a style=" text-decoration: none;color:rgb(255, 255, 255);" routerLink="/crypto_details/{{crypto.id}}">
+          <td>{{crypto.name}}</td>
+        </a>
+
+        <td>{{crypto.symbol}}</td>
+        <td>{{crypto.quote.USD.price| currency }}</td>
+        <td>{{(crypto.max_supply)? (crypto.max_supply | number: '.2'):'-' }}</td>
+        <td>{{(crypto.circulating_supply) ? (crypto.circulating_supply | number : '1.2-2') :'-' }}</td>
+      </tr>
+    </ng-template>
+  </p-table> -->
 </ng-template>
