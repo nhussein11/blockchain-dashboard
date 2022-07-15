@@ -53,29 +53,12 @@
     </div>
   </div>
 
-  <!-- <p-table [value]="cryptosData" class="d-flex justify-content-center " responsiveLayout="scroll">
-    <ng-template pTemplate="header" style="text-align: center;">
-      <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>Symbol</th>
-        <th>Price</th>
-        <th>Max Supply</th>
-        <th>Circulating Supply</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-crypto>
-      <tr style="text-align: center;">
-        <td>{{(crypto.cmc_rank)?crypto.cmc_rank :'-' }}</td>
-        <a style=" text-decoration: none;color:rgb(255, 255, 255);" routerLink="/crypto_details/{{crypto.id}}">
-          <td>{{crypto.name}}</td>
-        </a>
+<div class="d-flex justify-content-center mb-lg-4 ps-lg-4">
 
-        <td>{{crypto.symbol}}</td>
-        <td>{{crypto.quote.USD.price| currency }}</td>
-        <td>{{(crypto.max_supply)? (crypto.max_supply | number: '.2'):'-' }}</td>
-        <td>{{(crypto.circulating_supply) ? (crypto.circulating_supply | number : '1.2-2') :'-' }}</td>
-      </tr>
-    </ng-template>
-  </p-table> -->
+  <button pButton class="mx-5 p-button" type="button" icon="pi pi-angle-left" iconPos="left" label="Previous"></button>
+  <button pButton class="mx-5 p-button" type="button" icon="pi pi-angle-right" iconPos="right" label="Next"></button>
+  
+</div>
+  
+
 </ng-template>

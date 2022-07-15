@@ -15,7 +15,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 //primeNg
 import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
-
+import {ButtonModule} from 'primeng/button';
 
 
 @NgModule({
@@ -32,7 +32,8 @@ import {InputTextModule} from 'primeng/inputtext';
     FormsModule,
     Ng2SearchPipeModule,
     RouterModule,
-    InputTextModule
+    InputTextModule,
+    ButtonModule
 
   ]
 })
