@@ -1,15 +1,15 @@
 <h2 class="display-5 text-center"> <strong>{{crypto.name}} Details</strong> </h2>
 
-<div *ngIf="!cryptoDetailLoaded; else divCard">
-  <p-progressSpinner class="d-flex justify-content-center"></p-progressSpinner>
+<div *ngIf="!cryptoDetailLoaded; else divCard" class="h-100">
+  <p-progressSpinner class="d-flex justify-content-center "></p-progressSpinner>
 </div>
 
 <ng-template #divCard class="d-flex justify-content-center">
   <div class="row mx-5">
     <div class="col-sm-4">
-      <div class="card mb-md-4">
-        <h5 class="card-header text-center">{{crypto.name}}</h5>
-        <img src={{crypto.logo}} class="card-img mx-auto p-3" style="width:50%;height: 50%;object-fit: cover;">
+      <div class="card-column border mb-md-4">
+        <h5 class="card-header text-center"><strong>{{crypto.name}}</strong></h5>
+        <img src={{crypto.logo}} class="card-img mx-auto d-flex justify-content-centerp-3 w-75 " >
         <div class="card-body">
           <p class="card-text text-center lead fs-6"><small>{{crypto.description}}</small></p>
           <h6 class="card-footer text-center" *ngIf="crypto.category">Category: {{crypto.category | uppercase}}</h6>
@@ -32,7 +32,7 @@
       </div>
       <ng-template #pieChart>
         <div class="mt-5">
-          <p-chart class="p-5" type="bar" [data]="dataChart"></p-chart>
+          <p-chart class="p-5" type="bar" [data]="dataChart"  ></p-chart>
         </div>
       </ng-template>
     </div>

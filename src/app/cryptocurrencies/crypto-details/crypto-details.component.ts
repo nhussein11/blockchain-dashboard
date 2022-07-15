@@ -12,11 +12,15 @@ export class CryptoDetailsComponent implements OnInit {
 
   cryptoDetailLoaded: boolean = false;
   cryptoDetailGraphicLoaded:boolean=false;
+  
   id: string = '';
   crypto: CryptocurrencyDetails = {} as CryptocurrencyDetails;
 
+  // options : any;
+
   dataChart = {
     labels: ['2022'],
+    color: 'white',
     datasets: [
       {
         label: 'Percent change 1h',
@@ -50,8 +54,9 @@ export class CryptoDetailsComponent implements OnInit {
       }
     ]
   }
-
-  constructor(private route: ActivatedRoute, private _cryptosService: CryptosService) { }
+  
+  
+  constructor(private route: ActivatedRoute, private _cryptosService: CryptosService) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
