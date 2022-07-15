@@ -12,7 +12,10 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ChartModule } from 'primeng/chart';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
-
+//primeNg
+import {TableModule} from 'primeng/table';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
 
 
 @NgModule({
@@ -22,13 +25,15 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   ],
   imports: [
     CommonModule,
-
+    
     NgxPaginationModule,
     ProgressSpinnerModule,
     ChartModule,
     FormsModule,
     Ng2SearchPipeModule,
-    RouterModule
+    RouterModule,
+    InputTextModule,
+    ButtonModule
 
   ]
 })

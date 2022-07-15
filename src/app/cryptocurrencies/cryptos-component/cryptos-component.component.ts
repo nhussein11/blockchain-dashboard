@@ -7,7 +7,7 @@ import { LocalService } from 'src/app/services/local.service';
 @Component({
   selector: 'app-cryptos-component',
   templateUrl: './cryptos-component.component.html',
-  styleUrls: ['./cryptos-component.component.css'],
+
   providers: [CryptosService]
 })
 
@@ -15,22 +15,38 @@ export class CryptosComponentComponent implements OnInit {
   cryptosDataLoaded: boolean = false;
   cryptosData: Cryptocurrency[] = [];
 
-  p: number = 1;
-  count: number = 15;
+  start:number = 1;
+  limit:number = 10;
 
   searchText: string = '';
 
-  constructor(private _cryptosService: CryptosService,
-              private _localService:LocalService          
+  constructor(private _cryptosService: CryptosService          
     ) { }
 
   ngOnInit(): void {
-    this._cryptosService.getCryptos().subscribe(
+    this.loadCryptos();
+  }
+
+  loadCryptos(){
+    this._cryptosService.getCryptos(this.start,this.limit).subscribe(
       (response: Cryptocurrency[]) => {
         this.cryptosData = response;
         this.cryptosDataLoaded = true;
 
       }
     )
+  }
+
+  getNextCryptos(){
+    this.cryptosDataLoaded = false;
+    this.start +=10;
+    this.cryptosData = []
+    this.loadCryptos();
+  }
+  getPreviousCryptos(){
+    this.cryptosDataLoaded = false;
+    this.start -=10;
+    this.cryptosData = []
+    this.loadCryptos();
   }
 }

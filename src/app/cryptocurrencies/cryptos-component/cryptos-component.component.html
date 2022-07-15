@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col">
+      <h2 class="text-center">Cryptocurrencies Ranking</h2>
+    </div>
+    <div class="col">
+      <div class="d-flex justify-content-center input-group px-md-6 ">
+        <input pInputText class="form-control-md text-center font-weight-bold mt-2" type="text" [(ngModel)]="searchText"
+          placeholder="Search ...">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!cryptosDataLoaded; else divTable" class="h-100">
+  <p-progressSpinner class="d-flex justify-content-center"></p-progressSpinner>
+</div>
+
+<ng-template #divTable class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="col-auto">
+      <table class="table table-responsive table-hover "
+        style="font-family: var(--font--family); color:var(--text--color); font-size: large;">
+        <thead class="table" style="font-family: var(--font--family); color:var(--text--color)">
+          <tr class="text-center">
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Price (USD)</th>
+            <th>Max Supply</th>
+            <th>Circulating Supply</th>
+
+          </tr>
+        </thead>
+        <tbody class="text-center ">
+
+          <!-- <tr *ngFor="let crypto of (cryptosData | paginate: { itemsPerPage: count, currentPage: p }  )  "> -->
+          <tr *ngFor="let crypto of (cryptosData   )  ">
+            <td>{{(crypto.cmc_rank)?crypto.cmc_rank :'-' }}</td>
+            <td>
+              <a class="link-light " style="text-decoration: none;" routerLink="/crypto_details/{{crypto.id}}">
+                {{crypto.name}}
+              </a>
+            </td>
+            <td>{{crypto.symbol}}</td>
+            <td>{{crypto.quote.USD.price| currency }}</td>
+            <td>{{(crypto.max_supply)? (crypto.max_supply | number: '.2'):'-' }}</td>
+            <td>{{(crypto.circulating_supply) ? (crypto.circulating_supply | number : '1.2-2') :'-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="d-flex justify-content-center mt-2 ">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div> -->
+  </div>
+
+  <div class="d-flex justify-content-center mb-lg-4 ps-lg-4">
+
+    <button pButton class="mx-5 p-button" type="button" icon="pi pi-angle-left" iconPos="left"
+      label="Previous"
+      (click)="getPreviousCryptos()"
+      ></button>
+    <button pButton 
+    class="mx-5 p-button" 
+    type="button"
+     icon="pi pi-angle-right"
+      iconPos="right"
+       label="Next"
+       (click)="getNextCryptos()"
+       ></button>
+
+  </div>
+
+
+</ng-template>

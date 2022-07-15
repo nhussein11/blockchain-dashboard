@@ -21,11 +21,14 @@ export class CryptosService {
 
   constructor(private http: HttpClient) { }
 
-  getCryptos(): Observable<Cryptocurrency[]> {
+  getCryptos(start:number,limit:number): Observable<Cryptocurrency[]> {
+    let params = new HttpParams().set('start',start)
+                                  .set('limit',limit);
+
     let endpoint = `${this.url}/listings/latest`;
 
     return this.http.get<any>(endpoint,
-      { headers : this.headers, observe: 'response' })
+      { headers : this.headers, observe: 'response', params })
       .pipe(
         map((resp) => resp.body.data)
       );

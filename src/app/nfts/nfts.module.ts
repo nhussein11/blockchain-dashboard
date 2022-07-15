@@ -4,6 +4,7 @@ import { NftsComponentComponent } from './nfts-component/nfts-component.componen
 import { NftDetailsComponent } from './nft-details/nft-details.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BrowserModule } from '@angular/platform-browser';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -15,8 +16,10 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     CommonModule,
 
-    ProgressSpinnerModule
-    
+    ProgressSpinnerModule,
+
+
+    InputTextModule
   ]
 })
 export class NftsModule { }

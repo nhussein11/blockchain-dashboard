@@ -1,0 +1,31 @@
+/* .content-outer-container{
+    min-height: 100%;
+}
+.content-inner-container{
+    padding-bottom: 36px;
+} 
+.footer-container {
+    height: 24px;
+    margin-top: -36px;
+    border: solid 1px black;
+}
+.footer-content {
+    margin: 0 auto;
+    text-align: center;
+}
+*/
+footer div {
+    height: 15%;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    text-align: center !important;
+    
+}
+footer  a {
+    color: var(--text-color) !important;
+    font-family: var(--font--family) !important;
+    font-size: x-large;
+    text-decoration: none;
+    padding-top: 0.6em;
+    border-top: solid 2px white;
+}
