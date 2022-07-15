@@ -20,8 +20,12 @@ export class CryptosComponentComponent implements OnInit {
 
   searchText: string = '';
 
+<<<<<<< HEAD:src/app/cryptocurrencies/cryptos-component/cryptos-component.component.ts
   constructor(private _cryptosService: CryptosService          
     ) { }
+=======
+  constructor(private _cryptosService: CryptosService) { }
+>>>>>>> feature-nfts:src/app/modules/cryptocurrencies/cryptos-component/cryptos-component.component.ts
 
   ngOnInit(): void {
     this.loadCryptos();
@@ -32,7 +36,6 @@ export class CryptosComponentComponent implements OnInit {
       (response: Cryptocurrency[]) => {
         this.cryptosData = response;
         this.cryptosDataLoaded = true;
-
       }
     )
   }
@@ -43,10 +46,19 @@ export class CryptosComponentComponent implements OnInit {
     this.cryptosData = []
     this.loadCryptos();
   }
+<<<<<<< HEAD:src/app/cryptocurrencies/cryptos-component/cryptos-component.component.ts
+=======
+
+>>>>>>> feature-nfts:src/app/modules/cryptocurrencies/cryptos-component/cryptos-component.component.ts
   getPreviousCryptos(){
     this.cryptosDataLoaded = false;
     this.start -=10;
     this.cryptosData = []
     this.loadCryptos();
   }
+<<<<<<< HEAD:src/app/cryptocurrencies/cryptos-component/cryptos-component.component.ts
+=======
+
+
+>>>>>>> feature-nfts:src/app/modules/cryptocurrencies/cryptos-component/cryptos-component.component.ts
 }
