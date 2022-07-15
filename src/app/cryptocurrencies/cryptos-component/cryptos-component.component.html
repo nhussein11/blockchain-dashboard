@@ -5,7 +5,7 @@
     </div>
     <div class="col">
       <div class="d-flex justify-content-center input-group px-md-6 ">
-        <input  pInputText class="form-control-md text-center font-weight-bold mt-2" type="text" [(ngModel)]="searchText"
+        <input pInputText class="form-control-md text-center font-weight-bold mt-2" type="text" [(ngModel)]="searchText"
           placeholder="Search ...">
       </div>
     </div>
@@ -19,7 +19,8 @@
 <ng-template #divTable class="container">
   <div class="row justify-content-center mt-4">
     <div class="col-auto">
-      <table class="table table-responsive table-hover " style="font-family: var(--font--family); color:var(--text--color); font-size: large;">
+      <table class="table table-responsive table-hover "
+        style="font-family: var(--font--family); color:var(--text--color); font-size: large;">
         <thead class="table" style="font-family: var(--font--family); color:var(--text--color)">
           <tr class="text-center">
             <th>Rank</th>
@@ -33,7 +34,8 @@
         </thead>
         <tbody class="text-center ">
 
-          <tr *ngFor="let crypto of (cryptosData | paginate: { itemsPerPage: count, currentPage: p }  )  ">
+          <!-- <tr *ngFor="let crypto of (cryptosData | paginate: { itemsPerPage: count, currentPage: p }  )  "> -->
+          <tr *ngFor="let crypto of (cryptosData   )  ">
             <td>{{(crypto.cmc_rank)?crypto.cmc_rank :'-' }}</td>
             <td>
               <a class="link-light " style="text-decoration: none;" routerLink="/crypto_details/{{crypto.id}}">
@@ -48,17 +50,27 @@
         </tbody>
       </table>
     </div>
-    <div class="d-flex justify-content-center mt-2 ">
+    <!-- <div class="d-flex justify-content-center mt-2 ">
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
-    </div>
+    </div> -->
   </div>
 
-<div class="d-flex justify-content-center mb-lg-4 ps-lg-4">
+  <div class="d-flex justify-content-center mb-lg-4 ps-lg-4">
 
-  <button pButton class="mx-5 p-button" type="button" icon="pi pi-angle-left" iconPos="left" label="Previous"></button>
-  <button pButton class="mx-5 p-button" type="button" icon="pi pi-angle-right" iconPos="right" label="Next"></button>
-  
-</div>
-  
+    <button pButton class="mx-5 p-button" type="button" icon="pi pi-angle-left" iconPos="left"
+      label="Previous"
+      (click)="getPreviousCryptos()"
+      ></button>
+    <button pButton 
+    class="mx-5 p-button" 
+    type="button"
+     icon="pi pi-angle-right"
+      iconPos="right"
+       label="Next"
+       (click)="getNextCryptos()"
+       ></button>
+
+  </div>
+
 
 </ng-template>

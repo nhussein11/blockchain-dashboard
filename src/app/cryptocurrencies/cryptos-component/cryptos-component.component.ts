@@ -15,22 +15,38 @@ export class CryptosComponentComponent implements OnInit {
   cryptosDataLoaded: boolean = false;
   cryptosData: Cryptocurrency[] = [];
 
-  p: number = 1;
-  count: number = 10;
+  start:number = 1;
+  limit:number = 10;
 
   searchText: string = '';
 
-  constructor(private _cryptosService: CryptosService,
-              private _localService:LocalService          
+  constructor(private _cryptosService: CryptosService          
     ) { }
 
   ngOnInit(): void {
-    this._cryptosService.getCryptos().subscribe(
+    this.loadCryptos();
+  }
+
+  loadCryptos(){
+    this._cryptosService.getCryptos(this.start,this.limit).subscribe(
       (response: Cryptocurrency[]) => {
         this.cryptosData = response;
         this.cryptosDataLoaded = true;
 
       }
     )
+  }
+
+  getNextCryptos(){
+    this.cryptosDataLoaded = false;
+    this.start +=10;
+    this.cryptosData = []
+    this.loadCryptos();
+  }
+  getPreviousCryptos(){
+    this.cryptosDataLoaded = false;
+    this.start -=10;
+    this.cryptosData = []
+    this.loadCryptos();
   }
 }
