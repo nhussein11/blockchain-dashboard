@@ -14,7 +14,7 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 
 //PrimeNg
 import {DividerModule} from 'primeng/divider';
-
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 
 @NgModule({
@@ -32,7 +32,8 @@ import {DividerModule} from 'primeng/divider';
     ExchangesModule,
     
     
-    DividerModule
+    DividerModule,
+    ScrollPanelModule
   ],
   bootstrap: [AppComponent]
 })

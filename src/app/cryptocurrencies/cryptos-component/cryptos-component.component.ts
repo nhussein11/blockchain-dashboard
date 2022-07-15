@@ -16,7 +16,7 @@ export class CryptosComponentComponent implements OnInit {
   cryptosData: Cryptocurrency[] = [];
 
   p: number = 1;
-  count: number = 15;
+  count: number = 10;
 
   searchText: string = '';
 
