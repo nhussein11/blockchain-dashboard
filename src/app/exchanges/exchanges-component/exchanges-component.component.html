@@ -1,39 +1,37 @@
-
 <div class="container">
-    <div class="row mt-2">
-      <div class="col">
-        <h2 class="display text-center">Exchanges List</h2>
-      </div>
-      <div class="col">
-        <div class="d-flex justify-content-center input-group px-md-6 ">
-          <input 
-            class="form-control-md text-center font-weight-bold mt-2" 
-            type="text"
-            
-            placeholder="Search ..."
-            
-            >
+  <div class="row ">
+    <h2 class="col-lg-4 text-center p-sm-4">Exchanges List</h2>
+    <div class="col-lg-8 p-sm-3">
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input #ownerInput pInputText placeholder="Search ..." class="p-inputtext-lg text-center " type="text"
+          size="50">
+      </span>
+    </div>
+  </div>
+</div>
+<div *ngIf="!exchangesLoaded; else cardsContent" #progressSpinner class="h-100">
+  <p-progressSpinner class="d-flex justify-content-center" strokeWidth="2" animationDuration="1s"></p-progressSpinner>
+</div>
+
+<ng-template #cardsContent>
+  <div class="container container mb-xl-4">
+    <div class="row ">
+      <div class="col-sm-3 " *ngFor="let exchange of exchanges ">
+        <div class="card-columns border text-center mt-4">
+          <div class="card-header" style="background-color:var(--surface-0); ">
+            <img src="{{exchange.image}}">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{exchange.name}}</h5>
+            <p class="card-text">{{(exchange.description)?(exchange.description?.slice(0,80)+' ...'):' - '}}</p>
+            <p class="card-text">Year Established: {{exchange.year_established}}</p>
+
+            <p class="card-text">Country: {{exchange.country}}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-<div class="container h-75" >
-    <div class="row " >
-        <div class="col-sm-3 " *ngFor="let exchange of exchanges ">
-            <div class="card text-center mt-4">
-                <div class="card-header ">
-                    
-                    <img src="{{exchange.image}}">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{exchange.name}}</h5>
-                    <p class="card-text">{{(exchange.description)?(exchange.description?.slice(0,80)+' ...'):' - '}}</p>
-                    <p class="card-text">Year Established: {{exchange.year_established}}</p>
-        
-                    <p class="card-text">Country: {{exchange.country}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-</div>
+</ng-template>

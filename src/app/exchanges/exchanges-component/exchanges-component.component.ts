@@ -14,7 +14,7 @@ export class ExchangesComponentComponent implements OnInit {
 
   searchText:string='';
 
-  
+  exchangesLoaded:boolean=false;
 
   constructor(private _exchangesService: ExchangesService) { }
 
@@ -24,6 +24,7 @@ export class ExchangesComponentComponent implements OnInit {
     this._exchangesService.getExchanges().subscribe(
       (response: Exchange[]) => {
         this.exchanges = response;
+        this.exchangesLoaded=true;
       }, ((err)=>{
         console.log('Error')
         console.info(err)
