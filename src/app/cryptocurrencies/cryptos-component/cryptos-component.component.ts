@@ -20,8 +20,7 @@ export class CryptosComponentComponent implements OnInit {
 
   searchText: string = '';
 
-  constructor(private _cryptosService: CryptosService          
-    ) { }
+  constructor(private _cryptosService: CryptosService) { }
 
   ngOnInit(): void {
     this.loadCryptos();
@@ -32,7 +31,6 @@ export class CryptosComponentComponent implements OnInit {
       (response: Cryptocurrency[]) => {
         this.cryptosData = response;
         this.cryptosDataLoaded = true;
-
       }
     )
   }
@@ -43,10 +41,13 @@ export class CryptosComponentComponent implements OnInit {
     this.cryptosData = []
     this.loadCryptos();
   }
+
   getPreviousCryptos(){
     this.cryptosDataLoaded = false;
     this.start -=10;
     this.cryptosData = []
     this.loadCryptos();
   }
+
+
 }

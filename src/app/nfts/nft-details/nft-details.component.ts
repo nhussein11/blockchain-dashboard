@@ -36,9 +36,6 @@ export class NftDetailsComponent implements OnInit,OnChanges {
   getSantizeUrl(url : string | undefined){
     if(url){
       return this._sanitizer.bypassSecurityTrustUrl(url);
-    }else{return;}
-    
+    }else{return;} 
   }
-
-
 }
