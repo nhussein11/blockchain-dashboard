@@ -1,15 +1,11 @@
 <div class="container">
   <div class="row ">
-    <h2 class="col-lg-4 text-center p-sm-4">Exchanges List</h2>
+    <h2 class="container col-lg-4 text-center p-sm-4">Exchanges List</h2>
     <div class="col-lg-8 p-sm-3">
       <span class="p-input-icon-right">
         <i class="pi pi-search"></i>
-        <input #ownerInput pInputText placeholder="Search ..." class="p-inputtext-lg text-center " type="text"
-<<<<<<< HEAD
-          size="50">
-=======
+        <input #ownerInput pInputText placeholder="Search ..." class="p-inputtext-lg text-center container" type="text"
           size="30">
->>>>>>> feature-nfts
       </span>
     </div>
   </div>
@@ -19,7 +15,7 @@
 </div>
 
 <ng-template #cardsContent>
-  <div class="container container mb-xl-4">
+  <div class="container mb-xl-4">
     <div class="row ">
       <div class="col-sm-3 " *ngFor="let exchange of exchanges ">
         <div class="card-columns border text-center mt-4">
