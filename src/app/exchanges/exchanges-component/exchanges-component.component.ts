@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { debounceTime, Subject } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { Component, HostListener, Inject, Injectable, OnInit } from '@angular/core';
 import { Exchange } from 'src/app/models/Exchange';
 import { ExchangesService } from 'src/app/services/exchanges.service';
 
@@ -12,20 +12,28 @@ export class ExchangesComponentComponent implements OnInit {
 
   exchanges: Exchange[] = [];
 
-  searchText:string='';
+  perPage: number = 8;
+  page:number=1;
+  scrollHeight: number = 500;
 
-  exchangesLoaded:boolean=false;
+  searchText: string = '';
 
-  constructor(private _exchangesService: ExchangesService) { }
+  exchangesLoaded: boolean = false;
+
+  constructor(
+    private _exchangesService: ExchangesService) { }
 
 
   ngOnInit(): void {
+    this.loadExchanges(this.perPage,this.page);
+  }
 
-    this._exchangesService.getExchanges().subscribe(
+  loadExchanges(perPage: number, page:number) {
+    this._exchangesService.getExchanges(perPage,page).subscribe(
       (response: Exchange[]) => {
-        this.exchanges = response;
-        this.exchangesLoaded=true;
-      }, ((err)=>{
+        this.exchanges=this.exchanges.concat(response);    
+        this.exchangesLoaded = true;
+      }, ((err) => {
         console.log('Error')
         console.info(err)
       })
@@ -33,6 +41,10 @@ export class ExchangesComponentComponent implements OnInit {
   }
 
 
-  
+  scollDown() {
+    this.page += 1;
+    this.loadExchanges(this.perPage,this.page);
+  }
+
 
 }

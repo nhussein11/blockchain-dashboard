@@ -15,7 +15,11 @@
 </div>
 
 <ng-template #cardsContent>
-  <div class="container mb-xl-4">
+  <div class="container mb-xl-4" 
+    infinite-scroll
+    (scrolled)="scollDown()"
+  
+  >
     <div class="row ">
       <div class="col-sm-3 " *ngFor="let exchange of exchanges ">
         <div class="card-columns border text-center mt-4">
@@ -33,5 +37,4 @@
       </div>
     </div>
   </div>
-
 </ng-template>
