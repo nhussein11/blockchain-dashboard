@@ -15,12 +15,14 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 //PrimeNg
 import {DividerModule} from 'primeng/divider';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import { FavsDetailsComponent } from './favs/favs-details/favs-details.component';
+import { FavsModule } from './favs/favs.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponentComponent 
+    HomeComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     CryptocurrenciesModule,
     NftsModule,
     ExchangesModule,
+    FavsModule,
     
     
     DividerModule,
