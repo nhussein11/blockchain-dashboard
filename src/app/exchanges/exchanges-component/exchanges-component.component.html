@@ -13,28 +13,31 @@
 <div *ngIf="!exchangesLoaded; else cardsContent" #progressSpinner class="h-100">
   <p-progressSpinner class="d-flex justify-content-center" strokeWidth="2" animationDuration="1s"></p-progressSpinner>
 </div>
+<section>
 
-<ng-template #cardsContent>
-  <div class="container mb-xl-4" 
-    infinite-scroll
-    (scrolled)="scollDown()"
-  
-  >
-    <div class="row ">
-      <div class="col-sm-3 " *ngFor="let exchange of exchanges ">
-        <div class="card-columns border text-center mt-4">
-          <div class="card-header" style="background-color:var(--surface-0); ">
-            <img src="{{exchange.image}}">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{exchange.name}}</h5>
-            <p class="card-text">{{(exchange.description)?(exchange.description?.slice(0,80)+' ...'):' - '}}</p>
-            <p class="card-text">Year Established: {{exchange.year_established}}</p>
 
-            <p class="card-text">Country: {{exchange.country}}</p>
+
+  <ng-template #cardsContent>
+    <div class="container mb-xl-4" infinite-scroll (scrolled)="scollDown()">
+      <div class="row ">
+        <div class="col-sm-3 " *ngFor="let exchange of exchanges ">
+          <div class="card-columns border text-center mt-4">
+            <div class="card-header" style="background-color:var(--surface-0); ">
+              <img src="{{exchange.image}}">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{exchange.name}}</h5>
+              <p class="card-text">{{(exchange.description)?(exchange.description?.slice(0,80)+' ...'):' - '}}</p>
+              <p class="card-text">Year Established: {{exchange.year_established}}</p>
+
+              <p class="card-text">Country: {{exchange.country}}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
+  <button *ngIf="showButton" class="button" (click)="scrollTop()">
+    <i class="pi pi-angle-double-up"  ></i>
+  </button>
+</section>

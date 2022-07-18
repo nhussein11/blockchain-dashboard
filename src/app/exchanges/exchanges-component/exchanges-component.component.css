@@ -2,3 +2,21 @@
     transform: scale(1.1);
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
+.button{
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 3;
+    padding: 0.3rem;
+    background-color:var(--surface-d);
+    border: solid 3px black;
+    border-radius: 0.5rem;
+    
+}
+.button:hover{
+    cursor: pointer;
+    font-size: 1.7rem
+}
+.button i {
+    font-size: 1.5rem
+}
