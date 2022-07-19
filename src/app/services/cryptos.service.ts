@@ -28,7 +28,7 @@ export class CryptosService {
     let endpoint = `${this.url}/listings/latest`;
 
     return this.http.get<any>(endpoint,
-      { headers : this.headers, observe: 'response', params })
+      { headers : this.headers, responseType:'json',observe: 'response', params })
       .pipe(
         map((resp) => resp.body.data)
       );

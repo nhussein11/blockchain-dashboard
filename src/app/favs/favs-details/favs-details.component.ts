@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-favs-details',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavsDetailsComponent implements OnInit {
 
-  data:any[] = ['a','b','c', 'd']
+  @Input() data:any[] = []
 
   constructor() { }
 
