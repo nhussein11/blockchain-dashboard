@@ -13,9 +13,6 @@ import { LocalService } from './local.service';
 
 export class CryptosService {
 
-  private cryptoFavs : Cryptocurrency[]=[];
-
-
   private headers = new HttpHeaders()
     .set('X-CMC_PRO_API_KEY', 'b61a8fc1-81dc-4ab2-8fa5-475d5ddf4e08')
     .set('Accept', 'application/json')
@@ -23,7 +20,7 @@ export class CryptosService {
 
   private url = '/v1/cryptocurrency';
 
-  constructor(private http: HttpClient, private _localService :LocalService) { }
+  constructor(private http: HttpClient, private _localService: LocalService) { }
 
   getCryptos(start: number, limit: number): Observable<Cryptocurrency[]> {
     let params = new HttpParams().set('start', start)
@@ -35,18 +32,17 @@ export class CryptosService {
       { headers: this.headers, responseType: 'json', observe: 'response', params })
       .pipe(
         map((resp) => {
-          (resp.body.data).forEach((crypto:Cryptocurrency) => {
-            if(this._localService.getData(crypto.id.toString())){
-              
-              // console.log("FAVS:",crypto.id,crypto.name,crypto.is_favorite)
-              
-              crypto.is_favorite=true;
+
+          (resp.body.data).forEach((crypto: Cryptocurrency) => {
+          
+            if (this.getCryptoFav(crypto.id.toString())) {
+              crypto.is_favorite = true;
             }
-            
+
           });
+
           return resp.body.data
-        }
-        )
+        })
       );
   }
 
@@ -96,11 +92,7 @@ export class CryptosService {
       );
   }
 
-
-  getCryptoFavs(){
-  
+  getCryptoFav(id: string) {
+    return this._localService.getData('cryptoFavs - ' + id);
   }
-
-
-
 }

@@ -54,13 +54,13 @@ export class CryptosComponentComponent implements OnInit {
     (crypto.is_favorite)
     ?
       (
-        this._localService.removeData(crypto.id.toString()),
+        this._localService.removeData('cryptoFavs - ' + crypto.id.toString()),
         crypto.is_favorite = false
       ) 
     :
       (
         crypto.is_favorite = true,
-        this._localService.saveData(crypto.id.toString(), JSON.stringify(crypto))
+        this._localService.saveData('cryptoFavs - ' + crypto.id.toString(), JSON.stringify(crypto))
       )
   }
 }
