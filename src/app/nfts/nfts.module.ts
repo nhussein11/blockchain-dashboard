@@ -4,6 +4,7 @@ import { NftsComponentComponent } from './nfts-component/nfts-component.componen
 import { NftDetailsComponent } from './nft-details/nft-details.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -18,7 +19,8 @@ import { InputTextModule } from 'primeng/inputtext';
 
     ProgressSpinnerModule,
 
-    InputTextModule
+    InputTextModule,
+    ButtonModule
 
   ]
 })

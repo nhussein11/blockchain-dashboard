@@ -45,7 +45,18 @@
                     </ng-template>
 
                     <div class="card-body">
-                        <h5 class="card-title">{{nft.name}}</h5>
+                        <div class="row align-items-center ">
+                            <h5 class="col-sm-9 card-title">{{nft.name}}</h5>
+                            <button 
+                            pButton 
+                            pRipple 
+                            type="button" 
+                            class="col-sm-3 p-button-lg p-button-help p-button-rounded p-button-text"
+                            (click)="favNft(nft, $event)">
+                            <i [ngClass]="(nft.is_favorite) ?  'pi pi-heart-fill' : 'pi pi-heart'"></i>
+        
+                            </button>
+                        </div>
                         <p class="card-text">{{nft.description?.slice(0,80)+' ...'}}</p>
                     </div>
 
