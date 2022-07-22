@@ -22,8 +22,22 @@
       <div class="row ">
         <div class="col-sm-3 " *ngFor="let exchange of exchanges ">
           <div class="card-columns border text-center mt-4">
-            <div class="card-header" style="background-color:var(--surface-0); ">
-              <img src="{{exchange.image}}">
+            <div class="card-header  d-flex justify-content-center " style="background-color:var(--surface-0); ">
+              <div class="row px-5 flex-fill">
+                <img class="col-sm-7 mx-2" src="{{exchange.image}}">
+
+
+                <button 
+                pButton 
+                pRipple 
+                class="col-sm-3 my-auto p-button  p-button-help p-button-rounded p-button-text"
+                type="button" 
+                (click)="favExchange(exchange, $event)">
+                  <i [ngClass]="(exchange.is_favorite) ? 'pi pi-heart-fill': 'pi pi-heart'"></i>
+                </button>
+
+              </div>
+
             </div>
             <div class="card-body">
               <h5 class="card-title">{{exchange.name}}</h5>
@@ -38,6 +52,6 @@
     </div>
   </ng-template>
   <button *ngIf="showButton" class="button" (click)="scrollTop()">
-    <i class="pi pi-angle-double-up"  ></i>
+    <i class="pi pi-angle-double-up"></i>
   </button>
 </section>

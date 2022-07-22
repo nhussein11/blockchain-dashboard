@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { Exchange } from '../models/Exchange';
+import { LocalService } from './local.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ExchangesService {
   // private url : string = 'https://api.coingecko.com/api/v3/exchanges'; // endpoint without keys
   
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private _localService: LocalService) { }
 
   getExchanges(perPage:number, page:number){
 
@@ -32,10 +33,19 @@ export class ExchangesService {
       {headers: this.headers, params}
     ).pipe(
       map((exchangesResponse:Exchange[])=>{
+        exchangesResponse.forEach((exchange:Exchange)=>{
+          console.log(exchange.is_favorite)
+          if (this.getExchangeFav(exchange.id.toString())){exchange.is_favorite=true}
+          
+        })
         return  exchangesResponse
       })
     );
   
+  }
+
+  getExchangeFav(id: string | undefined) {
+    return this._localService.getData('exchangeFavs - ' + id);
   }
   
 }

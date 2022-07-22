@@ -11,4 +11,5 @@ export interface Exchange {
     trust_score_rank:                number;
     trade_volume_24h_btc:            number;
     trade_volume_24h_btc_normalized: number;
+    is_favorite ? : boolean;
 }

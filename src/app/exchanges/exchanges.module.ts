@@ -5,6 +5,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ExchangeDetailsComponent } from './exchange-details/exchange-details.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -18,7 +19,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
     InputTextModule,
     ProgressSpinnerModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+
+    ButtonModule
   ]
 })
 export class ExchangesModule { }

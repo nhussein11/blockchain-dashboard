@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Host, HostListener, Inject, OnInit } from '@angular/core';
 import { Exchange } from 'src/app/models/Exchange';
 import { ExchangesService } from 'src/app/services/exchanges.service';
+import { LocalService } from 'src/app/services/local.service';
 
 @Component({
   selector: 'app-exchanges-component',
@@ -24,7 +25,9 @@ export class ExchangesComponentComponent implements OnInit {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private _exchangesService: ExchangesService) { }
+    private _exchangesService: ExchangesService,
+    private _localService: LocalService
+    ) { }
 
 
   ngOnInit(): void {
@@ -59,4 +62,20 @@ export class ExchangesComponentComponent implements OnInit {
 
     this.showButton = (yOffSet || scrollTop) > this.scrollHeight;
   }
+
+  favExchange(exchange:Exchange, event:Event){
+    event.stopImmediatePropagation();
+    (exchange.is_favorite)
+    ?
+      (
+        this._localService.removeData('exchangeFavs - ' + exchange.id.toString()),
+        exchange.is_favorite = false
+      ) 
+    :
+      (
+        exchange.is_favorite = true,
+        this._localService.saveData('exchangeFavs - ' + exchange.id.toString(), JSON.stringify(crypto))
+      )
+  }
+  
 }
