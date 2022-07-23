@@ -74,7 +74,7 @@ export class ExchangesComponentComponent implements OnInit {
     :
       (
         exchange.is_favorite = true,
-        this._localService.saveData('exchangeFavs - ' + exchange.id.toString(), JSON.stringify(crypto))
+        this._localService.saveData('exchangeFavs - ' + exchange.id.toString(), JSON.stringify(exchange))
       )
   }
   

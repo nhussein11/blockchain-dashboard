@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
+import { Exchange } from 'src/app/models/Exchange';
+import { Nft } from 'src/app/models/Nfts';
 
 @Component({
   selector: 'app-favs-details',
@@ -7,7 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FavsDetailsComponent implements OnInit {
 
-  @Input() data:any[] = []
+  @Input() data:Cryptocurrency[] | Nft[] | Exchange [] = [];
 
   constructor() { }
 

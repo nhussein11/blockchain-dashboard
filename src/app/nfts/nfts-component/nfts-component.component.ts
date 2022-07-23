@@ -116,7 +116,7 @@ export class NftsComponentComponent implements OnInit {
     :
       (
         nft.is_favorite = true,
-        this._localService.saveData('nftFavs - ' + nft.name?.toString(), JSON.stringify(crypto))
+        this._localService.saveData('nftFavs - ' + nft.name?.toString(), JSON.stringify(nft))
       )
   }
 
