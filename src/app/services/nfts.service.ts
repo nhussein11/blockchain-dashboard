@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, SecurityContext } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { catchError, map, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+
+import { map, Observable } from 'rxjs';
 import { Nft, OwnedNft } from '../models/Nfts';
+import { LocalService } from './local.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class NftsService {
 
   private url = 'https://eth-mainnet.alchemyapi.io/nft/v2/demo/getNFTs';
 
-  constructor(private http: HttpClient,private _sanitizer: DomSanitizer    ) { }
+  constructor(private http: HttpClient, private _localService: LocalService) { }
 
   getNfts(owner: string): Observable<Nft[]> {
 
@@ -33,15 +34,17 @@ export class NftsService {
 
               if (nft.image?.startsWith('ipfs://')) { this.ipfsImage(nft) }
 
-              if (nft.image?.startsWith('data')) {this.base64Image(nft)}
+              if (nft.image?.startsWith('data')) { this.base64Image(nft) }
+
+              if (this.getNftFav(nft.name)) {nft.is_favorite=true}
 
               if (!(Object.keys(nft).length === 0)) { return nft }
-              else { return;}
+              else { return; }
             }
           )
         })
-      
-        );
+
+      );
   }
 
   isVideo(nft: Nft): void {
@@ -54,7 +57,7 @@ export class NftsService {
   }
 
 
-  base64Image(nft:Nft): void {
+  base64Image(nft: Nft): void {
     let dataURI = nft.image || '';
     let blob = this.dataURItoBlob(dataURI);
     let objectURL = URL.createObjectURL(blob);
@@ -75,6 +78,11 @@ export class NftsService {
       ia[i] = byteString.charCodeAt(i);
     }
     return new Blob([ia], { type: mimeString });
+  }
+
+  
+  getNftFav(name: string | undefined) {
+    return this._localService.getData('nftFavs - ' + name);
   }
 
 }

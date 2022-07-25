@@ -5,6 +5,7 @@ import { Nft } from 'src/app/models/Nfts';
 import { NftDetailsComponent } from 'src/app/nfts/nft-details/nft-details.component'
 import { NftsService } from 'src/app/services/nfts.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LocalService } from 'src/app/services/local.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class NftsComponentComponent implements OnInit {
 
-  @ViewChild('ownerInput')  ownerInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('ownerInput') ownerInput!: ElementRef<HTMLInputElement>;
 
   nftsDataLoaded: boolean = false;
   nfts: Nft[] = [];
@@ -28,12 +29,13 @@ export class NftsComponentComponent implements OnInit {
 
   imgSrcTest?: string = ''
 
-  errorMessage:string=''
-
+  errorMessage: string = ''
+  
   constructor(private _nftService: NftsService,
     private modal: NgbModal,
-    private _sanitizer: DomSanitizer
-
+    private _sanitizer: DomSanitizer,
+    private _localService: LocalService,
+    
   ) { }
 
   ngOnInit(): void {
@@ -48,17 +50,25 @@ export class NftsComponentComponent implements OnInit {
         this.nfts = response.filter(nft => nft !== undefined);
         this.nftsDataLoaded = true;
       }
-      , ((err:Error)=>{
+      , ((err: Error) => {
         console.log(err)
-        this.errorMessage = err.message 
-        this.invalidOwner=true
+        this.errorMessage = err.message
+        this.invalidOwner = true
       })
     )
   }
 
+  getSantizeUrl(url: string | undefined) {
+    if (!(url === undefined)) {
+      return this._sanitizer.bypassSecurityTrustUrl(url);
+    } else {
+      return 'https://github.com/nhussein11/blockchain-dashboard/blob/b13b498584fdf45121425edd6bae06cc4b752ecb/src/assets/no_image_available_icon.jpg'
+    }
+
+  }
 
   searchNftsByContract() {
-    
+
     !this.ownerInput.nativeElement.value
       ?
       (
@@ -68,7 +78,7 @@ export class NftsComponentComponent implements OnInit {
       )
       :
       this.invalidOwner = false
-      this.nfts = [],
+    this.nfts = [],
       this.loadNfts(this.ownerInput.nativeElement.value);
   }
 
@@ -95,10 +105,19 @@ export class NftsComponentComponent implements OnInit {
 
   }
 
-  getSantizeUrl(url : string | undefined){
-    if(url){
-      return this._sanitizer.bypassSecurityTrustUrl(url);
-    }else{return;}
-    
+  favNft(nft: Nft, event:Event) {
+    event.stopImmediatePropagation();
+    (nft.is_favorite)
+    ?
+      (
+        this._localService.removeData('nftFavs - ' + nft.name?.toString()),
+        nft.is_favorite = false
+      ) 
+    :
+      (
+        nft.is_favorite = true,
+        this._localService.saveData('nftFavs - ' + nft.name?.toString(), JSON.stringify(nft))
+      )
   }
+
 }

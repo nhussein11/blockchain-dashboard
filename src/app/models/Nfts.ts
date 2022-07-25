@@ -10,7 +10,7 @@ export interface OwnedNft {
     timeLastUpdated: Date;
 }
 export interface Nft{
-    name?:             string;
+    name:             string;
     description?:      string;
     image?:            string;
     // video?:            string;
@@ -31,4 +31,7 @@ export interface Nft{
     liveModel?:        string;
     poster?:           string;
     video?:string;
+    
+    is_favorite?:boolean;
+    is_nft?:boolean;
 }

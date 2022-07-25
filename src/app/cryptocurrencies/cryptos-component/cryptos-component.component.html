@@ -29,6 +29,9 @@
             <th>Price (USD)</th>
             <th>Max Supply</th>
             <th>Circulating Supply</th>
+            <th>
+              <button pButton pRipple type="button" icon="pi pi-heart-fill" class="p-button-rounded p-button-help p-button-text"></button>
+            </th>
 
           </tr>
         </thead>
@@ -46,6 +49,15 @@
             <td>{{crypto.quote.USD.price| currency }}</td>
             <td>{{(crypto.max_supply)? (crypto.max_supply | number: '.2'):'-' }}</td>
             <td>{{(crypto.circulating_supply) ? (crypto.circulating_supply | number : '1.2-2') :'-' }}</td>
+            <td>
+              <button pButton 
+                      pRipple 
+                      type="button" 
+                      class="p-button-rounded p-button-help p-button-text"
+                      (click)="favCrypto(crypto)">
+              <i  [ngClass]="(crypto.is_favorite)? 'pi pi-heart-fill': 'pi pi-heart'"></i>
+            </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -69,7 +81,6 @@
        label="Next"
        (click)="getNextCryptos()"
        ></button>
-
   </div>
 
 

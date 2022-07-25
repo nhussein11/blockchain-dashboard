@@ -2,28 +2,26 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ActivatedRoute, Params } from '@angular/router';
 import { Nft } from 'src/app/models/Nfts';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-nft-details',
   templateUrl: './nft-details.component.html',
   styleUrls: ['./nft-details.component.css']
 })
-export class NftDetailsComponent implements OnInit,OnChanges {
+export class NftDetailsComponent implements OnInit, OnChanges {
   data: string = '';
-  // nft: Nft ={} as Nft;
+  @Input() nft: Nft = {} as Nft;
 
-
-  @Input() nft: Nft ={} as Nft;
-  
-
-  constructor(private _route: ActivatedRoute,
-              private activeModal: NgbActiveModal
+  constructor(
+    private activeModal: NgbActiveModal,
+    private _sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
 
   }
 
-  ngOnChanges():void {
+  ngOnChanges(): void {
 
   }
 
@@ -31,5 +29,9 @@ export class NftDetailsComponent implements OnInit,OnChanges {
     this.activeModal.close("Modal closed!");
   }
 
-
+  getSantizeUrl(url: string | undefined) {
+    if (url) {
+      return this._sanitizer.bypassSecurityTrustUrl(url);
+    } else { return; }
+  }
 }
