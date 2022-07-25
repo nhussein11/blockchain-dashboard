@@ -13,10 +13,10 @@ import { ChartModule } from 'primeng/chart';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 //primeNg
-import {TableModule} from 'primeng/table';
+
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
-
+import {TableModule} from 'primeng/table';
 
 
 @NgModule({
@@ -34,7 +34,8 @@ import {ButtonModule} from 'primeng/button';
     Ng2SearchPipeModule,
     RouterModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    TableModule
 
   ]
 })
