@@ -5,6 +5,7 @@
       <span class="p-input-icon-right">
         <i class="pi pi-search"></i>
         <input #ownerInput pInputText placeholder="Search ..." class="p-inputtext-lg text-center container" type="text"
+          [(ngModel)]="searchText"
           size="30">
       </span>
     </div>
@@ -20,7 +21,7 @@
   <ng-template #cardsContent>
     <div class="container mb-xl-4" infinite-scroll (scrolled)="scollDown()">
       <div class="row ">
-        <div class="col-md-3 " *ngFor="let exchange of exchanges ">
+        <div class="col-md-3 " *ngFor="let exchange of exchanges | filter: searchText">
           <div class="card-columns border text-center mt-4">
             <div class="card-header  d-flex justify-content-center " style="background-color:var(--surface-0); ">
               <div class="row px-5 flex-fill">
