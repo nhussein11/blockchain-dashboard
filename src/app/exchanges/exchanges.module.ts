@@ -6,6 +6,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ExchangeDetailsComponent } from './exchange-details/exchange-details.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ButtonModule } from 'primeng/button';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -16,10 +18,12 @@ import { ButtonModule } from 'primeng/button';
   ],
   imports: [
     CommonModule,
+    FormsModule,
 
     InputTextModule,
     ProgressSpinnerModule,
     InfiniteScrollModule,
+    Ng2SearchPipeModule,
 
     ButtonModule
   ]
