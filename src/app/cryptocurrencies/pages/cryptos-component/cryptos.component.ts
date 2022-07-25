@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { CryptosService } from 'src/app/services/cryptos.service';
-import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
+
+import { Cryptocurrency } from 'src/app/cryptocurrencies/models/Cryptocurrency';
 import { LocalService } from 'src/app/services/local.service';
+import { CryptosService } from '../../services/cryptos.service';
 
 
 @Component({
   selector: 'app-cryptos-component',
-  templateUrl: './cryptos-component.component.html',
+  templateUrl: './cryptos.component.html',
 
   providers: [CryptosService]
 })
 
-export class CryptosComponentComponent implements OnInit {
+export class CryptosComponent implements OnInit {
   cryptosDataLoaded: boolean = false;
   cryptosData: Cryptocurrency[] = [];
 

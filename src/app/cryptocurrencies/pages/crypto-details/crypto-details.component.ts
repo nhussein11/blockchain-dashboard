@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CryptosService } from 'src/app/services/cryptos.service';
-import { ActivatedRoute } from '@angular/router';
 
-import { CryptocurrencyDetails } from 'src/app/models/Cryptocurrency-Details';
+import { ActivatedRoute } from '@angular/router';
+import { CryptocurrencyDetails } from '../../models/Cryptocurrency-Details';
+import { CryptosService } from '../../services/cryptos.service';
+
+
 
 @Component({
   selector: 'app-crypto-details',
@@ -15,8 +17,6 @@ export class CryptoDetailsComponent implements OnInit {
   
   id: string = '';
   crypto: CryptocurrencyDetails = {} as CryptocurrencyDetails;
-
-  // options : any;
 
   dataChart = {
     labels: ['2022'],

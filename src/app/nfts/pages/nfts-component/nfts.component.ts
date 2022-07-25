@@ -1,19 +1,22 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Nft } from 'src/app/models/Nfts';
-import { NftDetailsComponent } from 'src/app/nfts/nft-details/nft-details.component'
-import { NftsService } from 'src/app/services/nfts.service';
+
+
+
 import { DomSanitizer } from '@angular/platform-browser';
 import { LocalService } from 'src/app/services/local.service';
+import { Nft } from '../../models/Nfts';
+import { NftDetailsComponent } from '../nft-details/nft-details.component';
+import { NftsService } from '../../services/nfts.service';
 
 
 @Component({
   selector: 'app-nfts-component',
-  templateUrl: './nfts-component.component.html',
-  styleUrls: ['./nfts-component.component.css']
+  templateUrl: './nfts.component.html',
+  styleUrls: ['./nfts.component.css']
 })
-export class NftsComponentComponent implements OnInit {
+export class NftsComponent implements OnInit {
 
   @ViewChild('ownerInput') ownerInput!: ElementRef<HTMLInputElement>;
 
@@ -31,11 +34,11 @@ export class NftsComponentComponent implements OnInit {
 
   errorMessage: string = ''
   
-  constructor(private _nftService: NftsService,
-    private modal: NgbModal,
+  constructor(
+    private _nftService: NftsService,
+    private _modal: NgbModal,
     private _sanitizer: DomSanitizer,
     private _localService: LocalService,
-    
   ) { }
 
   ngOnInit(): void {
@@ -91,7 +94,7 @@ export class NftsComponentComponent implements OnInit {
     
     this.selectedNft = nft;
 
-    const modalRef = this.modal.open(NftDetailsComponent, { size: 'xl', centered: true, scrollable: true, backdropClass: "modal-backdrop" });
+    const modalRef = this._modal.open(NftDetailsComponent, { size: 'xl', centered: true, scrollable: true, backdropClass: "modal-backdrop" });
 
     (<NftDetailsComponent>modalRef.componentInstance).nft = this.selectedNft;
 

@@ -2,8 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map, Observable } from 'rxjs';
+import { LocalService } from 'src/app/services/local.service';
 import { Nft, OwnedNft } from '../models/Nfts';
-import { LocalService } from './local.service';
+
 
 @Injectable({
   providedIn: 'root'

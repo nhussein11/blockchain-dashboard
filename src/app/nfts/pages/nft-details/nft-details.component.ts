@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Nft } from 'src/app/models/Nfts';
+
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { DomSanitizer } from '@angular/platform-browser';
+import { Nft } from '../../models/Nfts';
 @Component({
   selector: 'app-nft-details',
   templateUrl: './nft-details.component.html',

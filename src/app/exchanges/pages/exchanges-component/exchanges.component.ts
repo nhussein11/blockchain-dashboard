@@ -1,15 +1,17 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Host, HostListener, Inject, OnInit } from '@angular/core';
-import { Exchange } from 'src/app/models/Exchange';
-import { ExchangesService } from 'src/app/services/exchanges.service';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
+
 import { LocalService } from 'src/app/services/local.service';
+import { Exchange } from '../../models/Exchange';
+
+import { ExchangesService } from '../../services/exchanges.service';
 
 @Component({
   selector: 'app-exchanges-component',
-  templateUrl: './exchanges-component.component.html',
-  styleUrls: ['./exchanges-component.component.css']
+  templateUrl: './exchanges.component.html',
+  styleUrls: ['./exchanges.component.css']
 })
-export class ExchangesComponentComponent implements OnInit {
+export class ExchangesComponent implements OnInit {
 
   exchanges: Exchange[] = [];
 

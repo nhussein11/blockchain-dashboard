@@ -1,6 +1,7 @@
 
-import { CryptoDetailsComponent } from './crypto-details/crypto-details.component';
-import { CryptosComponentComponent } from './cryptos-component/cryptos-component.component';
+import { CryptoDetailsComponent } from './pages/crypto-details/crypto-details.component';
+import { CryptosComponent } from './pages/cryptos-component/cryptos.component';
+
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,15 +18,17 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
+import { CryptocurrenciesRoutingModule } from './cryptocurrencies-routing.module';
 
 
 @NgModule({
   declarations: [
     CryptoDetailsComponent,
-    CryptosComponentComponent
+    CryptosComponent
   ],
   imports: [
     CommonModule,
+    CryptocurrenciesRoutingModule,
     
     NgxPaginationModule,
     ProgressSpinnerModule,

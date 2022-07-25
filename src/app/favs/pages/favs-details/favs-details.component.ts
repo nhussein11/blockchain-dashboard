@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Cryptocurrency } from 'src/app/models/Cryptocurrency';
-import { Exchange } from 'src/app/models/Exchange';
-import { Nft } from 'src/app/models/Nfts';
+import { Exchange } from 'src/app/exchanges/models/Exchange';
+import { Cryptocurrency } from 'src/app/cryptocurrencies/models/Cryptocurrency';
+
+import { Nft } from 'src/app/nfts/models/Nfts';
+
 import { LocalService } from 'src/app/services/local.service';
 
 @Component({
   selector: 'app-favs-details',
-  templateUrl: './favs-details.component.html',
-  styleUrls: ['./favs-details.component.css']
+  templateUrl: './favs-details.component.html'
 })
 export class FavsDetailsComponent {
 

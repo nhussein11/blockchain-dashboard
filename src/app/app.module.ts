@@ -15,7 +15,6 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 //PrimeNg
 import {DividerModule} from 'primeng/divider';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
-import { FavsDetailsComponent } from './favs/favs-details/favs-details.component';
 import { FavsModule } from './favs/favs.module';
 
 

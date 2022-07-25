@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
+import { LocalService } from 'src/app/services/local.service';
 import { Cryptocurrency, CryptocurrencyDetailsGraphic } from '../models/Cryptocurrency';
 import { CryptocurrencyDetails } from '../models/Cryptocurrency-Details';
-import { LocalService } from './local.service';
+
 
 
 
