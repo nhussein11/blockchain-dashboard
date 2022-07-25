@@ -10,7 +10,7 @@ export interface OwnedNft {
     timeLastUpdated: Date;
 }
 export interface Nft{
-    name?:             string;
+    name:             string;
     description?:      string;
     image?:            string;
     // video?:            string;

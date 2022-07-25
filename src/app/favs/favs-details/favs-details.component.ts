@@ -11,17 +11,11 @@ import { is } from 'typescript-is';
   templateUrl: './favs-details.component.html',
   styleUrls: ['./favs-details.component.css']
 })
-export class FavsDetailsComponent implements OnInit {
-
-  // elementToDelete: Cryptocurrency | Nft | Exchange = {};
+export class FavsDetailsComponent  {
 
   @Input() data: Cryptocurrency[] | Nft[] | Exchange[] = [];
 
   constructor(private _localService: LocalService) { }
-
-  ngOnInit(): void {
-
-  }
 
   deleteFav(element: any) : void {
     
@@ -29,29 +23,25 @@ export class FavsDetailsComponent implements OnInit {
     this.data.splice(index,1)
 
     if(this.instanceOfCryptocurrency(element)){
-      
       this._localService.removeData('cryptoFavs - '+element.id)
-
     }
     else if(this.instanceOfNft(element)){
-      
-      this._localService.removeData('nftFavs - '+element.name)
+      this._localService.removeData('nftFavs - '+ element.name)
     }
     else if(this.instanceOfExchange(element)){
-      
       this._localService.removeData('exchangeFavs - '+element.id)
     }
   }
 
 
 
-  instanceOfCryptocurrency(element: any): element is Cryptocurrency {
+  private instanceOfCryptocurrency(element: any): element is Cryptocurrency {
     return 'max_supply' in element;
   }
-  instanceOfNft(element: any): element is Nft {
-    return 'dna' in element;
+  private  instanceOfNft(element: any): element is Nft {
+    return 'name' in element; // to improve
   }
-  instanceOfExchange(element: any): element is Exchange {
+  private instanceOfExchange(element: any): element is Exchange {
     return 'year_established' in element;
   }
 
