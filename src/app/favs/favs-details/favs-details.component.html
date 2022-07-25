@@ -8,11 +8,13 @@
                 <img src="{{element.image}}"  class=" w-75 p-2" />
             </div>
             <div>
-                <h4 class="mb-1">{{(element.id)?element.id:element.name}}</h4>
-                <!-- <h6 class="mt-0 mb-3">{{element.description}}</h6> -->
-                <!-- <span [class]="'product-badge status-'">"product.inventoryStatus"</span> -->
+                <h4 class="mb-1">{{element.name}}</h4>
+
                 <div class="car-buttons mt-2 d-flex justify-content-center">
-                    <p-button type="button" styleClass="p-button-lg p-button-help p-button-rounded p-button-text">
+                    <p-button 
+                    type="button" 
+                    styleClass="p-button-lg p-button-help p-button-rounded p-button-text"
+                    (onClick)="deleteFav(element)">
                         <i class="pi pi-heart-fill"></i>
                     </p-button>
                 </div>

@@ -31,5 +31,7 @@ export interface Nft{
     liveModel?:        string;
     poster?:           string;
     video?:string;
+    
     is_favorite?:boolean;
+    is_nft?:boolean;
 }

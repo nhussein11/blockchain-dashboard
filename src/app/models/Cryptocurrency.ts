@@ -6,7 +6,9 @@ export interface Cryptocurrency {
     circulating_supply:               number;
     cmc_rank:                         number;
     quote:                            Quote;
+    
     is_favorite?:                     boolean;
+    is_cryptocurrency?:boolean;
 }
 export interface Quote {
     USD: Usd;
