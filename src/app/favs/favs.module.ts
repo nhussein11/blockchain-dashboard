@@ -4,9 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FavsComponent } from './pages/favs/favs.component';
 import { FavsDetailsComponent } from './pages/favs-details/favs-details.component';
 
-import {CarouselModule} from 'primeng/carousel';
-import  {ButtonModule} from 'primeng/button'
 import { FavsRoutingModule } from './favs-routing.module';
+import { PrimengModule } from '../primeng/primeng.module';
 
 
 @NgModule({
@@ -16,10 +15,10 @@ import { FavsRoutingModule } from './favs-routing.module';
   ],
   imports: [
     CommonModule,
-    FavsRoutingModule,
+    
+    PrimengModule,
 
-    CarouselModule,
-    ButtonModule
+    FavsRoutingModule,
   ]
 })
 export class FavsModule { }

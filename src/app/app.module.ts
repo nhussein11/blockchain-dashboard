@@ -12,11 +12,9 @@ import { ExchangesModule } from './exchanges/exchanges.module';
 
 
 
-//PrimeNg
-import {DividerModule} from 'primeng/divider';
-import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { FavsModule } from './favs/favs.module';
 import { HomeComponent } from './home-component/home.component';
+import { PrimengModule } from './primeng/primeng.module';
 
 
 @NgModule({
@@ -34,9 +32,10 @@ import { HomeComponent } from './home-component/home.component';
     ExchangesModule,
     FavsModule,
     
-    
-    DividerModule,
-    ScrollPanelModule
+
+
+
+    PrimengModule
   ],
   bootstrap: [AppComponent]
 })

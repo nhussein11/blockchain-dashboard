@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { NftsComponent } from './pages/nfts-component/nfts.component';
 import { NftsRoutingModule } from './nfts-routing.module';
+import { PrimengModule } from '../primeng/primeng.module';
 
 
 
@@ -20,10 +21,7 @@ import { NftsRoutingModule } from './nfts-routing.module';
     CommonModule,
     NftsRoutingModule,
 
-    ProgressSpinnerModule,
-
-    InputTextModule,
-    ButtonModule
+    PrimengModule
 
   ]
 })
