@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./exchanges/exchanges.module').then(m => m.ExchangesModule)
   },
   {
+    path: '',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
     path:'404',
     component:NotFoundPageComponent
   },

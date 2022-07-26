@@ -16,6 +16,7 @@ import { PrimengModule } from './primeng/primeng.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home-component/home.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HomeComponent } from './home-component/home.component';
     NftsModule,
     ExchangesModule,
     FavsModule,
+    AuthModule,
     
     SharedModule,
 
