@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { HomeComponentComponent } from './home-component/home-component.component';
-import { NotFoundPageComponentComponent } from './not-found-page-component/not-found-page-component.component';
+import { HomeComponent } from './home-component/home.component';
+import { NotFoundPageComponent } from './not-found-page-component/not-found-page.component';
+
+
 
 
 
 const routes: Routes = [
   {
     path: '', 
-    component: HomeComponentComponent 
+    component: HomeComponent 
   },
   {
     path: '',
@@ -25,7 +27,7 @@ const routes: Routes = [
   },
   {
     path:'404',
-    component:NotFoundPageComponentComponent
+    component:NotFoundPageComponent
   },
   {
     path:'**',

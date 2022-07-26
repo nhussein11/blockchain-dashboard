@@ -9,19 +9,20 @@ import { SharedModule } from './shared/shared.module';
 import { CryptocurrenciesModule } from './cryptocurrencies/cryptocurrencies.module';
 import { NftsModule } from './nfts/nfts.module';
 import { ExchangesModule } from './exchanges/exchanges.module';
-import { HomeComponentComponent } from './home-component/home-component.component';
+
 
 
 //PrimeNg
 import {DividerModule} from 'primeng/divider';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { FavsModule } from './favs/favs.module';
+import { HomeComponent } from './home-component/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponentComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
