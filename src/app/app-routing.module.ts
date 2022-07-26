@@ -5,9 +5,6 @@ import { HomeComponent } from './home-component/home.component';
 import { NotFoundPageComponent } from './not-found-page-component/not-found-page.component';
 
 
-
-
-
 const routes: Routes = [
   {
     path: '', 

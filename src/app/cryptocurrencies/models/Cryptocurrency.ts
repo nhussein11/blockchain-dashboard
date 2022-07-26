@@ -8,7 +8,7 @@ export interface Cryptocurrency {
     quote:                            Quote;
     
     is_favorite?:                     boolean;
-    is_cryptocurrency?:boolean;
+    is_cryptocurrency?:               boolean;
 }
 export interface Quote {
     USD: Usd;

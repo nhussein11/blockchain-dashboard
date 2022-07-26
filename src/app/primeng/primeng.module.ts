@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-//PrimeNg
 import { ButtonModule } from 'primeng/button';
 import {CarouselModule} from 'primeng/carousel';
 import { ChartModule } from 'primeng/chart';

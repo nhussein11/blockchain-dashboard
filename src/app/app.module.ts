@@ -1,4 +1,3 @@
-import { AppComponent } from './app.component';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,9 +12,10 @@ import { ExchangesModule } from './exchanges/exchanges.module';
 
 
 import { FavsModule } from './favs/favs.module';
-import { HomeComponent } from './home-component/home.component';
 import { PrimengModule } from './primeng/primeng.module';
 
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home-component/home.component';
 
 @NgModule({
   declarations: [
@@ -23,17 +23,16 @@ import { PrimengModule } from './primeng/primeng.module';
     HomeComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     HttpClientModule,
-    SharedModule,
+    
     CryptocurrenciesModule,
     NftsModule,
     ExchangesModule,
     FavsModule,
     
-
-
+    SharedModule,
 
     PrimengModule
   ],
