@@ -9,7 +9,15 @@
     margin-left: 5%;
 }
 
+
+
 #favs:hover{
     background-color: rgba(255, 0, 0, 0.522);
     border-radius: 0.5rem;
+    transform: scale(1.05);
+}
+#profile:hover{
+    background-color: rgba(51, 49, 162, 0.337);
+    border-radius: 0.5rem;
+    transform: scale(1.05);
 }
