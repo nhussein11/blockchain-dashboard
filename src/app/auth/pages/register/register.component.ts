@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { emailPattern } from '../../validation-patterns/validation-patterns';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+
+
+  form: FormGroup = this._formBuilder.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.pattern(emailPattern)]],
+    username: ['', Validators.required],
+    password: ['', Validators.required]
+  })
+
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+  }
+
+  signup(): void {
+    const {name, email, username, password} = this.form.value;
+    console.log(name, email, username, password)
+    
   }
 
 }
