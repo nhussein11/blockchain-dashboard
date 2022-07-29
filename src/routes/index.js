@@ -40,4 +40,26 @@ router.post('/signin', async (req,res)=>{
 });
 
 
+
+router.get('/profile',verifyToken, async(req,res)=>{
+    console.log(req.userId)
+    const user = await User.findOne({})
+    res.status(200).json({user})
+})
+
 module.exports = router;
+
+function verifyToken(req,res,next){
+    if(!req.headers.authorization){
+        res.status(401).send("Unauthorized request")
+    }
+
+    const token = req.headers.authorization.split(' ')[1]
+    if(token==='null') {res.status(401).send("Unauthorized request")}
+
+    const payload = jwt.verify(token,'secretKey')
+    req.userId = payload._id;
+
+    next();
+
+}
