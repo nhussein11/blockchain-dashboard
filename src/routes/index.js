@@ -4,11 +4,9 @@ const router = Router();
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 
-router.get('/', (req,res)=>{
-    console.log("hola")
-    res.send("hello world")
-});
-
+// router.get('/', (req,res)=>{
+//     res.send("hello world")
+// });
 
 router.post('/signup', async (req,res)=>{
     
@@ -61,5 +59,4 @@ function verifyToken(req,res,next){
     req.userId = payload._id;
 
     next();
-
 }
