@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../models/User';
+import { AuthService } from '../../services/auth.service';
 
 import { emailPattern } from '../../validation-patterns/validation-patterns';
 
@@ -19,15 +21,34 @@ export class RegisterComponent implements OnInit {
     password: ['', Validators.required]
   })
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, private _auth:AuthService) { }
 
   ngOnInit(): void {
   }
 
   signup(): void {
-    const {name, email, username, password} = this.form.value;
-    console.log(name, email, username, password)
-    
+    const { name, email, username, password } = this.form.value;
+    // console.log(name, email, username, password)
+    const user: User = {
+      name,
+      email,
+      username,
+      password
+    }
+
+    this._auth.signUp(user)
+      .subscribe(
+        res =>{
+          console.log(res)
+          
+        },
+        err=>{
+          console.log(err)
+          
+        }
+
+      )
+    ;
   }
 
 }
