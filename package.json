@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/nhussein11/blockchain-dashboard/issues"
   },
-  "homepage": "https://github.com/nhussein11/blockchain-dashboard#readme"
+  "homepage": "https://github.com/nhussein11/blockchain-dashboard#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
