@@ -4,9 +4,10 @@ const router = Router();
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 
-// router.get('/', (req,res)=>{
-//     res.send("hello world")
-// });
+router.get('/', async (req,res)=>{
+    const users = await User.find()
+    res.send("Users:" , users)
+});
 
 router.post('/signup', async (req,res)=>{
     
@@ -21,13 +22,15 @@ router.post('/signup', async (req,res)=>{
 
 router.post('/signin', async (req,res)=>{
     
+    
     const {username, password} = req.body;
     const user = await User.findOne({username})
+    
     
     if(!user){
         res.status(401).send("Username doesn't exist!")
     }
-
+    
     if(user.password !== password){
         res.status(401).send("Password invalid!")
     }
@@ -36,6 +39,21 @@ router.post('/signin', async (req,res)=>{
 
     res.status(200).json({token})
 });
+
+
+router.post('/forgot-password', async (req,res)=>{
+    
+    const {email} = req.body;
+    const user = await User.findOne({email})
+
+    if(!user){
+        res.status(401).send("Username doesn't exist!")
+    }
+    
+    const {password} = user;
+    res.status(200).json({'password':password})
+});
+
 
 
 
