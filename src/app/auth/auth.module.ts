@@ -9,6 +9,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileGuard } from './guards/profile.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 
 
@@ -26,9 +28,15 @@ import { ProfileGuard } from './guards/profile.guard';
 
     PrimengModule
   ],
-  //TODO: fix it
+  
   providers:[
-    ProfileGuard
+    ProfileGuard,
+    //ESto tengo que ver si va aca o en app.module.ts
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptorService,
+      multi:true
+    }
   ]
 })
 export class AuthModule { }

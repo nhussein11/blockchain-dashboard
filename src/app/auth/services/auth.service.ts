@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 import { User } from '../models/User';
 
 @Injectable({
@@ -10,7 +11,9 @@ export class AuthService {
 
   private URL: string = 'http://localhost:3000/api/auth'
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient,
+              private _router:Router
+    ) { }
 
 
   signUp(user: User) {
@@ -32,4 +35,14 @@ export class AuthService {
   loggedIn(): boolean {
     return !!(localStorage.getItem('token'));
   }
+
+  getToken(){
+    return localStorage.getItem('token')
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    this._router.navigate(['/login'])
+  }
+
 }
