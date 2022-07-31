@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from '../../models/User';
 import { AuthService } from '../../services/auth.service';
 
@@ -16,8 +17,10 @@ export class LoginComponent implements OnInit {
   })
 
 
-  constructor(private _formBuilder: FormBuilder,
-    private _auth: AuthService
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _auth: AuthService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -31,11 +34,8 @@ export class LoginComponent implements OnInit {
     this._auth.signIn(user)
     .subscribe(
       res =>{
-
-        // this._localService.saveData('token', res.token);
         localStorage.setItem('token',res.token)
-        console.log('log')
-        
+        this.router.navigate(['/profile']);
       },
       err=>{
         console.log(err)

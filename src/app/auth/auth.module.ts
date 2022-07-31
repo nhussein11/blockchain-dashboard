@@ -7,6 +7,8 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { PrimengModule } from '../primeng/primeng.module';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileGuard } from './guards/profile.guard';
 
 
 
@@ -14,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +25,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
 
     PrimengModule
+  ],
+  //TODO: fix it
+  providers:[
+    ProfileGuard
   ]
 })
 export class AuthModule { }

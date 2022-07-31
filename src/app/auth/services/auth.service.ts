@@ -13,20 +13,23 @@ export class AuthService {
   constructor(private _httpClient: HttpClient) { }
 
 
-  signUp(user:User) {
+  signUp(user: User) {
     let endpoint = `${this.URL}/signup`;
-    return this._httpClient.post<any>(endpoint,user);
+    return this._httpClient.post<any>(endpoint, user);
   }
 
 
-  signIn(user:User) {
+  signIn(user: User) {
     let endpoint = `${this.URL}/signin`;
-    return this._httpClient.post<any>(endpoint,user);
+    return this._httpClient.post<any>(endpoint, user);
   }
 
-  forgotPassword(email:string){
+  forgotPassword(email: string) {
     let endpoint = `${this.URL}/forgot-password`;
-    return this._httpClient.post<any>(endpoint,{email});
+    return this._httpClient.post<any>(endpoint, { email });
   }
 
+  loggedIn(): boolean {
+    return !!(localStorage.getItem('token'));
+  }
 }
