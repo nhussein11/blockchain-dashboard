@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 import { emailPattern } from '../../validation-patterns/validation-patterns';
 
@@ -16,15 +17,24 @@ export class ForgotPasswordComponent implements OnInit {
     email:['',[Validators.required, Validators.pattern(emailPattern)]]
   })
 
-  constructor(private _formBuilder:FormBuilder) { }
+  constructor(private _formBuilder:FormBuilder,
+              private _auth : AuthService
+    ) { }
 
   ngOnInit(): void {
   }
 
   forgotPassowrd():void{
     const {email} = this.form.value;
-    console.log(email)
-    
+    this._auth.forgotPassword(email)
+        .subscribe(
+          res=>{
+            console.log(res)
+            
+          },
+          err=>{
+            console.log(err)
+          }
+        )
   }
-
 }

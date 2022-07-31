@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocalService } from 'src/app/services/local.service';
 import { User } from '../../models/User';
 import { AuthService } from '../../services/auth.service';
 
@@ -21,7 +22,9 @@ export class RegisterComponent implements OnInit {
     password: ['', Validators.required]
   })
 
-  constructor(private _formBuilder: FormBuilder, private _auth:AuthService) { }
+  constructor(private _formBuilder: FormBuilder, 
+              private _auth:AuthService,
+              private _localService:LocalService) { }
 
   ngOnInit(): void {
   }
@@ -39,14 +42,14 @@ export class RegisterComponent implements OnInit {
     this._auth.signUp(user)
       .subscribe(
         res =>{
-          console.log(res)
+          // console.log(res.token)
+          // this._localService.saveData('token', res.token);
+          localStorage.setItem('token',res.token)
           
         },
         err=>{
           console.log(err)
-          
         }
-
       )
     ;
   }

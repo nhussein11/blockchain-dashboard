@@ -18,4 +18,15 @@ export class AuthService {
     return this._httpClient.post<any>(endpoint,user);
   }
 
+
+  signIn(user:User) {
+    let endpoint = `${this.URL}/signin`;
+    return this._httpClient.post<any>(endpoint,user);
+  }
+
+  forgotPassword(email:string){
+    let endpoint = `${this.URL}/forgot-password`;
+    return this._httpClient.post<any>(endpoint,{email});
+  }
+
 }
