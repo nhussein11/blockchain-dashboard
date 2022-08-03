@@ -4,6 +4,8 @@ const router = Router();
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 
+const { ObjectId } = require('mongodb');
+
 router.get('/', async (req,res)=>{
     const users = await User.find()
     res.send("Users:" , users)
@@ -24,6 +26,7 @@ router.post('/signin', async (req,res)=>{
     
     
     const {username, password} = req.body;
+    
     const user = await User.findOne({username})
     
     
@@ -37,7 +40,7 @@ router.post('/signin', async (req,res)=>{
 
     const token = jwt.sign({_id: user._id}, 'secretKey');
 
-    res.status(200).json({token})
+    res.status(200).json({token,id:user._id})
 });
 
 
@@ -57,9 +60,9 @@ router.post('/forgot-password', async (req,res)=>{
 
 
 
-router.get('/profile',verifyToken, async(req,res)=>{
-    console.log(req.userId)
-    const user = await User.findOne({})
+router.get('/profile/:id',verifyToken, async(req,res)=>{
+    const id =  req.userId;
+    const user = await User.findOne( {_id: ObjectId(id)})
     res.status(200).json({user})
 })
 
