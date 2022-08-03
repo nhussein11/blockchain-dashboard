@@ -11,6 +11,7 @@ export class AuthService {
 
   private URL: string = 'http://localhost:3000/api/auth'
 
+
   constructor(private _httpClient: HttpClient,
               private _router:Router
     ) { }
@@ -27,6 +28,11 @@ export class AuthService {
     return this._httpClient.post<any>(endpoint, user);
   }
 
+  profile(userId:string){
+    let endpoint = `${this.URL}/profile/${userId}`;
+    return this._httpClient.get<any>(endpoint);
+  }
+
   forgotPassword(email: string) {
     let endpoint = `${this.URL}/forgot-password`;
     return this._httpClient.post<any>(endpoint, { email });
@@ -38,6 +44,9 @@ export class AuthService {
 
   getToken(){
     return localStorage.getItem('token')
+  }
+  getId(){
+    return localStorage.getItem('id')
   }
 
   logout(){

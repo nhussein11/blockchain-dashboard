@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LocalService } from 'src/app/services/local.service';
 import { User } from '../../models/User';
 import { AuthService } from '../../services/auth.service';
@@ -24,7 +25,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder, 
               private _auth:AuthService,
-              private _localService:LocalService) { }
+              private _router:Router) { }
 
   ngOnInit(): void {
   }
@@ -45,6 +46,7 @@ export class RegisterComponent implements OnInit {
           // console.log(res.token)
           // this._localService.saveData('token', res.token);
           localStorage.setItem('token',res.token)
+          
           
         },
         err=>{
