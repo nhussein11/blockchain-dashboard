@@ -32,7 +32,6 @@ export class RegisterComponent implements OnInit {
 
   signup(): void {
     const { name, email, username, password } = this.form.value;
-    // console.log(name, email, username, password)
     const user: User = {
       name,
       email,
@@ -43,11 +42,8 @@ export class RegisterComponent implements OnInit {
     this._auth.signUp(user)
       .subscribe(
         res =>{
-          // console.log(res.token)
-          // this._localService.saveData('token', res.token);
           localStorage.setItem('token',res.token)
-          
-          
+          this._router.navigate(['/profile'])
         },
         err=>{
           console.log(err)

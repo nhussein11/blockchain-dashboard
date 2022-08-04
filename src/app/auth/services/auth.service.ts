@@ -13,8 +13,8 @@ export class AuthService {
 
 
   constructor(private _httpClient: HttpClient,
-              private _router:Router
-    ) { }
+    private _router: Router
+  ) { }
 
 
   signUp(user: User) {
@@ -28,9 +28,13 @@ export class AuthService {
     return this._httpClient.post<any>(endpoint, user);
   }
 
-  profile(userId:string){
+  profile(userId: string) {
     let endpoint = `${this.URL}/profile/${userId}`;
     return this._httpClient.get<any>(endpoint);
+  }
+  updateProfile(userId: string, newUser: User) {
+    let endpoint = `${this.URL}/profile/${userId}`;
+    return this._httpClient.patch<any>(endpoint, newUser);
   }
 
   forgotPassword(email: string) {
@@ -42,14 +46,21 @@ export class AuthService {
     return !!(localStorage.getItem('token'));
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('token')
   }
-  getId(){
+  getId() {
     return localStorage.getItem('id')
   }
 
-  logout(){
+  destroyToken() {
+    return localStorage.removeItem('token')
+  }
+  destroyId(){
+    return localStorage.removeItem('id')
+  }
+
+  logout() {
     localStorage.removeItem('token');
     this._router.navigate(['/login'])
   }
