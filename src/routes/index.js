@@ -5,6 +5,7 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 
 const { ObjectId } = require('mongodb');
+const mongoose = require("mongoose");
 
 router.get('/', async (req,res)=>{
     const users = await User.find()
@@ -64,6 +65,13 @@ router.get('/profile/:id',verifyToken, async(req,res)=>{
     const id =  req.userId;
     const user = await User.findOne( {_id: ObjectId(id)})
     res.status(200).json({user})
+});
+
+router.patch('/profile/:id',verifyToken, async(req,res)=>{
+    const update = req.body;
+    const filter = {_id: (req.userId)}
+    const userToUpdate = await User.findOneAndUpdate( filter, update, { new: true })
+    res.status(200).json({userToUpdate})
 })
 
 module.exports = router;
