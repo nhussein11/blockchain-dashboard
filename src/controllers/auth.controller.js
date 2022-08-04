@@ -3,57 +3,57 @@ const { ObjectId } = require('mongodb')
 const jwt = require('jsonwebtoken')
 
 
-const getAllUsers = async (req,res)=>{
+const getAllUsers = async (req, res) => {
     const users = await User.find()
-    res.status(200).send({"users":  users})
+    res.status(200).send({ "users": users })
 }
 
-const signUp =  async (req,res)=>{
-    const {name, email, username, password} = req.body;
-    const newUser = new User({name, email, username, password})
+const signUp = async (req, res) => {
+    const { name, email, username, password } = req.body;
+    const newUser = new User({ name, email, username, password })
     await newUser.save()
 
-    const token = jwt.sign({_id: newUser._id}, 'secretKey');
-    res.status(200).json({token})
+    const token = jwt.sign({ _id: newUser._id }, 'secretKey');
+    res.status(200).json({ token })
 }
 
-const signIn = async (req,res)=>{
-    const {username, password} = req.body;
-    const user = await User.findOne({username})
-    if(!user){
+const signIn = async (req, res) => {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username })
+    if (!user) {
         res.status(401).send("Username doesn't exist!")
     }
-    if(user.password !== password){
+    if (user.password !== password) {
         res.status(401).send("Password invalid!")
     }
-    const token = jwt.sign({_id: user._id}, 'secretKey');
-    res.status(200).json({token,id:user._id})
+    const token = jwt.sign({ _id: user._id }, 'secretKey');
+    res.status(200).json({ token, id: user._id })
 }
 
-const forgotPassword =  async (req,res)=>{
-    
-    const {email} = req.body;
-    const user = await User.findOne({email})
+const forgotPassword = async (req, res) => {
 
-    if(!user){
+    const { email } = req.body;
+    const user = await User.findOne({ email })
+
+    if (!user) {
         res.status(401).send("Username doesn't exist!")
     }
-    
-    const {password} = user;
-    res.status(200).json({'password':password})
+
+    const { password } = user;
+    res.status(200).json({ 'password': password })
 }
 
-const getProfile = async(req,res)=>{
-    const id =  req.userId;
-    const user = await User.findOne( {_id: ObjectId(id)})
-    res.status(200).json({user})
+const getProfile = async (req, res) => {
+    const id = req.userId;
+    const user = await User.findOne({ _id: ObjectId(id) })
+    res.status(200).json({ user })
 }
 
-const updateProfile = async(req,res)=>{
+const updateProfile = async (req, res) => {
     const update = req.body;
-    const filter = {_id: (req.userId)}
-    const userToUpdate = await User.findOneAndUpdate( filter, update, { new: true })
-    res.status(200).json({userToUpdate})
+    const filter = { _id: (req.userId) }
+    const userToUpdate = await User.findOneAndUpdate(filter, update, { new: true })
+    res.status(200).json({ userToUpdate })
 }
 
 
