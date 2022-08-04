@@ -5,8 +5,8 @@ const { dbConnection } = require('./database/database');
 const dotenv = require('dotenv')
 const dotenvExpand = require('dotenv-expand')
 
-const myEnv = dotenv.config()
-dotenvExpand.expand(myEnv)
+const env = dotenv.config()
+dotenvExpand.expand(env)
 
 const app = express();
 dbConnection();

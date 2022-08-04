@@ -4,8 +4,9 @@ const { getAllUsers,
         signIn, 
         forgotPassword, 
         getProfile, 
-        updateProfile,
-        verifyToken } = require('../controllers/auth.controller')
+        updateProfile } = require('../controllers/auth.controller')
+
+const {verifyToken} = require('../middlewares/auth.middlewares')
 
 const router = Router();
 

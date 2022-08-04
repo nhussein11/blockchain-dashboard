@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const { ObjectId } = require('mongodb')
 const jwt = require('jsonwebtoken')
-
+const {verifyToken} = require('../middlewares/auth.middlewares')
 
 const getAllUsers = async (req, res) => {
     const users = await User.find()
@@ -57,19 +57,7 @@ const updateProfile = async (req, res) => {
 }
 
 
-function verifyToken(req, res, next) {
-    if (!req.headers.authorization) {
-        res.status(401).send("Unauthorized request")
-    }
 
-    const token = req.headers.authorization.split(' ')[1]
-    if (token === 'null') { res.status(401).send("Unauthorized request") }
-
-    const payload = jwt.verify(token, 'secretKey')
-    req.userId = payload._id;
-
-    next();
-}
 
 module.exports = {
     getAllUsers,
@@ -77,6 +65,5 @@ module.exports = {
     signIn,
     forgotPassword,
     getProfile,
-    updateProfile,
-    verifyToken
+    updateProfile
 }
