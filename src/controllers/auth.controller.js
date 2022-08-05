@@ -1,7 +1,8 @@
 const User = require('../models/User')
+const {jwtUtility, createJWT} =  require('../utilities/jwt')
 const { ObjectId } = require('mongodb')
 const jwt = require('jsonwebtoken')
-const {verifyToken} = require('../middlewares/auth.middlewares')
+const bcrypt = require('bcryptjs')
 
 const getAllUsers = async (req, res) => {
     const users = await User.find()
@@ -10,11 +11,39 @@ const getAllUsers = async (req, res) => {
 
 const signUp = async (req, res) => {
     const { name, email, username, password } = req.body;
-    const newUser = new User({ name, email, username, password })
-    await newUser.save()
+    try {
+        
+        const existingUser = await User.findOne({username});
+        if(existingUser){
+            return res.status(400).send({
+                status: "Failed",
+                message: "Username already exists."
+            })
+        }
+        const newUser = new User({ name, email, username, password })
+        
+        const salt = bcrypt.genSaltSync();
+        newUser.password = bcrypt.hashSync(password, salt);
 
-    const token = jwt.sign({ _id: newUser._id }, 'secretKey');
-    res.status(200).json({ token })
+        await newUser.save();
+
+        const token = await createJWT(newUser._id, newUser.name);
+        
+        res.status(201).send({ 
+            status: "successfully",
+            message: "Username already exists.",
+            token
+        })
+
+    } catch (error) {
+        return res.status(400).send({
+            status: "Failed",
+            message: "Something went wrong...",
+            error: error.message
+        })
+    }
+
+
 }
 
 const signIn = async (req, res) => {

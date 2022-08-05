@@ -8,8 +8,9 @@ const verifyToken= (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1]
     if (token === 'null') { res.status(401).send("Unauthorized request") }
 
-    const payload = jwt.verify(token, 'secretKey')
-    req.userId = payload._id;
+    const payload = jwt.verify(token, process.env.SECRET_JWT_SEED)
+    
+    req.userId = payload.uid;
 
     next();
 }
