@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from '../models/User';
 
@@ -25,7 +27,13 @@ export class AuthService {
 
   signIn(user: User) {
     let endpoint = `${this.URL}/signin`;
-    return this._httpClient.post<any>(endpoint, user);
+    return this._httpClient.post<User>(endpoint, user)
+      .pipe(
+        catchError( ({error}) => { 
+          // console.log(error)
+          return  throwError(() => error);
+        } )
+      );
   }
 
   profile(userId: string) {
@@ -56,7 +64,7 @@ export class AuthService {
   destroyToken() {
     return localStorage.removeItem('token')
   }
-  destroyId(){
+  destroyId() {
     return localStorage.removeItem('id')
   }
 

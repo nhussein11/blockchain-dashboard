@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(emailPattern)]],
     username: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['        ', Validators.required]
   })
 
   isModifying: boolean = false;
@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
         this.form.controls['name'].setValue(name);
         this.form.controls['email'].setValue(email);
         this.form.controls['username'].setValue(username);
-        this.form.controls['password'].setValue(password);
+        // this.form.controls['password'].setValue(password);
         this.initialValues = this.form.value;
       }
     )

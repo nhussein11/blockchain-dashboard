@@ -12,15 +12,17 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup = this._formBuilder.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required]
+    username: ['nico', Validators.required],
+    password: ['123', Validators.required]
   })
 
+  userErrorMessage: string = '';
+  passwordErrorMessage: string = '';
 
   constructor(
     private _formBuilder: FormBuilder,
     private _auth: AuthService,
-    private router:Router
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,23 +30,23 @@ export class LoginComponent implements OnInit {
 
 
   login(): void {
-    //Backend
     const { username, password } = this.form.value;
     const user: User = { username, password };
     this._auth.signIn(user)
-    .subscribe(
-      res =>{
-        localStorage.setItem('token',res.token)
-        localStorage.setItem('id',res.id)
-
-        this.router.navigate(['/profile']);
-      },
-      err=>{
-        console.log(err)
-      }
-    )
-    
-    
-    ;
+      .subscribe({
+        next: (res: any) => {
+          localStorage.setItem('token', res.token)
+          localStorage.setItem('id', res.id)
+          this.router.navigate(['/profile']);
+        },
+        error: (err) => {
+          if(err.message.split(' ')[0] == 'Username'){
+            this.userErrorMessage = err.message
+          }
+          else if (err.message.split(' ')[0] == 'Password'){
+            this.passwordErrorMessage = err.message
+          }
+        }
+      });
   }
 }
