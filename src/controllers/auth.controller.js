@@ -1,5 +1,5 @@
 const User = require('../models/User')
-const {jwtUtility, createJWT} =  require('../utilities/jwt')
+const { jwtUtility, createJWT } = require('../utilities/jwt')
 const { ObjectId } = require('mongodb')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
@@ -10,28 +10,27 @@ const getAllUsers = async (req, res) => {
 }
 
 const signUp = async (req, res) => {
-    const { name, email, username, password } = req.body;
     try {
-        
-        const existingUser = await User.findOne({username});
-        if(existingUser){
+        const { name, email, username, password } = req.body;
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
             return res.status(400).send({
                 status: "Failed",
                 message: "Username already exists."
             })
         }
         const newUser = new User({ name, email, username, password })
-        
+
         const salt = bcrypt.genSaltSync();
         newUser.password = bcrypt.hashSync(password, salt);
 
         await newUser.save();
 
         const token = await createJWT(newUser._id, newUser.name);
-        
-        res.status(201).send({ 
-            status: "successfully",
-            message: "Username already exists.",
+
+        res.status(201).send({
+            status: "Successfully",
+            message: "User has been created successfully.",
             token
         })
 
@@ -47,16 +46,41 @@ const signUp = async (req, res) => {
 }
 
 const signIn = async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username })
-    if (!user) {
-        res.status(401).send("Username doesn't exist!")
+    try {
+
+        const { username, password } = req.body;
+        const user = await User.findOne({ username })
+
+        if (!user) {
+            return res.status(401).send({
+                status: "Failed",
+                message: "Username doesn't exist!"
+            })
+        }
+
+        const validPassword = bcrypt.compareSync(password, user.password);
+        if (!validPassword) {
+            return res.status(401).send({
+                status:"Failed",
+                message:"Password invalid!"
+            })
+        }
+
+        const token = await createJWT(user._id, user.name);
+
+        return res.status(200).json({ 
+            status:"Successfully",
+            token, 
+            id: user._id 
+        })
+
+    } catch (error) {
+        return res.status(400).send({
+            status: "Failed",
+            message: "Something went wrong...",
+            error: error.message
+        })
     }
-    if (user.password !== password) {
-        res.status(401).send("Password invalid!")
-    }
-    const token = jwt.sign({ _id: user._id }, 'secretKey');
-    res.status(200).json({ token, id: user._id })
 }
 
 const forgotPassword = async (req, res) => {
@@ -75,13 +99,28 @@ const forgotPassword = async (req, res) => {
 const getProfile = async (req, res) => {
     const id = req.userId;
     const user = await User.findOne({ _id: ObjectId(id) })
-    res.status(200).json({ user })
+    if(!user){
+        return res.status(400).send({
+            status: "Failed",
+            message: "Username doesn't exist."
+        })
+    }
+    res.status(200).json({ 
+        status:"Successfully",
+        user
+    })
 }
 
 const updateProfile = async (req, res) => {
-    const update = req.body;
+    const { name, email, username, password } = req.body;
+
+    const salt = bcrypt.genSaltSync();
+    passwordHashed = bcrypt.hashSync(password, salt);
+
+    const userUpdated = {name,email,username,passwordHashed}
+
     const filter = { _id: (req.userId) }
-    const userToUpdate = await User.findOneAndUpdate(filter, update, { new: true })
+    const userToUpdate = await User.findOneAndUpdate(filter, userUpdated, { new: true })
     res.status(200).json({ userToUpdate })
 }
 
