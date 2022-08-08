@@ -3,21 +3,25 @@
         <div class="border p-5 text-center">
             <h2>Welcome</h2>
 
-            <form class="">
-                <div class="p-inputgroup p-3">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <input type="text" pInputText placeholder="Username">
+            <form class="" [formGroup]="form">
+                <div class="field">
+                    <div class="p-inputgroup p-3 ">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input type="text"  pInputText placeholder="Username" formControlName="username">
+                    </div>
+                    <small  class="p-error block">{{userErrorMessage}}</small>
                 </div>
-                <div class="p-inputgroup p-3">
+                <div class="p-inputgroup p-3 ">
                     <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                    <input type="text" pInputText placeholder="Password">
+                    <input type="text" pInputText placeholder="Password" formControlName="password">
                 </div>
+                <small  class="p-error block">{{passwordErrorMessage}}</small>
                 <hr>
 
                 <div class="row">
                     <a class="col-md-6 p-2 link-primary" routerLink="/register" >New Account</a>
                     <a class="col-md-6 p-2  link-primary" routerLink="/forgot-password">Forgot password?</a>
-                    <p-button class="col-md-12 p-2 " label="Submit" icon="pi pi-send" iconPos="right" (click)="login()"></p-button>
+                    <p-button class="col-md-12 p-2 " label="Login" icon="pi pi-sign-in" iconPos="right" (click)="login()"></p-button>
                 </div>
             </form>
         </div>

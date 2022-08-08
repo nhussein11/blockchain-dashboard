@@ -1,10 +1,10 @@
 <div class="container h-100  ">
     <div class="d-flex justify-content-md-center align-items-center vh-100">
         <div class="border p-5 text-center">
-            <h2>Welcome</h2>
+            <h2>Profile</h2>
 
             <form class="" [formGroup]="form">
-                
+
                 <div class="p-inputgroup p-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-caret-right"></i></span>
                     <input type="text" pInputText placeholder="Name" formControlName="name">
@@ -20,13 +20,15 @@
                 </div>
                 <div class="p-inputgroup p-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                    <input type="text" pInputText placeholder="Password" formControlName="password">
+                    <input type="password" pInputText placeholder="Password" formControlName="password">
                 </div>
                 <hr>
 
                 <div class="row">
-
-                    <p-button class="col-md-12 p-2 " label="Register" icon="pi pi-user-plus" iconPos="right" (click)="signup()" ></p-button>
+                    <p-button class="col-md-6 p-2 " [label]="labelModifyorSave" icon="pi pi-user-edit" iconPos="right" (click)="modify()">
+                        
+                    </p-button>
+                    <p-button class="col-md-6 p-2 " label="Log Out" icon="pi pi-sign-out" iconPos="right" (click)="logout()" ></p-button>
                 </div>
             </form>
         </div>

@@ -6,6 +6,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { PrimengModule } from '../primeng/primeng.module';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileGuard } from './guards/profile.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 
 
@@ -13,13 +18,25 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
+    ReactiveFormsModule,
 
     PrimengModule
+  ],
+  
+  providers:[
+    ProfileGuard,
+    //ESto tengo que ver si va aca o en app.module.ts
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptorService,
+      multi:true
+    }
   ]
 })
 export class AuthModule { }
