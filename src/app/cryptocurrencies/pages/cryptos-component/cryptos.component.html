@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col">
+      <h2 class="text-center">Cryptocurrencies Ranking</h2>
+    </div>
+    <div class="col">
+      <div class="d-flex justify-content-center input-group px-md-6 ">
+        <input pInputText class="form-control-md text-center font-weight-bold mt-2" type="text" [(ngModel)]="searchText"
+          placeholder="Search ...">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!cryptosDataLoaded; else divTable" class="h-100">
+  <p-progressSpinner class="d-flex justify-content-center"></p-progressSpinner>
+</div>
+
+<ng-template #divTable class="container">
+
+
+  <div class="row justify-content-center mt-4">
+    <div class="col-auto">
+
+      <p-table [value]="cryptosData | filter:searchText" class="table table-responsive"
+      style="font-family: var(--font--family); color:var(--text--color); font-size: large;"
+      >
+        <ng-template pTemplate="header" style="font-family: var(--font--family); color:var(--text--color)">
+            <tr class="text-center">
+              <th pSortableColumn="cmc_rank">Rank<p-sortIcon field="rank"></p-sortIcon></th>
+              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="symbol">Symbol <p-sortIcon field="symbol"></p-sortIcon></th>
+              <th pSortableColumn="price">Price (USD) <p-sortIcon field="price"></p-sortIcon></th>
+              <th pSortableColumn="max_supply">Max Supply <p-sortIcon field="max_supply"></p-sortIcon></th>
+              <th pSortableColumn="circulating_supply">Circulating Supply <p-sortIcon field="circulating_supply"></p-sortIcon></th>
+              <th>
+                <button pButton pRipple type="button" icon="pi pi-heart-fill" class="p-button-rounded p-button-help p-button-text"></button>
+              </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-crypto>
+            <tr >
+              <td>{{(crypto.cmc_rank)?crypto.cmc_rank :'-' }}</td>
+              <td>
+                <a class="link-light " style="text-decoration: none;" routerLink="/crypto_details/{{crypto.id}}">
+                  {{crypto.name}}
+                </a>
+              </td>
+              <td>{{crypto.symbol}}</td>
+              <td>{{crypto.quote.USD.price| currency }}</td>
+              <td>{{(crypto.max_supply)? (crypto.max_supply | number: '.2'):'-' }}</td>
+              <td>{{(crypto.circulating_supply) ? (crypto.circulating_supply | number : '1.2-2') :'-' }}</td>
+              <td>
+                <button pButton 
+                        pRipple 
+                        type="button" 
+                        class="p-button-rounded p-button-help p-button-text"
+                        (click)="favCrypto(crypto)">
+                <i  [ngClass]="(crypto.is_favorite)? 'pi pi-heart-fill': 'pi pi-heart'"></i>
+              </button>
+              </td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+</div>
+
+  <div class="d-flex justify-content-center mb-lg-4 ps-lg-4">
+
+    <button pButton class="mx-5 p-button" type="button" icon="pi pi-angle-left" iconPos="left"
+      label="Previous"
+      (click)="getPreviousCryptos()"
+      ></button>
+    <button pButton 
+    class="mx-5 p-button" 
+    type="button"
+     icon="pi pi-angle-right"
+      iconPos="right"
+       label="Next"
+       (click)="getNextCryptos()"
+       ></button>
+  </div>
+
+
+</ng-template>

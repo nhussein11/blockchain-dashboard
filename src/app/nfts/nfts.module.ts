@@ -1,25 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NftsComponentComponent } from './nfts-component/nfts-component.component';
-import { NftDetailsComponent } from './nft-details/nft-details.component';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { BrowserModule } from '@angular/platform-browser';
-import { InputTextModule } from 'primeng/inputtext';
 
+import { PrimengModule } from '../primeng/primeng.module';
 
+import { NftDetailsComponent } from './pages/nft-details/nft-details.component';
+import { NftsComponent } from './pages/nfts-component/nfts.component';
+import { NftsRoutingModule } from './nfts-routing.module';
 
 @NgModule({
   declarations: [
-    NftsComponentComponent,
+    NftsComponent,
     NftDetailsComponent
   ],
   imports: [
     CommonModule,
-
-    ProgressSpinnerModule,
-
-
-    InputTextModule
+    NftsRoutingModule,
+    PrimengModule
   ]
 })
 export class NftsModule { }

@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row ">
+    <h2 class="container col-lg-4 text-center p-sm-4">Exchanges List</h2>
+    <div class="col-lg-8 p-sm-3">
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input #ownerInput pInputText placeholder="Search ..." class="p-inputtext-lg text-center container" type="text"
+          [(ngModel)]="searchText"
+          size="30">
+      </span>
+    </div>
+  </div>
+</div>
+<div *ngIf="!exchangesLoaded; else cardsContent" #progressSpinner class="h-100">
+  <p-progressSpinner class="d-flex justify-content-center" strokeWidth="2" animationDuration="1s"></p-progressSpinner>
+</div>
+<section>
+
+
+
+  <ng-template #cardsContent>
+    <div class="container mb-xl-4" infinite-scroll (scrolled)="scollDown()">
+      <div class="row ">
+        <div class="col-md-3 " *ngFor="let exchange of exchanges | filter: searchText">
+          <div class="card-columns border text-center mt-4">
+            <div class="card-header  d-flex justify-content-center " style="background-color:var(--surface-0); ">
+              <div class="row px-5 flex-fill">
+                <img class="col-sm-7 mx-2" src="{{exchange.image}}">
+
+
+                <button 
+                pButton 
+                pRipple 
+                class="col-sm-3 my-auto p-button  p-button-help p-button-rounded p-button-text"
+                type="button" 
+                (click)="favExchange(exchange, $event)">
+                  <i [ngClass]="(exchange.is_favorite) ? 'pi pi-heart-fill': 'pi pi-heart'"></i>
+                </button>
+
+              </div>
+
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{exchange.name}}</h5>
+              <p class="card-text">{{(exchange.description)?(exchange.description?.slice(0,80)+' ...'):' - '}}</p>
+              <p class="card-text">Year Established: {{exchange.year_established}}</p>
+
+              <p class="card-text">Country: {{exchange.country}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <button *ngIf="showButton" class="button" (click)="scrollTop()">
+    <i class="pi pi-angle-double-up"></i>
+  </button>
+</section>

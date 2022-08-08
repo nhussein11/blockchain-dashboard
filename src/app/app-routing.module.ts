@@ -1,46 +1,50 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { CryptoDetailsComponent } from './cryptocurrencies/crypto-details/crypto-details.component';
-import { CryptosComponentComponent } from './cryptocurrencies/cryptos-component/cryptos-component.component';
-import { ExchangesComponentComponent } from './exchanges/exchanges-component/exchanges-component.component';
-import { HomeComponentComponent } from './home-component/home-component.component';
-import { NftsComponentComponent } from './nfts/nfts-component/nfts-component.component';
-import { NotFoundPageComponentComponent } from './not-found-page-component/not-found-page-component.component';
 
+import { HomeComponent } from './home-component/home.component';
+import { NotFoundPageComponent } from './not-found-page-component/not-found-page.component';
 
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule)
-  // },
+  {
+    path: '', 
+    component: HomeComponent 
+  },
   {
     path: '',
-    children: [
-      { path: '', component: HomeComponentComponent },
-      { path: 'cryptocurrencies', component: CryptosComponentComponent },
-      { path: 'crypto_details/:id', component: CryptoDetailsComponent },
-      { path: 'nfts', component: NftsComponentComponent },
-      
-      { path: 'exchanges', component: ExchangesComponentComponent },
-      { path: '**', component: NotFoundPageComponentComponent }
-    ]
+    loadChildren: () => import('./cryptocurrencies/cryptocurrencies.module').then(m => m.CryptocurrenciesModule)
   },
-
   {
-    path:'',
-    redirectTo:'',
-    pathMatch: 'full'
+    path: '',
+    loadChildren: () => import('./nfts/nfts.module').then(m => m.NftsModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./exchanges/exchanges.module').then(m => m.ExchangesModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path:'404',
+    component:NotFoundPageComponent
+  },
+  {
+    path:'**',
+    redirectTo:'home'
   }
 ]
 
 @NgModule({
 
   imports: [
-    RouterModule.forRoot(routes,{
+    RouterModule.forRoot(routes
+      ,{
       enableTracing:false,
       preloadingStrategy:PreloadAllModules
-    })
+      }
+    )
   ],
   exports: [RouterModule]
 })
