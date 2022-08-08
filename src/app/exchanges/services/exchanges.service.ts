@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, shareReplay } from 'rxjs';
 import { LocalService } from 'src/app/services/local.service';
 import { Exchange } from '../models/Exchange';
 
@@ -37,7 +37,7 @@ export class ExchangesService {
     ).pipe(
       map((exchangesResponse:Exchange[])=>{
         exchangesResponse.forEach((exchange:Exchange)=>{
-          console.log(exchange.is_favorite)
+          // console.log(exchange.is_favorite)
           if (this.getExchangeFav(exchange.id.toString())){exchange.is_favorite=true}
           
         })

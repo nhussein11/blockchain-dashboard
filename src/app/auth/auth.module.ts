@@ -31,7 +31,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
   
   providers:[
     ProfileGuard,
-    //ESto tengo que ver si va aca o en app.module.ts
+    //Esto tengo que ver si va aca o en app.module.ts
     {
       provide:HTTP_INTERCEPTORS,
       useClass:TokenInterceptorService,

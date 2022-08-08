@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { map, Observable } from 'rxjs';
+import { map, Observable, share, shareReplay } from 'rxjs';
 import { LocalService } from 'src/app/services/local.service';
 import { Nft, OwnedNft } from '../models/Nfts';
 
@@ -43,8 +43,8 @@ export class NftsService {
               else { return; }
             }
           )
-        })
-
+        }),
+        shareReplay()
       );
   }
 
