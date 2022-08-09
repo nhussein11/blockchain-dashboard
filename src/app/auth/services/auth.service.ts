@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, retry, tap } from 'rxjs/operators';
 
 import { User } from '../models/User';
 
@@ -16,9 +16,8 @@ export class AuthService {
 
   helper = new JwtHelperService();
 
-
   constructor(private _httpClient: HttpClient,
-    private _router: Router
+              private _router: Router
   ) { }
 
 
@@ -53,9 +52,8 @@ export class AuthService {
   }
 
   loggedIn(): boolean {
-    const token = localStorage.getItem('token') 
-    const isExpired = this.helper.isTokenExpired(token!)
-    return !isExpired;
+    const validToken = this.isTokenExpired();
+    return !validToken;
   }
 
   getToken() {
@@ -75,6 +73,12 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this._router.navigate(['/login'])
+  }
+
+  isTokenExpired(){
+    const token = this.getToken();
+    const isExpired = this.helper.isTokenExpired(token!)
+    return isExpired;
   }
 
 }
