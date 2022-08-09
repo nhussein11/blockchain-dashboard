@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -11,7 +12,9 @@ import { User } from '../models/User';
 })
 export class AuthService {
 
-  private URL: string = 'http://localhost:3000/api/auth'
+  private URL: string = 'http://localhost:3000/api/auth';
+
+  helper = new JwtHelperService();
 
 
   constructor(private _httpClient: HttpClient,
@@ -50,7 +53,9 @@ export class AuthService {
   }
 
   loggedIn(): boolean {
-    return !!(localStorage.getItem('token'));
+    const token = localStorage.getItem('token') 
+    const isExpired = this.helper.isTokenExpired(token!)
+    return !isExpired;
   }
 
   getToken() {
