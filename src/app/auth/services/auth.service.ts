@@ -30,7 +30,6 @@ export class AuthService {
     return this._httpClient.post<User>(endpoint, user)
       .pipe(
         catchError( ({error}) => { 
-          // console.log(error)
           return  throwError(() => error);
         } )
       );
