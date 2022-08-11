@@ -24,7 +24,17 @@ export class AuthService {
 
   signUp(user: User) {
     let endpoint = `${this.URL}/signup`;
-    return this._httpClient.post<any>(endpoint, user);
+    return this._httpClient.post<any>(endpoint, user)
+      .pipe(
+        tap(({ token }) => {
+          const timeout = this.helper.getTokenExpirationDate(token)!.valueOf() - new Date().valueOf();
+          this.expirationCounter(timeout);
+        }),
+        catchError(({ error }) => {
+          return throwError(() => error);
+        })
+      )
+      ;
   }
 
 
