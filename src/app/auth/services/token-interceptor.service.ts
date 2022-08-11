@@ -11,6 +11,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
 
+    this._auth.isTokenExpired();
     const idToken = this._auth.getToken();
 
     if (idToken) {

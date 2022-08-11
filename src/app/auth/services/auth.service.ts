@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, Subscription, throwError } from 'rxjs';
 import { catchError, map, retry, tap } from 'rxjs/operators';
 
 import { User } from '../models/User';
@@ -15,9 +15,10 @@ export class AuthService {
   private URL: string = 'http://localhost:3000/api/auth';
 
   helper = new JwtHelperService();
+  tokenSubscription = new Subscription();
 
   constructor(private _httpClient: HttpClient,
-              private _router: Router
+    private _router: Router
   ) { }
 
 
@@ -31,9 +32,9 @@ export class AuthService {
     let endpoint = `${this.URL}/signin`;
     return this._httpClient.post<User>(endpoint, user)
       .pipe(
-        catchError( ({error}) => { 
-          return  throwError(() => error);
-        } )
+        catchError(({ error }) => {
+          return throwError(() => error);
+        })
       );
   }
 
@@ -75,9 +76,10 @@ export class AuthService {
     this._router.navigate(['/login'])
   }
 
-  isTokenExpired(){
+  isTokenExpired() {
     const token = this.getToken();
     const isExpired = this.helper.isTokenExpired(token!)
+    if (isExpired) { this.destroyToken(); }
     return isExpired;
   }
 
