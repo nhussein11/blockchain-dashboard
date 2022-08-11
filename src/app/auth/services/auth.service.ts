@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, of, Subscription, throwError } from 'rxjs';
+import { Observable, of, pipe, Subscription, throwError } from 'rxjs';
 import { catchError, delay, map, retry, tap } from 'rxjs/operators';
 
 import { User } from '../models/User';
@@ -25,31 +25,13 @@ export class AuthService {
   signUp(user: User) {
     let endpoint = `${this.URL}/signup`;
     return this._httpClient.post<any>(endpoint, user)
-      .pipe(
-        tap(({ token }) => {
-          const timeout = this.helper.getTokenExpirationDate(token)!.valueOf() - new Date().valueOf();
-          this.expirationCounter(timeout);
-        }),
-        catchError(({ error }) => {
-          return throwError(() => error);
-        })
-      )
-      ;
+      .pipe(this.handleTokenExpirationAndError());
   }
-
 
   signIn(user: User) {
     let endpoint = `${this.URL}/signin`;
     return this._httpClient.post<any>(endpoint, user)
-      .pipe(
-        tap(({ token }) => {
-          const timeout = this.helper.getTokenExpirationDate(token)!.valueOf() - new Date().valueOf();
-          this.expirationCounter(timeout);
-        }),
-        catchError(({ error }) => {
-          return throwError(() => error);
-        })
-      );
+      .pipe(this.handleTokenExpirationAndError());
   }
 
   profile(userId: string) {
@@ -91,14 +73,16 @@ export class AuthService {
     this._router.navigate(['/login'])
   }
 
-  isTokenExpired() {
+  //Helper methods
+
+  private isTokenExpired() {
     const token = this.getToken();
     const isExpired = this.helper.isTokenExpired(token!)
     if (isExpired) { this.destroyToken(); }
     return isExpired;
   }
 
-  expirationCounter(timeout: any) {
+  private expirationCounter(timeout: any) {
     this.tokenSubscription.unsubscribe();
     this.tokenSubscription = of(null)
       .pipe(delay(timeout))
@@ -106,6 +90,18 @@ export class AuthService {
         console.log('EXPIRED!!');
         this.logout();
       });
+  }
+
+  private handleTokenExpirationAndError() {
+    return pipe(
+      tap({ next: ({ token }) => {
+            const timeout = this.helper.getTokenExpirationDate(token)!.valueOf() - new Date().valueOf();
+            this.expirationCounter(timeout);
+          }}),
+      catchError(({ error }) => {
+        return throwError(() => error);
+      })
+    )
   }
 
 }
