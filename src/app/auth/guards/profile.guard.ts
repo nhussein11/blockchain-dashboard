@@ -15,18 +15,15 @@ export class ProfileGuard implements CanActivate, CanLoad {
     private _auth: AuthService) { }
     
     canActivate(): boolean {
-      if (this._auth.loggedIn()){
-        // console.log(true)
+      if (this._auth.getToken()){
         return true;
-      }
-      // console.log(false)
-      
+      }      
       this._router.navigateByUrl('/login');
       return false;
     }
     
     canLoad(): boolean {
-      if(this._auth.loggedIn()){
+      if(this._auth.getToken()){
         return true;
       }
       this._router.navigateByUrl('/login');

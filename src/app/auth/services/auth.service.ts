@@ -48,11 +48,6 @@ export class AuthService {
     return this._httpClient.post<any>(endpoint, { email });
   }
 
-  loggedIn(): boolean {
-    const validToken = this.isTokenExpired();
-    return !validToken;
-  }
-
   getToken() {
     return localStorage.getItem('token')
   }
@@ -68,21 +63,13 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    this.destroyToken();
     this.destroyId();
     this._router.navigate(['/login'])
   }
 
   //Helper methods
-
-  private isTokenExpired() {
-    const token = this.getToken();
-    const isExpired = this.helper.isTokenExpired(token!)
-    if (isExpired) { this.destroyToken(); }
-    return isExpired;
-  }
-
-  private expirationCounter(timeout: any) {
+  private expirationCounter(timeout: number) {
     this.tokenSubscription.unsubscribe();
     this.tokenSubscription = of(null)
       .pipe(delay(timeout))
