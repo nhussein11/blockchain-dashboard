@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, of, Subscription, throwError } from 'rxjs';
-import { catchError, map, retry, tap } from 'rxjs/operators';
+import { catchError, delay, map, retry, tap } from 'rxjs/operators';
 
 import { User } from '../models/User';
 
@@ -30,8 +30,12 @@ export class AuthService {
 
   signIn(user: User) {
     let endpoint = `${this.URL}/signin`;
-    return this._httpClient.post<User>(endpoint, user)
+    return this._httpClient.post<any>(endpoint, user)
       .pipe(
+        tap(({ token }) => {
+          const timeout = this.helper.getTokenExpirationDate(token)!.valueOf() - new Date().valueOf();
+          this.expirationCounter(timeout);
+        }),
         catchError(({ error }) => {
           return throwError(() => error);
         })
@@ -73,6 +77,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    this.destroyId();
     this._router.navigate(['/login'])
   }
 
@@ -81,6 +86,16 @@ export class AuthService {
     const isExpired = this.helper.isTokenExpired(token!)
     if (isExpired) { this.destroyToken(); }
     return isExpired;
+  }
+
+  expirationCounter(timeout: any) {
+    this.tokenSubscription.unsubscribe();
+    this.tokenSubscription = of(null)
+      .pipe(delay(timeout))
+      .subscribe(() => {
+        console.log('EXPIRED!!');
+        this.logout();
+      });
   }
 
 }
