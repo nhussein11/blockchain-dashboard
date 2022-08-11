@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, of, pipe, Subscription, throwError } from 'rxjs';
 import { catchError, delay, map, retry, tap } from 'rxjs/operators';
+import { AuthResponse } from '../models/AuthResponse';
 
 import { User } from '../models/User';
 
@@ -24,13 +25,13 @@ export class AuthService {
 
   signUp(user: User) {
     let endpoint = `${this.URL}/signup`;
-    return this._httpClient.post<any>(endpoint, user)
+    return this._httpClient.post<AuthResponse>(endpoint, user)
       .pipe(this.handleTokenExpirationAndError());
   }
 
   signIn(user: User) {
     let endpoint = `${this.URL}/signin`;
-    return this._httpClient.post<any>(endpoint, user)
+    return this._httpClient.post<AuthResponse>(endpoint, user)
       .pipe(this.handleTokenExpirationAndError());
   }
 
@@ -81,10 +82,13 @@ export class AuthService {
 
   private handleTokenExpirationAndError() {
     return pipe(
-      tap({ next: ({ token }) => {
-            const timeout = this.helper.getTokenExpirationDate(token)!.valueOf() - new Date().valueOf();
-            this.expirationCounter(timeout);
-          }}),
+      tap({
+        next: (Authresponse: AuthResponse) => {
+          const { token } = Authresponse;
+          const timeout = this.helper.getTokenExpirationDate(token)!.valueOf() - new Date().valueOf();
+          this.expirationCounter(timeout);
+        }
+      }),
       catchError(({ error }) => {
         return throwError(() => error);
       })
