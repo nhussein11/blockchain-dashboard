@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
-      { path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard] }
+      { path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard], canLoad:[ProfileComponent] }
     ]
   }
 ]

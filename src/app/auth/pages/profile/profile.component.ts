@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalService } from 'src/app/services/local.service';
 import { User } from '../../models/User';
 import { AuthService } from '../../services/auth.service';
 import { emailPattern } from '../../validation-patterns/validation-patterns';
@@ -18,29 +19,26 @@ export class ProfileComponent implements OnInit {
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(emailPattern)]],
     username: ['', Validators.required],
-    password: ['        ', Validators.required]
+    password: ['', Validators.required]
   })
 
   isModifying: boolean = false;
   initialValues: Object = {};
   labelModifyorSave: string = 'Modify'
 
-
-
-
-  constructor(private _auth: AuthService, 
+  constructor(
+    private _auth: AuthService, 
     private _formBuilder: FormBuilder,
-    private _router:Router) { }
+    private _localService:LocalService
+    ) { }
 
   ngOnInit(): void {
 
-
-
-    const id: string = this._auth.getId()!;
+    const id: string = this._localService.getData('id');
     this.form.disable();
+
     this._auth.profile(id).subscribe(
       ({ user }: { user: User }) => {
-
         const { name, email, username, password } = user;
 
         this.form.controls['name'].setValue(name);
@@ -69,14 +67,12 @@ export class ProfileComponent implements OnInit {
   }
 
   saveUpdatedUser() {
-    const id: string = this._auth.getId()!;
+    const id: string = this._localService.getData('id');
     const user: User = this.form.value
     this._auth.updateProfile(id, user).subscribe()
   }
 
   logout(){
-    this._auth.destroyToken();
-    this._auth.destroyId();
-    this._router.navigate(['/login']);
+    this._auth.logout();
   }
 }

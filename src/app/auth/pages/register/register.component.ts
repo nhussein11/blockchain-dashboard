@@ -23,15 +23,16 @@ export class RegisterComponent implements OnInit {
     password: ['', Validators.required]
   })
 
-  constructor(private _formBuilder: FormBuilder, 
-              private _auth:AuthService,
-              private _router:Router) { }
+  constructor(private _formBuilder: FormBuilder,
+    private _auth: AuthService,
+    private _router: Router) { }
 
   ngOnInit(): void {
   }
 
   signup(): void {
     const { name, email, username, password } = this.form.value;
+    
     const user: User = {
       name,
       email,
@@ -40,16 +41,14 @@ export class RegisterComponent implements OnInit {
     }
 
     this._auth.signUp(user)
-      .subscribe(
-        res =>{
-          localStorage.setItem('token',res.token)
+      .subscribe({
+        next: () => {
           this._router.navigate(['/profile'])
         },
-        err=>{
+        error: (err: Error) => {
           console.log(err)
         }
-      )
-    ;
+      });
   }
 
 }

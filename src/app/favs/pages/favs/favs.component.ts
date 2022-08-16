@@ -19,6 +19,10 @@ export class FavsComponent implements OnInit {
   constructor(private _localService : LocalService) { }
 
   ngOnInit(): void {
+
+    const id = localStorage.getItem('id')
+    console.log(id)
+    
         
     Object.keys(localStorage).forEach((item : string) => {
     

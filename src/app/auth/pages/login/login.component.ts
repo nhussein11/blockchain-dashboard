@@ -34,9 +34,7 @@ export class LoginComponent implements OnInit {
     const user: User = { username, password };
     this._auth.signIn(user)
       .subscribe({
-        next: (res: any) => {
-          localStorage.setItem('token', res.token)
-          localStorage.setItem('id', res.id)
+        next: () => {
           this.router.navigate(['/profile']);
         },
         error: (err) => {
