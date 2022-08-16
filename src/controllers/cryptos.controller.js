@@ -28,6 +28,7 @@ const addCryptoFav = async (req, res) => {
         cryptoId
     })
 }
+
 const deleteCryptoFav = async (req, res) => {
     const { userId, cryptoId } = req.params;
     
