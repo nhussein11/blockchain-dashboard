@@ -1,5 +1,6 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LocalService } from 'src/app/services/local.service';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -7,11 +8,14 @@ import { AuthService } from './auth.service';
 })
 export class TokenInterceptorService implements HttpInterceptor {
 
-  constructor(private _auth: AuthService) { }
+  constructor(
+    private _auth: AuthService,
+    private _localService : LocalService
+    ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
 
-    const idToken = this._auth.getToken();
+    const idToken = this._localService.getData('token');
 
     if (idToken) {
       const cloned = req.clone({

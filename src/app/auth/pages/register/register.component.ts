@@ -42,8 +42,7 @@ export class RegisterComponent implements OnInit {
 
     this._auth.signUp(user)
       .subscribe({
-        next: (res: any) => {
-          localStorage.setItem('token', res.token)
+        next: () => {
           this._router.navigate(['/profile'])
         },
         error: (err: Error) => {

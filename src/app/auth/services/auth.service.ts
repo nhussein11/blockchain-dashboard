@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, of, pipe, Subscription, throwError } from 'rxjs';
-import { catchError, delay, map, retry, tap } from 'rxjs/operators';
+import { of, pipe, Subscription, throwError } from 'rxjs';
+import { catchError, delay, tap } from 'rxjs/operators';
+import { LocalService } from 'src/app/services/local.service';
 import { AuthResponse } from '../models/AuthResponse';
 
 import { User } from '../models/User';
@@ -18,8 +19,10 @@ export class AuthService {
   helper = new JwtHelperService();
   tokenSubscription = new Subscription();
 
-  constructor(private _httpClient: HttpClient,
-    private _router: Router
+  constructor(
+    private _httpClient: HttpClient,
+    private _router: Router,
+    private _localService: LocalService
   ) { }
 
 
@@ -64,8 +67,8 @@ export class AuthService {
   }
 
   logout() {
-    this.destroyToken();
-    this.destroyId();
+    this._localService.removeData('token');
+    this._localService.removeData('id');
     this._router.navigate(['/login'])
   }
 
@@ -84,7 +87,10 @@ export class AuthService {
     return pipe(
       tap({
         next: (Authresponse: AuthResponse) => {
-          const { token } = Authresponse;
+          const { id, token } = Authresponse;
+          this._localService.saveData('id',id);
+          this._localService.saveData('token',token);
+
           const timeout = this.helper.getTokenExpirationDate(token)!.valueOf() - new Date().valueOf();
           this.expirationCounter(timeout);
         }
