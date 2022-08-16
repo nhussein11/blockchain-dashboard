@@ -8,10 +8,10 @@ const createJWT = (uid, name) => {
             payload,
             process.env.SECRET_JWT_SEED,
             {
-                expiresIn: '24h'
+                // algorithm:'RS256',
+                expiresIn: '10s',
             },
             (err, token) => {
-
                 if (err) {
                     console.log(err);
                     reject(err)

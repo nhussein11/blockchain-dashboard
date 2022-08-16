@@ -1,7 +1,6 @@
 const User = require('../models/User')
-const { jwtUtility, createJWT } = require('../utilities/jwt')
+const {  createJWT } = require('../utilities/jwt')
 const { ObjectId } = require('mongodb')
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const getAllUsers = async (req, res) => {
@@ -28,11 +27,14 @@ const signUp = async (req, res) => {
 
         const token = await createJWT(newUser._id, newUser.name);
 
-        res.status(201).send({
-            status: "Successfully",
-            message: "User has been created successfully.",
-            token
-        })
+        return res
+            .cookie("SESSIONID", token, { httpOnly: true, secure: true })
+            .status(201)
+            .send({
+                status: "Successfully",
+                message: "User has been created successfully.",
+                token
+            })
 
     } catch (error) {
         return res.status(400).send({
@@ -61,18 +63,21 @@ const signIn = async (req, res) => {
         const validPassword = bcrypt.compareSync(password, user.password);
         if (!validPassword) {
             return res.status(401).send({
-                status:"Failed",
-                message:"Password invalid!"
+                status: "Failed",
+                message: "Password invalid!"
             })
         }
 
         const token = await createJWT(user._id, user.name);
 
-        return res.status(200).json({ 
-            status:"Successfully",
-            token, 
-            id: user._id 
-        })
+        return res
+            .cookie("SESSIONID", token, { httpOnly: true, secure: true })
+            .status(200)
+            .json({
+                status: "Successfully",
+                token,
+                id: user._id
+            })
 
     } catch (error) {
         return res.status(400).send({
@@ -99,14 +104,14 @@ const forgotPassword = async (req, res) => {
 const getProfile = async (req, res) => {
     const id = req.userId;
     const user = await User.findOne({ _id: ObjectId(id) })
-    if(!user){
+    if (!user) {
         return res.status(400).send({
             status: "Failed",
             message: "Username doesn't exist."
         })
     }
-    res.status(200).json({ 
-        status:"Successfully",
+    res.status(200).json({
+        status: "Successfully",
         user
     })
 }
@@ -117,7 +122,7 @@ const updateProfile = async (req, res) => {
     const salt = bcrypt.genSaltSync();
     passwordHashed = bcrypt.hashSync(password, salt);
 
-    const userUpdated = {name,email,username,passwordHashed}
+    const userUpdated = { name, email, username, passwordHashed }
 
     const filter = { _id: (req.userId) }
     const userToUpdate = await User.findOneAndUpdate(filter, userUpdated, { new: true })

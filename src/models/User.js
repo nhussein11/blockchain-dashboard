@@ -17,6 +17,15 @@ const userSchema = new Schema({
         type: String,
         required:true
     },
+    cryptosFavs:{
+        type: [String]
+    },
+    nftsFavs:{
+        type: [String]
+    },
+    exchangesFavs:{
+        type: [String]
+    }
 }, { timestamps: true }
 );
 
