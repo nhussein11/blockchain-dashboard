@@ -52,20 +52,6 @@ export class AuthService {
     return this._httpClient.post<any>(endpoint, { email });
   }
 
-  getToken() {
-    return localStorage.getItem('token')
-  }
-  getId() {
-    return localStorage.getItem('id')
-  }
-
-  destroyToken() {
-    return localStorage.removeItem('token')
-  }
-  destroyId() {
-    return localStorage.removeItem('id')
-  }
-
   logout() {
     this._localService.removeData('token');
     this._localService.removeData('id');

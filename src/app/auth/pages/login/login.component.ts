@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _auth: AuthService,
-    private router: Router
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this._auth.signIn(user)
       .subscribe({
         next: () => {
-          this.router.navigate(['/profile']);
+          this._router.navigate(['/profile']);
         },
         error: (err) => {
           if(err.message.split(' ')[0] == 'Username'){
